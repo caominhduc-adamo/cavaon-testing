@@ -76,3 +76,55 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Run with Docker (Nginx + PHP 7.2 + MySQL + phpMyAdmin)
+
+### Services
+
+- Laravel app (Nginx + PHP-FPM 7.2): `http://localhost:8000`
+- MySQL 5.7: `localhost:33060`
+- phpMyAdmin: `http://localhost:8080`
+
+### Start project
+
+1. Build and start containers:
+
+```bash
+docker compose up -d --build
+```
+
+2. Install PHP dependencies inside container:
+
+```bash
+docker compose exec app composer install
+```
+
+3. Create environment file (if missing):
+
+```bash
+cp .env.example .env
+```
+
+4. Update DB values in `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=laravel
+DB_PASSWORD=secret
+```
+
+5. Generate app key and run migrations:
+
+```bash
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate
+```
+
+### Stop project
+
+```bash
+docker compose down
+```
