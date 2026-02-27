@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\File;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/{any}', 'HomeController@spa')->where(['any' => '.*']);
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

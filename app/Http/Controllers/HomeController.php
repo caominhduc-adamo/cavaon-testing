@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function spa($any)
+    {
+        return view('layouts.app');
+    }
 }
