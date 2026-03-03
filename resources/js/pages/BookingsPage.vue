@@ -667,6 +667,11 @@ export default {
                 return;
             }
 
+            // When edit data loads before tours list, avoid clearing a valid value too early.
+            if (!this.selectedTour) {
+                return;
+            }
+
             const exists = this.availableTourDates.some(
                 (tourDate) => Number(tourDate.id) === Number(this.form.tour_date_id)
             );
@@ -678,6 +683,7 @@ export default {
         async fetchToursForSelection() {
             try {
                 this.tours = await this.$store.dispatch('tours/fetchPublicToursForSelection');
+                this.onTourChanged();
                 this.$nextTick(() => {
                     this.initTourSelect2();
                     this.syncTourSelect2Value();

@@ -17,7 +17,7 @@ export default new Router({
             component: ToursPage,
         },
         {
-            path: '/tours/create',
+            path: '/tours/new',
             name: 'tours.create',
             component: ToursPage,
         },
@@ -32,7 +32,7 @@ export default new Router({
             component: BookingsPage,
         },
         {
-            path: '/bookings/create',
+            path: '/bookings/new',
             name: 'bookings.create',
             component: BookingsPage,
         },

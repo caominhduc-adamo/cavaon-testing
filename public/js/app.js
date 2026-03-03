@@ -1996,6 +1996,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ModuleFilterBar',
@@ -2851,6 +2853,11 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       if (!this.form.tour_date_id) {
         return;
       }
+
+      // When edit data loads before tours list, avoid clearing a valid value too early.
+      if (!this.selectedTour) {
+        return;
+      }
       var exists = this.availableTourDates.some(function (tourDate) {
         return Number(tourDate.id) === Number(_this0.form.tour_date_id);
       });
@@ -2870,6 +2877,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               return _this1.$store.dispatch('tours/fetchPublicToursForSelection');
             case 1:
               _this1.tours = _context2.v;
+              _this1.onTourChanged();
               _this1.$nextTick(function () {
                 _this1.initTourSelect2();
                 _this1.syncTourSelect2Value();
@@ -52335,7 +52343,12 @@ var render = function () {
     [
       _c("input", {
         staticClass: "form-control mr-2",
-        attrs: { type: "text", placeholder: _vm.searchPlaceholder },
+        staticStyle: {
+          "min-width": "350px",
+          width: "350px",
+          "max-width": "100%",
+        },
+        attrs: { type: "text", placeholder: _vm.searchPlaceholder, size: "40" },
         domProps: { value: _vm.searchValue },
         on: {
           input: function ($event) {
@@ -73066,7 +73079,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     name: 'tours.index',
     component: _pages_ToursPage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
-    path: '/tours/create',
+    path: '/tours/new',
     name: 'tours.create',
     component: _pages_ToursPage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
@@ -73078,7 +73091,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     name: 'bookings.index',
     component: _pages_BookingsPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
-    path: '/bookings/create',
+    path: '/bookings/new',
     name: 'bookings.create',
     component: _pages_BookingsPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {

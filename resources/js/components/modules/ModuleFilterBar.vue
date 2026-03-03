@@ -6,6 +6,8 @@
             class="form-control mr-2"
             :placeholder="searchPlaceholder"
             @input="$emit('update:searchValue', $event.target.value)"
+            style="min-width: 350px; width: 350px; max-width: 100%;"
+            size="40"
         >
         <select
             :value="statusValue"
