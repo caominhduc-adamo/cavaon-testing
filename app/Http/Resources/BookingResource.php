@@ -36,6 +36,17 @@ class BookingResource extends JsonResource
                     'status' => $this->tourDate->status,
                 ];
             }),
+            'invoice' => $this->whenLoaded('invoice', function () {
+                return [
+                    'id' => $this->invoice->id,
+                    'invoice_number' => $this->invoice->invoice_number,
+                    'amount' => $this->invoice->amount,
+                    'currency' => $this->invoice->currency,
+                    'status' => $this->invoice->status,
+                    'issued_at' => $this->invoice->issued_at ? $this->invoice->issued_at->toDateTimeString() : null,
+                    'paid_at' => $this->invoice->paid_at ? $this->invoice->paid_at->toDateTimeString() : null,
+                ];
+            }),
             'passengers' => PassengerResource::collection($this->whenLoaded('passengers')),
         ];
     }

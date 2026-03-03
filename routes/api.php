@@ -34,4 +34,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/bookings/{booking}', 'Api\V1\BookingController@show');
     Route::post('/bookings', 'Api\V1\BookingController@store');
     Route::put('/bookings/{booking}', 'Api\V1\BookingController@update');
+
+    Route::get('/invoices', 'Api\V1\InvoiceController@index');
+    Route::get('/invoices/{invoice}', 'Api\V1\InvoiceController@show');
+    Route::put('/invoices/{invoice}', 'Api\V1\InvoiceController@update');
 });

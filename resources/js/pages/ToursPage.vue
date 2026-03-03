@@ -18,6 +18,13 @@
                     Passengers
                 </button>
                 <button
+                    type="button"
+                    class="btn btn-outline-primary mr-2"
+                    @click="goToInvoices"
+                >
+                    Invoices
+                </button>
+                <button
                     v-if="!isFormRoute"
                     type="button"
                     class="btn btn-success"
@@ -497,9 +504,10 @@ export default {
             this.clearValidationErrors();
 
             try {
+                const wasEditing = this.isEditing;
                 const payload = this.buildPayload();
 
-                if (this.isEditing) {
+                if (wasEditing) {
                     await window.axios.put('/api/v1/tours/' + this.form.id, payload);
                 } else {
                     await window.axios.post('/api/v1/tours', payload);
@@ -511,16 +519,35 @@ export default {
                     status: this.statusFilter,
                     page: this.currentPage,
                 });
+                await Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: wasEditing ? 'Tour updated successfully.' : 'Tour created successfully.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
                 this.goToIndex();
             } catch (error) {
                 const hasFieldErrors = this.setValidationErrors(error);
+                const errorMessage = this.extractApiError(
+                    error,
+                    'Unable to save tour. Please review your inputs and try again.'
+                );
 
                 if (!hasFieldErrors) {
-                    this.formError = this.extractApiError(
-                        error,
-                        'Unable to save tour. Please review your inputs and try again.'
-                    );
+                    this.formError = errorMessage;
                 }
+                await Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: errorMessage,
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
             } finally {
                 this.submitting = false;
             }
@@ -677,6 +704,9 @@ export default {
         },
         goToPassengers() {
             this.$router.push({ name: 'passengers.index' });
+        },
+        goToInvoices() {
+            this.$router.push({ name: 'invoices.index' });
         },
         goToIndex() {
             this.$router.push({

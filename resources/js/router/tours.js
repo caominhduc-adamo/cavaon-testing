@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import ToursPage from '../pages/ToursPage.vue';
 import BookingsPage from '../pages/BookingsPage.vue';
 import PassengersPage from '../pages/PassengersPage.vue';
+import InvoicesPage from '../pages/InvoicesPage.vue';
 
 Vue.use(Router);
 
@@ -53,6 +54,16 @@ export default new Router({
             path: '/passengers/:id/edit',
             name: 'passengers.edit',
             component: PassengersPage,
+        },
+        {
+            path: '/invoices',
+            name: 'invoices.index',
+            component: InvoicesPage,
+        },
+        {
+            path: '/invoices/:id/edit',
+            name: 'invoices.edit',
+            component: InvoicesPage,
         },
     ],
 });

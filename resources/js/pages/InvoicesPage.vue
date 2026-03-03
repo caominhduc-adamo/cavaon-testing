@@ -1,16 +1,8 @@
 <template>
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="mb-0">Passengers Management</h1>
+            <h1 class="mb-0">Invoices Management</h1>
             <div>
-                <button
-                    v-if="!isFormRoute"
-                    type="button"
-                    class="btn btn-success mr-2"
-                    @click="goToCreate"
-                >
-                    Create
-                </button>
                 <button
                     type="button"
                     class="btn btn-outline-primary mr-2"
@@ -21,87 +13,67 @@
                 <button
                     type="button"
                     class="btn btn-outline-primary"
-                    @click="goToInvoices"
+                    @click="goToPassengers"
                 >
-                    Invoices
+                    Passengers
                 </button>
             </div>
         </div>
 
-        <div v-if="isFormRoute" class="card mb-4">
-            <div class="card-header">
-                {{ isEditing ? 'Edit passenger #' + form.id : 'Create new passenger' }}
-            </div>
+        <div v-if="isEditRoute" class="card mb-4">
+            <div class="card-header">Edit invoice #{{ form.id }}</div>
             <div class="card-body">
-                <div v-if="loadingForm" class="alert alert-info">Loading passenger details...</div>
+                <div v-if="loadingForm" class="alert alert-info">Loading invoice details...</div>
                 <div v-if="formError" class="alert alert-danger">{{ formError }}</div>
 
-                <form v-if="!loadingForm" @submit.prevent="submitPassengerForm">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="first-name">First name</label>
-                            <input
-                                id="first-name"
-                                v-model.trim="form.first_name"
-                                type="text"
-                                :class="['form-control', { 'is-invalid': getFieldError('first_name') }]"
-                                required
-                            >
-                            <div v-if="getFieldError('first_name')" class="invalid-feedback d-block">
-                                {{ getFieldError('first_name') }}
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="last-name">Last name</label>
-                            <input
-                                id="last-name"
-                                v-model.trim="form.last_name"
-                                type="text"
-                                :class="['form-control', { 'is-invalid': getFieldError('last_name') }]"
-                                required
-                            >
-                            <div v-if="getFieldError('last_name')" class="invalid-feedback d-block">
-                                {{ getFieldError('last_name') }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="email">Email</label>
-                            <input
-                                id="email"
-                                v-model.trim="form.email"
-                                type="email"
-                                :class="['form-control', { 'is-invalid': getFieldError('email') }]"
-                            >
-                            <div v-if="getFieldError('email')" class="invalid-feedback d-block">
-                                {{ getFieldError('email') }}
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="phone">Phone</label>
-                            <input
-                                id="phone"
-                                v-model.trim="form.phone"
-                                type="text"
-                                :class="['form-control', { 'is-invalid': getFieldError('phone') }]"
-                            >
-                            <div v-if="getFieldError('phone')" class="invalid-feedback d-block">
-                                {{ getFieldError('phone') }}
-                            </div>
-                        </div>
-                    </div>
-
+                <form v-if="!loadingForm" @submit.prevent="submitInvoiceForm">
                     <div class="form-group">
-                        <label for="status">Status</label>
+                        <label>Invoice number</label>
+                        <input class="form-control" type="text" :value="form.invoice_number || '-'" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Booking reference</label>
+                        <input class="form-control" type="text" :value="form.booking_reference || '-'" disabled>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="invoice-amount">Amount</label>
+                            <input
+                                id="invoice-amount"
+                                v-model.number="form.amount"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                :class="['form-control', { 'is-invalid': getFieldError('amount') }]"
+                            >
+                            <div v-if="getFieldError('amount')" class="invalid-feedback d-block">
+                                {{ getFieldError('amount') }}
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="invoice-currency">Currency</label>
+                            <input
+                                id="invoice-currency"
+                                v-model.trim="form.currency"
+                                type="text"
+                                maxlength="3"
+                                :class="['form-control', { 'is-invalid': getFieldError('currency') }]"
+                            >
+                            <div v-if="getFieldError('currency')" class="invalid-feedback d-block">
+                                {{ getFieldError('currency') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="invoice-status">Status</label>
                         <select
-                            id="status"
+                            id="invoice-status"
                             v-model="form.status"
                             :class="['form-control', { 'is-invalid': getFieldError('status') }]"
                         >
-                            <option value="Enabled">Enabled</option>
-                            <option value="Disabled">Disabled</option>
+                            <option value="Unpaid">Unpaid</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Cancelled">Cancelled</option>
                         </select>
                         <div v-if="getFieldError('status')" class="invalid-feedback d-block">
                             {{ getFieldError('status') }}
@@ -110,7 +82,7 @@
 
                     <div class="d-flex">
                         <button type="submit" class="btn btn-success mr-2" :disabled="submitting">
-                            {{ submitting ? 'Saving...' : (isEditing ? 'Update passenger' : 'Create passenger') }}
+                            {{ submitting ? 'Saving...' : 'Update invoice' }}
                         </button>
                         <button type="button" class="btn btn-outline-secondary" :disabled="submitting" @click="goToIndex">
                             Cancel
@@ -120,43 +92,56 @@
             </div>
         </div>
 
-        <template v-if="!isFormRoute">
+        <template v-if="!isEditRoute">
             <div class="form-inline mb-3">
                 <input
-                    v-model.trim="searchInput"
+                    v-model.trim="invoiceNumberInput"
                     type="text"
                     class="form-control mr-2"
-                    placeholder="Search by name/email/phone"
+                    placeholder="Search by invoice number"
                 >
                 <select v-model="statusFilter" class="form-control mr-2" @change="submitSearch">
                     <option value="">All statuses</option>
-                    <option value="Enabled">Enabled</option>
-                    <option value="Disabled">Disabled</option>
+                    <option value="Unpaid">Unpaid</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Cancelled">Cancelled</option>
                 </select>
             </div>
 
-            <div v-if="loadingList" class="alert alert-info mb-3">Loading passengers...</div>
+            <div v-if="loadingList" class="alert alert-info mb-3">Loading invoices...</div>
             <div v-else-if="listError" class="alert alert-danger mb-3">{{ listError }}</div>
-            <div v-else-if="!items.length" class="alert alert-secondary mb-3">No passengers found.</div>
+            <div v-else-if="!items.length" class="alert alert-secondary mb-3">No invoices found.</div>
 
             <div v-else class="table-responsive mb-3">
                 <table class="table table-striped table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th style="width: 70px;">ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th style="width: 100px;">Status</th>
+                            <th>Invoice #</th>
+                            <th>Booking</th>
+                            <th style="width: 120px;">Amount</th>
+                            <th style="width: 100px;">Currency</th>
+                            <th style="width: 110px;">Status</th>
                             <th style="width: 90px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="item in items" :key="item.id">
                             <td>{{ item.id }}</td>
-                            <td>{{ item.first_name }} {{ item.last_name }}</td>
-                            <td>{{ item.email || '-' }}</td>
-                            <td>{{ item.phone || '-' }}</td>
+                            <td>{{ item.invoice_number }}</td>
+                            <td>
+                                <template v-if="item.booking">
+                                    <a
+                                        href="#"
+                                        @click.prevent="goToBookingEdit(item.booking.id)"
+                                    >
+                                        {{ item.booking.reference }}
+                                    </a>
+                                </template>
+                                <span v-else>-</span>
+                            </td>
+                            <td>{{ item.amount }}</td>
+                            <td>{{ item.currency }}</td>
                             <td>{{ item.status }}</td>
                             <td>
                                 <button class="btn btn-sm btn-outline-primary" type="button" @click="startEdit(item)">
@@ -168,7 +153,7 @@
                 </table>
             </div>
 
-            <nav v-if="hasPagination" aria-label="Passengers pagination">
+            <nav v-if="hasPagination" aria-label="Invoices pagination">
                 <ul class="pagination">
                     <li class="page-item" :class="{ disabled: isFirstPage || loadingList }">
                         <button class="page-link" type="button" @click="goToPage(currentPage - 1)">Previous</button>
@@ -189,7 +174,7 @@
 import Swal from 'sweetalert2';
 
 export default {
-    name: 'PassengersPage',
+    name: 'InvoicesPage',
     data() {
         return {
             items: [],
@@ -199,7 +184,7 @@ export default {
             submitting: false,
             formError: null,
             validationErrors: {},
-            searchInput: '',
+            invoiceNumberInput: '',
             statusFilter: '',
             searchDebounceTimer: null,
             pagination: {
@@ -212,11 +197,8 @@ export default {
         };
     },
     computed: {
-        isFormRoute() {
-            return this.$route.name === 'passengers.create' || this.$route.name === 'passengers.edit';
-        },
-        isEditing() {
-            return !!this.form.id;
+        isEditRoute() {
+            return this.$route.name === 'invoices.edit';
         },
         currentPage() {
             return this.pagination.current_page;
@@ -238,14 +220,14 @@ export default {
         '$route.query': {
             immediate: true,
             handler(query) {
-                const q = typeof query.q === 'string' ? query.q : '';
-                const status = query.status === 'Enabled' || query.status === 'Disabled' ? query.status : '';
+                const invoiceNumber = typeof query.invoice_number === 'string' ? query.invoice_number : '';
+                const status = ['Unpaid', 'Paid', 'Cancelled'].includes(query.status) ? query.status : '';
                 const parsedPage = parseInt(query.page, 10);
                 const page = Number.isNaN(parsedPage) || parsedPage < 1 ? 1 : parsedPage;
 
-                this.searchInput = q;
+                this.invoiceNumberInput = invoiceNumber;
                 this.statusFilter = status;
-                this.fetchPassengers({ q, status, page });
+                this.fetchInvoices({ invoiceNumber, status, page });
             },
         },
         '$route': {
@@ -254,12 +236,14 @@ export default {
                 this.syncFormFromRoute();
             },
         },
-        searchInput(newValue) {
-            if (this.isFormRoute) {
+        invoiceNumberInput(newValue) {
+            if (this.isEditRoute) {
                 return;
             }
 
-            const routeQuery = typeof this.$route.query.q === 'string' ? this.$route.query.q : '';
+            const routeQuery = typeof this.$route.query.invoice_number === 'string'
+                ? this.$route.query.invoice_number
+                : '';
 
             if (newValue === routeQuery) {
                 return;
@@ -278,11 +262,11 @@ export default {
         getDefaultForm() {
             return {
                 id: null,
-                first_name: '',
-                last_name: '',
-                email: '',
-                phone: '',
-                status: 'Enabled',
+                invoice_number: '',
+                booking_reference: '',
+                amount: 0,
+                currency: 'USD',
+                status: 'Unpaid',
             };
         },
         getFieldError(field) {
@@ -303,7 +287,6 @@ export default {
         extractApiError(error, fallbackMessage) {
             if (error.response && error.response.data) {
                 const payload = error.response.data;
-
                 if (payload.errors) {
                     const allMessages = Object.keys(payload.errors).reduce((messages, field) => {
                         const fieldMessages = payload.errors[field];
@@ -322,8 +305,8 @@ export default {
 
             return fallbackMessage;
         },
-        async fetchPassengers({ q = '', status = '', page = 1 } = {}) {
-            if (this.isFormRoute) {
+        async fetchInvoices({ invoiceNumber = '', status = '', page = 1 } = {}) {
+            if (this.isEditRoute) {
                 return;
             }
 
@@ -331,9 +314,9 @@ export default {
             this.listError = null;
 
             try {
-                const response = await window.axios.get('/api/v1/passengers', {
+                const response = await window.axios.get('/api/v1/invoices', {
                     params: {
-                        q: q || undefined,
+                        invoice_number: invoiceNumber || undefined,
                         status: status || undefined,
                         page,
                         per_page: this.pagination.per_page,
@@ -349,66 +332,55 @@ export default {
                     total: payload.meta ? payload.meta.total : 0,
                 };
             } catch (error) {
-                this.listError = this.extractApiError(error, 'Unable to load passengers. Please try again.');
+                this.listError = this.extractApiError(error, 'Unable to load invoices. Please try again.');
             } finally {
                 this.loadingList = false;
             }
         },
-        async fetchPassengerForEdit(id) {
+        async fetchInvoiceForEdit(id) {
             this.loadingForm = true;
             this.formError = null;
             this.form = this.getDefaultForm();
 
             try {
-                const response = await window.axios.get('/api/v1/passengers/' + id);
+                const response = await window.axios.get('/api/v1/invoices/' + id);
                 const item = response.data && response.data.data ? response.data.data : null;
 
                 if (!item) {
-                    this.formError = 'Passenger not found.';
+                    this.formError = 'Invoice not found.';
                     return;
                 }
 
                 this.form = {
                     id: item.id,
-                    first_name: item.first_name || '',
-                    last_name: item.last_name || '',
-                    email: item.email || '',
-                    phone: item.phone || '',
-                    status: item.status || 'Enabled',
+                    invoice_number: item.invoice_number || '',
+                    booking_reference: item.booking ? item.booking.reference : '',
+                    amount: Number(item.amount || 0),
+                    currency: item.currency || 'USD',
+                    status: item.status || 'Unpaid',
                 };
             } catch (error) {
-                this.formError = this.extractApiError(error, 'Unable to load this passenger.');
+                this.formError = this.extractApiError(error, 'Unable to load this invoice.');
             } finally {
                 this.loadingForm = false;
             }
         },
-        async submitPassengerForm() {
+        async submitInvoiceForm() {
             this.submitting = true;
             this.formError = null;
             this.clearValidationErrors();
 
             try {
-                const wasEditing = this.isEditing;
-                const payload = {
-                    first_name: this.form.first_name,
-                    last_name: this.form.last_name,
-                    email: this.form.email || null,
-                    phone: this.form.phone || null,
+                await window.axios.put('/api/v1/invoices/' + this.form.id, {
+                    amount: this.form.amount,
+                    currency: (this.form.currency || '').toUpperCase(),
                     status: this.form.status,
-                };
-
-                if (wasEditing) {
-                    await window.axios.put('/api/v1/passengers/' + this.form.id, payload);
-                } else {
-                    await window.axios.post('/api/v1/passengers', payload);
-                }
-
-                this.form = this.getDefaultForm();
+                });
                 await Swal.fire({
                     toast: true,
                     position: 'top-end',
                     icon: 'success',
-                    title: wasEditing ? 'Passenger updated successfully.' : 'Passenger created successfully.',
+                    title: 'Invoice updated successfully.',
                     showConfirmButton: false,
                     timer: 3000,
                     timerProgressBar: true,
@@ -416,7 +388,7 @@ export default {
                 this.goToIndex();
             } catch (error) {
                 const hasFieldErrors = this.setValidationErrors(error);
-                const errorMessage = this.extractApiError(error, 'Unable to save passenger.');
+                const errorMessage = this.extractApiError(error, 'Unable to save invoice.');
                 if (!hasFieldErrors) {
                     this.formError = errorMessage;
                 }
@@ -434,14 +406,7 @@ export default {
             }
         },
         syncFormFromRoute() {
-            if (!this.isFormRoute) {
-                this.form = this.getDefaultForm();
-                this.formError = null;
-                this.validationErrors = {};
-                return;
-            }
-
-            if (this.$route.name === 'passengers.create') {
+            if (!this.isEditRoute) {
                 this.form = this.getDefaultForm();
                 this.formError = null;
                 this.validationErrors = {};
@@ -449,10 +414,8 @@ export default {
             }
 
             const routeId = parseInt(this.$route.params.id, 10);
-
             if (Number.isNaN(routeId)) {
-                this.form = this.getDefaultForm();
-                this.formError = 'Invalid passenger id.';
+                this.formError = 'Invalid invoice id.';
                 return;
             }
 
@@ -460,32 +423,35 @@ export default {
                 return;
             }
 
-            this.fetchPassengerForEdit(routeId);
-        },
-        goToCreate() {
-            this.$router.push({ name: 'passengers.create', query: this.$route.query });
-        },
-        goToIndex() {
-            this.$router.push({ name: 'passengers.index', query: this.$route.query });
-        },
-        goToBookings() {
-            this.$router.push({ name: 'bookings.index' });
-        },
-        goToInvoices() {
-            this.$router.push({ name: 'invoices.index' });
+            this.fetchInvoiceForEdit(routeId);
         },
         startEdit(item) {
             this.$router.push({
-                name: 'passengers.edit',
+                name: 'invoices.edit',
                 params: { id: String(item.id) },
                 query: this.$route.query,
             });
         },
+        goToIndex() {
+            this.$router.push({ name: 'invoices.index', query: this.$route.query });
+        },
+        goToBookings() {
+            this.$router.push({ name: 'bookings.index' });
+        },
+        goToBookingEdit(bookingId) {
+            this.$router.push({
+                name: 'bookings.edit',
+                params: { id: String(bookingId) },
+            });
+        },
+        goToPassengers() {
+            this.$router.push({ name: 'passengers.index' });
+        },
         submitSearch() {
             this.$router.push({
-                name: 'passengers.index',
+                name: 'invoices.index',
                 query: {
-                    q: this.searchInput || undefined,
+                    invoice_number: this.invoiceNumberInput || undefined,
                     status: this.statusFilter || undefined,
                     page: 1,
                 },
@@ -497,9 +463,9 @@ export default {
             }
 
             this.$router.push({
-                name: 'passengers.index',
+                name: 'invoices.index',
                 query: {
-                    q: this.searchInput || undefined,
+                    invoice_number: this.invoiceNumberInput || undefined,
                     status: this.statusFilter || undefined,
                     page,
                 },

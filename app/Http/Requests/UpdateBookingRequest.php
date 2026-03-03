@@ -27,4 +27,12 @@ class UpdateBookingRequest extends FormRequest
             ])],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'passenger_ids.required' => 'At least 1 passenger is required.',
+            'passenger_ids.min' => 'At least 1 passenger is required.',
+        ];
+    }
 }

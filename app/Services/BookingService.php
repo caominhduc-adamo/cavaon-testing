@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Booking;
+use App\Invoice;
 use App\Tour;
 use App\TourDate;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,7 @@ class BookingService
             ->when($status, function ($query) use ($status) {
                 $query->where('status', $status);
             })
-            ->with(['tour', 'tourDate', 'passengers'])
+            ->with(['tour', 'tourDate', 'passengers', 'invoice'])
             ->orderBy('id', 'desc')
             ->paginate($perPage)
             ->appends($queryParams);
@@ -32,7 +33,7 @@ class BookingService
 
     public function getBooking(Booking $booking)
     {
-        return $booking->load(['tour', 'tourDate', 'passengers']);
+        return $booking->load(['tour', 'tourDate', 'passengers', 'invoice']);
     }
 
     public function createBooking(array $validated)
@@ -53,7 +54,15 @@ class BookingService
 
             $booking->passengers()->sync($validated['passenger_ids']);
 
-            return $booking->load(['tour', 'tourDate', 'passengers']);
+            $booking->invoice()->create([
+                'invoice_number' => $this->generateInvoiceNumber(),
+                'amount' => 0,
+                'currency' => 'USD',
+                'status' => Invoice::STATUS_UNPAID,
+                'issued_at' => now(),
+            ]);
+
+            return $booking->load(['tour', 'tourDate', 'passengers', 'invoice']);
         });
     }
 
@@ -74,7 +83,7 @@ class BookingService
 
             $booking->passengers()->sync($validated['passenger_ids']);
 
-            return $booking->load(['tour', 'tourDate', 'passengers']);
+            return $booking->load(['tour', 'tourDate', 'passengers', 'invoice']);
         });
     }
 
@@ -106,5 +115,14 @@ class BookingService
         } while (Booking::query()->where('reference', $reference)->exists());
 
         return $reference;
+    }
+
+    protected function generateInvoiceNumber()
+    {
+        do {
+            $invoiceNumber = 'INV-' . now()->format('Ymd') . '-' . Str::upper(Str::random(6));
+        } while (Invoice::query()->where('invoice_number', $invoiceNumber)->exists());
+
+        return $invoiceNumber;
     }
 }

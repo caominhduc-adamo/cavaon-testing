@@ -13,10 +13,17 @@
                 </button>
                 <button
                     type="button"
-                    class="btn btn-outline-primary"
+                    class="btn btn-outline-primary mr-2"
                     @click="goToPassengers"
                 >
                     Passengers
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    @click="goToInvoices"
+                >
+                    Invoices
                 </button>
             </div>
         </div>
@@ -265,6 +272,7 @@
                             <th>Reference</th>
                             <th>Tour</th>
                             <th>Tour Date</th>
+                            <th>Invoice</th>
                             <th style="width: 100px;">Passengers</th>
                             <th style="width: 100px;">Status</th>
                             <th style="width: 90px;">Action</th>
@@ -281,6 +289,18 @@
                                         ? formatDateRange(item.tour_date.start_date, item.tour_date.end_date)
                                         : '-'
                                 }}
+                            </td>
+                            <td>
+                                <template v-if="item.invoice">
+                                    <a
+                                        href="#"
+                                        @click.prevent="goToInvoiceEdit(item.invoice.id)"
+                                    >
+                                        {{ item.invoice.invoice_number }}
+                                    </a>
+                                    <span> ({{ item.invoice.status }})</span>
+                                </template>
+                                <span v-else>-</span>
                             </td>
                             <td>{{ item.passengers ? item.passengers.length : 0 }}</td>
                             <td>{{ item.status }}</td>
@@ -312,6 +332,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
+
 export default {
     name: 'BookingsPage',
     data() {
@@ -624,14 +646,33 @@ export default {
                 this.passengerSearchInput = '';
                 this.resetQuickPassengerForm();
                 this.showPassengerCreator = false;
+                await Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Passenger created and selected.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
             } catch (error) {
                 const hasFieldErrors = this.setNewPassengerValidationErrors(error);
+                const errorMessage = this.extractApiError(
+                    error,
+                    'Unable to create passenger. Please review your input and try again.'
+                );
                 if (!hasFieldErrors) {
-                    this.newPassengerError = this.extractApiError(
-                        error,
-                        'Unable to create passenger. Please review your input and try again.'
-                    );
+                    this.newPassengerError = errorMessage;
                 }
+                await Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: errorMessage,
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
             } finally {
                 this.creatingPassenger = false;
             }
@@ -782,13 +823,14 @@ export default {
             this.clearValidationErrors();
 
             try {
+                const wasEditing = this.isEditing;
                 const payload = {
                     tour_id: this.form.tour_id,
                     tour_date_id: this.form.tour_date_id,
                     passenger_ids: this.form.passenger_ids,
                 };
 
-                if (this.isEditing) {
+                if (wasEditing) {
                     payload.status = this.form.status;
                     await window.axios.put('/api/v1/bookings/' + this.form.id, payload);
                 } else {
@@ -796,15 +838,34 @@ export default {
                 }
 
                 this.form = this.getDefaultForm();
+                await Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: wasEditing ? 'Booking updated successfully.' : 'Booking created successfully.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
                 this.goToIndex();
             } catch (error) {
                 const hasFieldErrors = this.setValidationErrors(error);
+                const errorMessage = this.extractApiError(
+                    error,
+                    'Unable to save booking. Please review your selections.'
+                );
                 if (!hasFieldErrors) {
-                    this.formError = this.extractApiError(
-                        error,
-                        'Unable to save booking. Please review your selections.'
-                    );
+                    this.formError = errorMessage;
                 }
+                await Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: errorMessage,
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
             } finally {
                 this.submitting = false;
             }
@@ -846,6 +907,15 @@ export default {
         },
         goToPassengers() {
             this.$router.push({ name: 'passengers.index' });
+        },
+        goToInvoices() {
+            this.$router.push({ name: 'invoices.index' });
+        },
+        goToInvoiceEdit(invoiceId) {
+            this.$router.push({
+                name: 'invoices.edit',
+                params: { id: String(invoiceId) },
+            });
         },
         startEdit(item) {
             this.$router.push({

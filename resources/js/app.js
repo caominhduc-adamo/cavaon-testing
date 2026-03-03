@@ -11,6 +11,7 @@ import 'select2/dist/css/select2.min.css';
 import Vue from 'vue';
 import toursRouter from './router/tours';
 import toursStore from './store/tours';
+import AppSidebarLayout from './components/AppSidebarLayout.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,5 +28,5 @@ const app = new Vue({
     el: '#app',
     router: toursRouter,
     store: toursStore,
-    render: h => h('router-view'),
+    render: h => h(AppSidebarLayout),
 });

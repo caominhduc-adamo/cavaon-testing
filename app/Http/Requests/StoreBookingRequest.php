@@ -21,4 +21,12 @@ class StoreBookingRequest extends FormRequest
             'passenger_ids.*' => ['required', 'integer', 'distinct', Rule::exists('passengers', 'id')],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'passenger_ids.required' => 'At least 1 passenger is required.',
+            'passenger_ids.min' => 'At least 1 passenger is required.',
+        ];
+    }
 }

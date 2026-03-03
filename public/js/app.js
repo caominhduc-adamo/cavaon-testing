@@ -1899,6 +1899,66 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AppSidebarLayout.vue?vue&type=script&lang=js":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AppSidebarLayout.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'AppSidebarLayout',
+  data: function data() {
+    return {
+      menuItems: [{
+        name: 'tours.index',
+        label: 'Tour Management'
+      }, {
+        name: 'bookings.index',
+        label: 'Booking Management'
+      }, {
+        name: 'passengers.index',
+        label: 'Passenger Management'
+      }, {
+        name: 'invoices.index',
+        label: 'Invoice Management'
+      }]
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=script&lang=js":
 /*!*****************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/BookingsPage.vue?vue&type=script&lang=js ***!
@@ -1908,6 +1968,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -2231,6 +2293,27 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BookingsPage',
@@ -2516,7 +2599,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     submitQuickPassenger: function submitQuickPassenger() {
       var _this9 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var payload, response, newPassenger, hasFieldErrors, _t;
+        var payload, response, newPassenger, hasFieldErrors, errorMessage, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
@@ -2548,23 +2631,45 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _this9.passengerSearchInput = '';
               _this9.resetQuickPassengerForm();
               _this9.showPassengerCreator = false;
-              _context.n = 5;
-              break;
+              _context.n = 4;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Passenger created and selected.',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+              });
             case 4:
-              _context.p = 4;
-              _t = _context.v;
-              hasFieldErrors = _this9.setNewPassengerValidationErrors(_t);
-              if (!hasFieldErrors) {
-                _this9.newPassengerError = _this9.extractApiError(_t, 'Unable to create passenger. Please review your input and try again.');
-              }
+              _context.n = 6;
+              break;
             case 5:
               _context.p = 5;
-              _this9.creatingPassenger = false;
-              return _context.f(5);
+              _t = _context.v;
+              hasFieldErrors = _this9.setNewPassengerValidationErrors(_t);
+              errorMessage = _this9.extractApiError(_t, 'Unable to create passenger. Please review your input and try again.');
+              if (!hasFieldErrors) {
+                _this9.newPassengerError = errorMessage;
+              }
+              _context.n = 6;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: errorMessage,
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true
+              });
             case 6:
+              _context.p = 6;
+              _this9.creatingPassenger = false;
+              return _context.f(6);
+            case 7:
               return _context.a(2);
           }
-        }, _callee, null, [[1, 4, 5, 6]]);
+        }, _callee, null, [[1, 5, 6, 7]]);
       }))();
     },
     onTourChanged: function onTourChanged() {
@@ -2789,7 +2894,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     submitBookingForm: function submitBookingForm() {
       var _this13 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
-        var payload, hasFieldErrors, _t6;
+        var wasEditing, payload, hasFieldErrors, errorMessage, _t6;
         return _regenerator().w(function (_context6) {
           while (1) switch (_context6.p = _context6.n) {
             case 0:
@@ -2797,12 +2902,13 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _this13.formError = null;
               _this13.clearValidationErrors();
               _context6.p = 1;
+              wasEditing = _this13.isEditing;
               payload = {
                 tour_id: _this13.form.tour_id,
                 tour_date_id: _this13.form.tour_date_id,
                 passenger_ids: _this13.form.passenger_ids
               };
-              if (!_this13.isEditing) {
+              if (!wasEditing) {
                 _context6.n = 3;
                 break;
               }
@@ -2817,24 +2923,46 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               return window.axios.post('/api/v1/bookings', payload);
             case 4:
               _this13.form = _this13.getDefaultForm();
-              _this13.goToIndex();
-              _context6.n = 6;
-              break;
+              _context6.n = 5;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: wasEditing ? 'Booking updated successfully.' : 'Booking created successfully.',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+              });
             case 5:
-              _context6.p = 5;
-              _t6 = _context6.v;
-              hasFieldErrors = _this13.setValidationErrors(_t6);
-              if (!hasFieldErrors) {
-                _this13.formError = _this13.extractApiError(_t6, 'Unable to save booking. Please review your selections.');
-              }
+              _this13.goToIndex();
+              _context6.n = 7;
+              break;
             case 6:
               _context6.p = 6;
-              _this13.submitting = false;
-              return _context6.f(6);
+              _t6 = _context6.v;
+              hasFieldErrors = _this13.setValidationErrors(_t6);
+              errorMessage = _this13.extractApiError(_t6, 'Unable to save booking. Please review your selections.');
+              if (!hasFieldErrors) {
+                _this13.formError = errorMessage;
+              }
+              _context6.n = 7;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: errorMessage,
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true
+              });
             case 7:
+              _context6.p = 7;
+              _this13.submitting = false;
+              return _context6.f(7);
+            case 8:
               return _context6.a(2);
           }
-        }, _callee6, null, [[1, 5, 6, 7]]);
+        }, _callee6, null, [[1, 6, 7, 8]]);
       }))();
     },
     syncFormFromRoute: function syncFormFromRoute() {
@@ -2876,6 +3004,19 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     goToPassengers: function goToPassengers() {
       this.$router.push({
         name: 'passengers.index'
+      });
+    },
+    goToInvoices: function goToInvoices() {
+      this.$router.push({
+        name: 'invoices.index'
+      });
+    },
+    goToInvoiceEdit: function goToInvoiceEdit(invoiceId) {
+      this.$router.push({
+        name: 'invoices.edit',
+        params: {
+          id: String(invoiceId)
+        }
       });
     },
     startEdit: function startEdit(item) {
@@ -2934,6 +3075,564 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/InvoicesPage.vue?vue&type=script&lang=js":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/InvoicesPage.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'InvoicesPage',
+  data: function data() {
+    return {
+      items: [],
+      loadingList: false,
+      listError: null,
+      loadingForm: false,
+      submitting: false,
+      formError: null,
+      validationErrors: {},
+      invoiceNumberInput: '',
+      statusFilter: '',
+      searchDebounceTimer: null,
+      pagination: {
+        current_page: 1,
+        last_page: 1,
+        per_page: 10,
+        total: 0
+      },
+      form: this.getDefaultForm()
+    };
+  },
+  computed: {
+    isEditRoute: function isEditRoute() {
+      return this.$route.name === 'invoices.edit';
+    },
+    currentPage: function currentPage() {
+      return this.pagination.current_page;
+    },
+    lastPage: function lastPage() {
+      return this.pagination.last_page;
+    },
+    hasPagination: function hasPagination() {
+      return this.pagination.total > this.pagination.per_page;
+    },
+    isFirstPage: function isFirstPage() {
+      return this.currentPage <= 1;
+    },
+    isLastPage: function isLastPage() {
+      return this.currentPage >= this.lastPage;
+    }
+  },
+  watch: {
+    '$route.query': {
+      immediate: true,
+      handler: function handler(query) {
+        var invoiceNumber = typeof query.invoice_number === 'string' ? query.invoice_number : '';
+        var status = ['Unpaid', 'Paid', 'Cancelled'].includes(query.status) ? query.status : '';
+        var parsedPage = parseInt(query.page, 10);
+        var page = Number.isNaN(parsedPage) || parsedPage < 1 ? 1 : parsedPage;
+        this.invoiceNumberInput = invoiceNumber;
+        this.statusFilter = status;
+        this.fetchInvoices({
+          invoiceNumber: invoiceNumber,
+          status: status,
+          page: page
+        });
+      }
+    },
+    '$route': {
+      immediate: true,
+      handler: function handler() {
+        this.syncFormFromRoute();
+      }
+    },
+    invoiceNumberInput: function invoiceNumberInput(newValue) {
+      var _this = this;
+      if (this.isEditRoute) {
+        return;
+      }
+      var routeQuery = typeof this.$route.query.invoice_number === 'string' ? this.$route.query.invoice_number : '';
+      if (newValue === routeQuery) {
+        return;
+      }
+      if (this.searchDebounceTimer) {
+        clearTimeout(this.searchDebounceTimer);
+      }
+      this.searchDebounceTimer = setTimeout(function () {
+        _this.submitSearch();
+      }, 800);
+    }
+  },
+  methods: {
+    getDefaultForm: function getDefaultForm() {
+      return {
+        id: null,
+        invoice_number: '',
+        booking_reference: '',
+        amount: 0,
+        currency: 'USD',
+        status: 'Unpaid'
+      };
+    },
+    getFieldError: function getFieldError(field) {
+      var errors = this.validationErrors[field];
+      return Array.isArray(errors) && errors.length ? errors[0] : null;
+    },
+    clearValidationErrors: function clearValidationErrors() {
+      this.validationErrors = {};
+    },
+    setValidationErrors: function setValidationErrors(error) {
+      if (error && error.response && error.response.data && error.response.data.errors) {
+        this.validationErrors = error.response.data.errors;
+        return true;
+      }
+      return false;
+    },
+    extractApiError: function extractApiError(error, fallbackMessage) {
+      if (error.response && error.response.data) {
+        var payload = error.response.data;
+        if (payload.errors) {
+          var allMessages = Object.keys(payload.errors).reduce(function (messages, field) {
+            var fieldMessages = payload.errors[field];
+            return Array.isArray(fieldMessages) ? messages.concat(fieldMessages) : messages;
+          }, []);
+          if (allMessages.length) {
+            return allMessages.join(' ');
+          }
+        }
+        if (payload.message && payload.message !== 'The given data was invalid.') {
+          return payload.message;
+        }
+      }
+      return fallbackMessage;
+    },
+    fetchInvoices: function fetchInvoices() {
+      var _arguments = arguments,
+        _this2 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        var _ref, _ref$invoiceNumber, invoiceNumber, _ref$status, status, _ref$page, page, response, payload, _t;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              _ref = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {}, _ref$invoiceNumber = _ref.invoiceNumber, invoiceNumber = _ref$invoiceNumber === void 0 ? '' : _ref$invoiceNumber, _ref$status = _ref.status, status = _ref$status === void 0 ? '' : _ref$status, _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page;
+              if (!_this2.isEditRoute) {
+                _context.n = 1;
+                break;
+              }
+              return _context.a(2);
+            case 1:
+              _this2.loadingList = true;
+              _this2.listError = null;
+              _context.p = 2;
+              _context.n = 3;
+              return window.axios.get('/api/v1/invoices', {
+                params: {
+                  invoice_number: invoiceNumber || undefined,
+                  status: status || undefined,
+                  page: page,
+                  per_page: _this2.pagination.per_page
+                }
+              });
+            case 3:
+              response = _context.v;
+              payload = response.data || {};
+              _this2.items = payload.data || [];
+              _this2.pagination = {
+                current_page: payload.meta ? payload.meta.current_page : 1,
+                last_page: payload.meta ? payload.meta.last_page : 1,
+                per_page: payload.meta ? payload.meta.per_page : 10,
+                total: payload.meta ? payload.meta.total : 0
+              };
+              _context.n = 5;
+              break;
+            case 4:
+              _context.p = 4;
+              _t = _context.v;
+              _this2.listError = _this2.extractApiError(_t, 'Unable to load invoices. Please try again.');
+            case 5:
+              _context.p = 5;
+              _this2.loadingList = false;
+              return _context.f(5);
+            case 6:
+              return _context.a(2);
+          }
+        }, _callee, null, [[2, 4, 5, 6]]);
+      }))();
+    },
+    fetchInvoiceForEdit: function fetchInvoiceForEdit(id) {
+      var _this3 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+        var response, item, _t2;
+        return _regenerator().w(function (_context2) {
+          while (1) switch (_context2.p = _context2.n) {
+            case 0:
+              _this3.loadingForm = true;
+              _this3.formError = null;
+              _this3.form = _this3.getDefaultForm();
+              _context2.p = 1;
+              _context2.n = 2;
+              return window.axios.get('/api/v1/invoices/' + id);
+            case 2:
+              response = _context2.v;
+              item = response.data && response.data.data ? response.data.data : null;
+              if (item) {
+                _context2.n = 3;
+                break;
+              }
+              _this3.formError = 'Invoice not found.';
+              return _context2.a(2);
+            case 3:
+              _this3.form = {
+                id: item.id,
+                invoice_number: item.invoice_number || '',
+                booking_reference: item.booking ? item.booking.reference : '',
+                amount: Number(item.amount || 0),
+                currency: item.currency || 'USD',
+                status: item.status || 'Unpaid'
+              };
+              _context2.n = 5;
+              break;
+            case 4:
+              _context2.p = 4;
+              _t2 = _context2.v;
+              _this3.formError = _this3.extractApiError(_t2, 'Unable to load this invoice.');
+            case 5:
+              _context2.p = 5;
+              _this3.loadingForm = false;
+              return _context2.f(5);
+            case 6:
+              return _context2.a(2);
+          }
+        }, _callee2, null, [[1, 4, 5, 6]]);
+      }))();
+    },
+    submitInvoiceForm: function submitInvoiceForm() {
+      var _this4 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+        var hasFieldErrors, errorMessage, _t3;
+        return _regenerator().w(function (_context3) {
+          while (1) switch (_context3.p = _context3.n) {
+            case 0:
+              _this4.submitting = true;
+              _this4.formError = null;
+              _this4.clearValidationErrors();
+              _context3.p = 1;
+              _context3.n = 2;
+              return window.axios.put('/api/v1/invoices/' + _this4.form.id, {
+                amount: _this4.form.amount,
+                currency: (_this4.form.currency || '').toUpperCase(),
+                status: _this4.form.status
+              });
+            case 2:
+              _context3.n = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Invoice updated successfully.',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+              });
+            case 3:
+              _this4.goToIndex();
+              _context3.n = 5;
+              break;
+            case 4:
+              _context3.p = 4;
+              _t3 = _context3.v;
+              hasFieldErrors = _this4.setValidationErrors(_t3);
+              errorMessage = _this4.extractApiError(_t3, 'Unable to save invoice.');
+              if (!hasFieldErrors) {
+                _this4.formError = errorMessage;
+              }
+              _context3.n = 5;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: errorMessage,
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true
+              });
+            case 5:
+              _context3.p = 5;
+              _this4.submitting = false;
+              return _context3.f(5);
+            case 6:
+              return _context3.a(2);
+          }
+        }, _callee3, null, [[1, 4, 5, 6]]);
+      }))();
+    },
+    syncFormFromRoute: function syncFormFromRoute() {
+      if (!this.isEditRoute) {
+        this.form = this.getDefaultForm();
+        this.formError = null;
+        this.validationErrors = {};
+        return;
+      }
+      var routeId = parseInt(this.$route.params.id, 10);
+      if (Number.isNaN(routeId)) {
+        this.formError = 'Invalid invoice id.';
+        return;
+      }
+      if (this.form.id === routeId) {
+        return;
+      }
+      this.fetchInvoiceForEdit(routeId);
+    },
+    startEdit: function startEdit(item) {
+      this.$router.push({
+        name: 'invoices.edit',
+        params: {
+          id: String(item.id)
+        },
+        query: this.$route.query
+      });
+    },
+    goToIndex: function goToIndex() {
+      this.$router.push({
+        name: 'invoices.index',
+        query: this.$route.query
+      });
+    },
+    goToBookings: function goToBookings() {
+      this.$router.push({
+        name: 'bookings.index'
+      });
+    },
+    goToBookingEdit: function goToBookingEdit(bookingId) {
+      this.$router.push({
+        name: 'bookings.edit',
+        params: {
+          id: String(bookingId)
+        }
+      });
+    },
+    goToPassengers: function goToPassengers() {
+      this.$router.push({
+        name: 'passengers.index'
+      });
+    },
+    submitSearch: function submitSearch() {
+      this.$router.push({
+        name: 'invoices.index',
+        query: {
+          invoice_number: this.invoiceNumberInput || undefined,
+          status: this.statusFilter || undefined,
+          page: 1
+        }
+      });
+    },
+    goToPage: function goToPage(page) {
+      if (page < 1 || page > this.lastPage || page === this.currentPage) {
+        return;
+      }
+      this.$router.push({
+        name: 'invoices.index',
+        query: {
+          invoice_number: this.invoiceNumberInput || undefined,
+          status: this.statusFilter || undefined,
+          page: page
+        }
+      });
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (this.searchDebounceTimer) {
+      clearTimeout(this.searchDebounceTimer);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/PassengersPage.vue?vue&type=script&lang=js":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/PassengersPage.vue?vue&type=script&lang=js ***!
@@ -2943,6 +3642,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -3127,6 +3828,14 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PassengersPage',
@@ -3360,7 +4069,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     submitPassengerForm: function submitPassengerForm() {
       var _this4 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-        var payload, hasFieldErrors, _t3;
+        var wasEditing, payload, hasFieldErrors, errorMessage, _t3;
         return _regenerator().w(function (_context3) {
           while (1) switch (_context3.p = _context3.n) {
             case 0:
@@ -3368,6 +4077,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _this4.formError = null;
               _this4.clearValidationErrors();
               _context3.p = 1;
+              wasEditing = _this4.isEditing;
               payload = {
                 first_name: _this4.form.first_name,
                 last_name: _this4.form.last_name,
@@ -3375,7 +4085,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 phone: _this4.form.phone || null,
                 status: _this4.form.status
               };
-              if (!_this4.isEditing) {
+              if (!wasEditing) {
                 _context3.n = 3;
                 break;
               }
@@ -3389,24 +4099,46 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               return window.axios.post('/api/v1/passengers', payload);
             case 4:
               _this4.form = _this4.getDefaultForm();
-              _this4.goToIndex();
-              _context3.n = 6;
-              break;
+              _context3.n = 5;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: wasEditing ? 'Passenger updated successfully.' : 'Passenger created successfully.',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+              });
             case 5:
-              _context3.p = 5;
-              _t3 = _context3.v;
-              hasFieldErrors = _this4.setValidationErrors(_t3);
-              if (!hasFieldErrors) {
-                _this4.formError = _this4.extractApiError(_t3, 'Unable to save passenger.');
-              }
+              _this4.goToIndex();
+              _context3.n = 7;
+              break;
             case 6:
               _context3.p = 6;
-              _this4.submitting = false;
-              return _context3.f(6);
+              _t3 = _context3.v;
+              hasFieldErrors = _this4.setValidationErrors(_t3);
+              errorMessage = _this4.extractApiError(_t3, 'Unable to save passenger.');
+              if (!hasFieldErrors) {
+                _this4.formError = errorMessage;
+              }
+              _context3.n = 7;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: errorMessage,
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true
+              });
             case 7:
+              _context3.p = 7;
+              _this4.submitting = false;
+              return _context3.f(7);
+            case 8:
               return _context3.a(2);
           }
-        }, _callee3, null, [[1, 5, 6, 7]]);
+        }, _callee3, null, [[1, 6, 7, 8]]);
       }))();
     },
     syncFormFromRoute: function syncFormFromRoute() {
@@ -3448,6 +4180,11 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     goToBookings: function goToBookings() {
       this.$router.push({
         name: 'bookings.index'
+      });
+    },
+    goToInvoices: function goToInvoices() {
+      this.$router.push({
+        name: 'invoices.index'
       });
     },
     startEdit: function startEdit(item) {
@@ -3508,6 +4245,13 @@ function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { 
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3987,7 +4731,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
     submitTourForm: function submitTourForm() {
       var _this2 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var payload, hasFieldErrors, _t;
+        var wasEditing, payload, hasFieldErrors, errorMessage, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
@@ -3995,8 +4739,9 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
               _this2.formError = null;
               _this2.clearValidationErrors();
               _context.p = 1;
+              wasEditing = _this2.isEditing;
               payload = _this2.buildPayload();
-              if (!_this2.isEditing) {
+              if (!wasEditing) {
                 _context.n = 3;
                 break;
               }
@@ -4017,24 +4762,46 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
                 page: _this2.currentPage
               });
             case 5:
-              _this2.goToIndex();
-              _context.n = 7;
-              break;
+              _context.n = 6;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: wasEditing ? 'Tour updated successfully.' : 'Tour created successfully.',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+              });
             case 6:
-              _context.p = 6;
-              _t = _context.v;
-              hasFieldErrors = _this2.setValidationErrors(_t);
-              if (!hasFieldErrors) {
-                _this2.formError = _this2.extractApiError(_t, 'Unable to save tour. Please review your inputs and try again.');
-              }
+              _this2.goToIndex();
+              _context.n = 8;
+              break;
             case 7:
               _context.p = 7;
-              _this2.submitting = false;
-              return _context.f(7);
+              _t = _context.v;
+              hasFieldErrors = _this2.setValidationErrors(_t);
+              errorMessage = _this2.extractApiError(_t, 'Unable to save tour. Please review your inputs and try again.');
+              if (!hasFieldErrors) {
+                _this2.formError = errorMessage;
+              }
+              _context.n = 8;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: errorMessage,
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true
+              });
             case 8:
+              _context.p = 8;
+              _this2.submitting = false;
+              return _context.f(8);
+            case 9:
               return _context.a(2);
           }
-        }, _callee, null, [[1, 6, 7, 8]]);
+        }, _callee, null, [[1, 7, 8, 9]]);
       }))();
     },
     publishTour: function publishTour() {
@@ -4227,6 +4994,11 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
     goToPassengers: function goToPassengers() {
       this.$router.push({
         name: 'passengers.index'
+      });
+    },
+    goToInvoices: function goToInvoices() {
+      this.$router.push({
+        name: 'invoices.index'
       });
     },
     goToIndex: function goToIndex() {
@@ -51407,6 +52179,74 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AppSidebarLayout.vue?vue&type=template&id=193f0e20":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AppSidebarLayout.vue?vue&type=template&id=193f0e20 ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "d-flex min-vh-100" }, [
+    _c(
+      "aside",
+      { staticClass: "border-right bg-light", staticStyle: { width: "260px" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "nav",
+          { staticClass: "list-group list-group-flush rounded-0" },
+          _vm._l(_vm.menuItems, function (item) {
+            return _c(
+              "router-link",
+              {
+                key: item.name,
+                staticClass: "list-group-item list-group-item-action border-0",
+                attrs: {
+                  to: { name: item.name },
+                  "active-class": "active",
+                  "exact-active-class": "active",
+                },
+              },
+              [
+                _vm._v(
+                  "\n                " + _vm._s(item.label) + "\n            "
+                ),
+              ]
+            )
+          }),
+          1
+        ),
+      ]
+    ),
+    _vm._v(" "),
+    _c("main", { staticClass: "flex-grow-1 py-4" }, [_c("router-view")], 1),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-3 border-bottom" }, [
+      _c("h5", { staticClass: "mb-0" }, [_vm._v("Management")]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72":
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72 ***!
@@ -51450,11 +52290,21 @@ var render = function () {
             _c(
               "button",
               {
-                staticClass: "btn btn-outline-primary",
+                staticClass: "btn btn-outline-primary mr-2",
                 attrs: { type: "button" },
                 on: { click: _vm.goToPassengers },
               },
               [_vm._v("\n                Passengers\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.goToInvoices },
+              },
+              [_vm._v("\n                Invoices\n            ")]
             ),
           ]),
         ]
@@ -52639,6 +53489,48 @@ var render = function () {
                               ),
                             ]),
                             _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                item.invoice
+                                  ? [
+                                      _c(
+                                        "a",
+                                        {
+                                          attrs: { href: "#" },
+                                          on: {
+                                            click: function ($event) {
+                                              $event.preventDefault()
+                                              return _vm.goToInvoiceEdit(
+                                                item.invoice.id
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(
+                                                item.invoice.invoice_number
+                                              ) +
+                                              "\n                                "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v(
+                                          " (" +
+                                            _vm._s(item.invoice.status) +
+                                            ")"
+                                        ),
+                                      ]),
+                                    ]
+                                  : _c("span", [_vm._v("-")]),
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
                             _c("td", [
                               _vm._v(
                                 _vm._s(
@@ -52759,9 +53651,615 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Tour Date")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Invoice")]),
+        _vm._v(" "),
         _c("th", { staticStyle: { width: "100px" } }, [_vm._v("Passengers")]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "100px" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "90px" } }, [_vm._v("Action")]),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/InvoicesPage.vue?vue&type=template&id=70156e1e":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/InvoicesPage.vue?vue&type=template&id=70156e1e ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "d-flex justify-content-between align-items-center mb-4",
+        },
+        [
+          _c("h1", { staticClass: "mb-0" }, [_vm._v("Invoices Management")]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary mr-2",
+                attrs: { type: "button" },
+                on: { click: _vm.goToBookings },
+              },
+              [_vm._v("\n                Bookings\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.goToPassengers },
+              },
+              [_vm._v("\n                Passengers\n            ")]
+            ),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _vm.isEditRoute
+        ? _c("div", { staticClass: "card mb-4" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Edit invoice #" + _vm._s(_vm.form.id)),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _vm.loadingForm
+                ? _c("div", { staticClass: "alert alert-info" }, [
+                    _vm._v("Loading invoice details..."),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.formError
+                ? _c("div", { staticClass: "alert alert-danger" }, [
+                    _vm._v(_vm._s(_vm.formError)),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.loadingForm
+                ? _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function ($event) {
+                          $event.preventDefault()
+                          return _vm.submitInvoiceForm.apply(null, arguments)
+                        },
+                      },
+                    },
+                    [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Invoice number")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", disabled: "" },
+                          domProps: { value: _vm.form.invoice_number || "-" },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Booking reference")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", disabled: "" },
+                          domProps: {
+                            value: _vm.form.booking_reference || "-",
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("div", { staticClass: "form-group col-md-6" }, [
+                          _c("label", { attrs: { for: "invoice-amount" } }, [
+                            _vm._v("Amount"),
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.number",
+                                value: _vm.form.amount,
+                                expression: "form.amount",
+                                modifiers: { number: true },
+                              },
+                            ],
+                            class: [
+                              "form-control",
+                              { "is-invalid": _vm.getFieldError("amount") },
+                            ],
+                            attrs: {
+                              id: "invoice-amount",
+                              type: "number",
+                              min: "0",
+                              step: "0.01",
+                            },
+                            domProps: { value: _vm.form.amount },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "amount",
+                                  _vm._n($event.target.value)
+                                )
+                              },
+                              blur: function ($event) {
+                                return _vm.$forceUpdate()
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _vm.getFieldError("amount")
+                            ? _c(
+                                "div",
+                                { staticClass: "invalid-feedback d-block" },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(_vm.getFieldError("amount")) +
+                                      "\n                        "
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group col-md-6" }, [
+                          _c("label", { attrs: { for: "invoice-currency" } }, [
+                            _vm._v("Currency"),
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.trim",
+                                value: _vm.form.currency,
+                                expression: "form.currency",
+                                modifiers: { trim: true },
+                              },
+                            ],
+                            class: [
+                              "form-control",
+                              { "is-invalid": _vm.getFieldError("currency") },
+                            ],
+                            attrs: {
+                              id: "invoice-currency",
+                              type: "text",
+                              maxlength: "3",
+                            },
+                            domProps: { value: _vm.form.currency },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "currency",
+                                  $event.target.value.trim()
+                                )
+                              },
+                              blur: function ($event) {
+                                return _vm.$forceUpdate()
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _vm.getFieldError("currency")
+                            ? _c(
+                                "div",
+                                { staticClass: "invalid-feedback d-block" },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(_vm.getFieldError("currency")) +
+                                      "\n                        "
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "invoice-status" } }, [
+                          _vm._v("Status"),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.status,
+                                expression: "form.status",
+                              },
+                            ],
+                            class: [
+                              "form-control",
+                              { "is-invalid": _vm.getFieldError("status") },
+                            ],
+                            attrs: { id: "invoice-status" },
+                            on: {
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "status",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                            },
+                          },
+                          [
+                            _c("option", { attrs: { value: "Unpaid" } }, [
+                              _vm._v("Unpaid"),
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Paid" } }, [
+                              _vm._v("Paid"),
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Cancelled" } }, [
+                              _vm._v("Cancelled"),
+                            ]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.getFieldError("status")
+                          ? _c(
+                              "div",
+                              { staticClass: "invalid-feedback d-block" },
+                              [
+                                _vm._v(
+                                  "\n                        " +
+                                    _vm._s(_vm.getFieldError("status")) +
+                                    "\n                    "
+                                ),
+                              ]
+                            )
+                          : _vm._e(),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "d-flex" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success mr-2",
+                            attrs: { type: "submit", disabled: _vm.submitting },
+                          },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(
+                                  _vm.submitting
+                                    ? "Saving..."
+                                    : "Update invoice"
+                                ) +
+                                "\n                    "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-outline-secondary",
+                            attrs: { type: "button", disabled: _vm.submitting },
+                            on: { click: _vm.goToIndex },
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Cancel\n                    "
+                            ),
+                          ]
+                        ),
+                      ]),
+                    ]
+                  )
+                : _vm._e(),
+            ]),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.isEditRoute
+        ? [
+            _c("div", { staticClass: "form-inline mb-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.invoiceNumberInput,
+                    expression: "invoiceNumberInput",
+                    modifiers: { trim: true },
+                  },
+                ],
+                staticClass: "form-control mr-2",
+                attrs: {
+                  type: "text",
+                  placeholder: "Search by invoice number",
+                },
+                domProps: { value: _vm.invoiceNumberInput },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.invoiceNumberInput = $event.target.value.trim()
+                  },
+                  blur: function ($event) {
+                    return _vm.$forceUpdate()
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.statusFilter,
+                      expression: "statusFilter",
+                    },
+                  ],
+                  staticClass: "form-control mr-2",
+                  on: {
+                    change: [
+                      function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.statusFilter = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.submitSearch,
+                    ],
+                  },
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v("All statuses"),
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Unpaid" } }, [
+                    _vm._v("Unpaid"),
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Paid" } }, [_vm._v("Paid")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Cancelled" } }, [
+                    _vm._v("Cancelled"),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _vm.loadingList
+              ? _c("div", { staticClass: "alert alert-info mb-3" }, [
+                  _vm._v("Loading invoices..."),
+                ])
+              : _vm.listError
+              ? _c("div", { staticClass: "alert alert-danger mb-3" }, [
+                  _vm._v(_vm._s(_vm.listError)),
+                ])
+              : !_vm.items.length
+              ? _c("div", { staticClass: "alert alert-secondary mb-3" }, [
+                  _vm._v("No invoices found."),
+                ])
+              : _c("div", { staticClass: "table-responsive mb-3" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table table-striped table-bordered" },
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.items, function (item) {
+                          return _c("tr", { key: item.id }, [
+                            _c("td", [_vm._v(_vm._s(item.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.invoice_number))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                item.booking
+                                  ? [
+                                      _c(
+                                        "a",
+                                        {
+                                          attrs: { href: "#" },
+                                          on: {
+                                            click: function ($event) {
+                                              $event.preventDefault()
+                                              return _vm.goToBookingEdit(
+                                                item.booking.id
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(item.booking.reference) +
+                                              "\n                                "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  : _c("span", [_vm._v("-")]),
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.amount))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.currency))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.status))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-sm btn-outline-primary",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.startEdit(item)
+                                    },
+                                  },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Edit\n                            "
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ])
+                        }),
+                        0
+                      ),
+                    ]
+                  ),
+                ]),
+            _vm._v(" "),
+            _vm.hasPagination
+              ? _c("nav", { attrs: { "aria-label": "Invoices pagination" } }, [
+                  _c("ul", { staticClass: "pagination" }, [
+                    _c(
+                      "li",
+                      {
+                        staticClass: "page-item",
+                        class: { disabled: _vm.isFirstPage || _vm.loadingList },
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "page-link",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.goToPage(_vm.currentPage - 1)
+                              },
+                            },
+                          },
+                          [_vm._v("Previous")]
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "page-item disabled" }, [
+                      _c("span", { staticClass: "page-link" }, [
+                        _vm._v(
+                          "Page " +
+                            _vm._s(_vm.currentPage) +
+                            " of " +
+                            _vm._s(_vm.lastPage)
+                        ),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticClass: "page-item",
+                        class: { disabled: _vm.isLastPage || _vm.loadingList },
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "page-link",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.goToPage(_vm.currentPage + 1)
+                              },
+                            },
+                          },
+                          [_vm._v("Next")]
+                        ),
+                      ]
+                    ),
+                  ]),
+                ])
+              : _vm._e(),
+          ]
+        : _vm._e(),
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", { staticStyle: { width: "70px" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Invoice #")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Booking")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "120px" } }, [_vm._v("Amount")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "100px" } }, [_vm._v("Currency")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "110px" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "90px" } }, [_vm._v("Action")]),
       ]),
@@ -52817,11 +54315,21 @@ var render = function () {
             _c(
               "button",
               {
-                staticClass: "btn btn-outline-primary",
+                staticClass: "btn btn-outline-primary mr-2",
                 attrs: { type: "button" },
                 on: { click: _vm.goToBookings },
               },
               [_vm._v("\n                Bookings\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.goToInvoices },
+              },
+              [_vm._v("\n                Invoices\n            ")]
             ),
           ]),
         ]
@@ -53495,6 +55003,16 @@ var render = function () {
                 on: { click: _vm.goToPassengers },
               },
               [_vm._v("\n                Passengers\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary mr-2",
+                attrs: { type: "button" },
+                on: { click: _vm.goToInvoices },
+              },
+              [_vm._v("\n                Invoices\n            ")]
             ),
             _vm._v(" "),
             !_vm.isFormRoute
@@ -71081,6 +72599,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _router_tours__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router/tours */ "./resources/js/router/tours.js");
 /* harmony import */ var _store_tours__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/tours */ "./resources/js/store/tours.js");
+/* harmony import */ var _components_AppSidebarLayout_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/AppSidebarLayout.vue */ "./resources/js/components/AppSidebarLayout.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -71089,6 +72608,7 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
+
 
 
 
@@ -71110,7 +72630,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
   router: _router_tours__WEBPACK_IMPORTED_MODULE_2__["default"],
   store: _store_tours__WEBPACK_IMPORTED_MODULE_3__["default"],
   render: function render(h) {
-    return h('router-view');
+    return h(_components_AppSidebarLayout_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
   }
 });
 
@@ -71162,6 +72682,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/AppSidebarLayout.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/AppSidebarLayout.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AppSidebarLayout_vue_vue_type_template_id_193f0e20__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppSidebarLayout.vue?vue&type=template&id=193f0e20 */ "./resources/js/components/AppSidebarLayout.vue?vue&type=template&id=193f0e20");
+/* harmony import */ var _AppSidebarLayout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppSidebarLayout.vue?vue&type=script&lang=js */ "./resources/js/components/AppSidebarLayout.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AppSidebarLayout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AppSidebarLayout_vue_vue_type_template_id_193f0e20__WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AppSidebarLayout_vue_vue_type_template_id_193f0e20__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AppSidebarLayout.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AppSidebarLayout.vue?vue&type=script&lang=js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/AppSidebarLayout.vue?vue&type=script&lang=js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppSidebarLayout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AppSidebarLayout.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AppSidebarLayout.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppSidebarLayout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AppSidebarLayout.vue?vue&type=template&id=193f0e20":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/AppSidebarLayout.vue?vue&type=template&id=193f0e20 ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppSidebarLayout_vue_vue_type_template_id_193f0e20__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AppSidebarLayout.vue?vue&type=template&id=193f0e20 */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AppSidebarLayout.vue?vue&type=template&id=193f0e20");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppSidebarLayout_vue_vue_type_template_id_193f0e20__WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppSidebarLayout_vue_vue_type_template_id_193f0e20__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -71229,6 +72818,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_template_id_063dba72__WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_template_id_063dba72__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/InvoicesPage.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/pages/InvoicesPage.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _InvoicesPage_vue_vue_type_template_id_70156e1e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InvoicesPage.vue?vue&type=template&id=70156e1e */ "./resources/js/pages/InvoicesPage.vue?vue&type=template&id=70156e1e");
+/* harmony import */ var _InvoicesPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InvoicesPage.vue?vue&type=script&lang=js */ "./resources/js/pages/InvoicesPage.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _InvoicesPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _InvoicesPage_vue_vue_type_template_id_70156e1e__WEBPACK_IMPORTED_MODULE_0__["render"],
+  _InvoicesPage_vue_vue_type_template_id_70156e1e__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/InvoicesPage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/InvoicesPage.vue?vue&type=script&lang=js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/pages/InvoicesPage.vue?vue&type=script&lang=js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoicesPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./InvoicesPage.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/InvoicesPage.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoicesPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/InvoicesPage.vue?vue&type=template&id=70156e1e":
+/*!***************************************************************************!*\
+  !*** ./resources/js/pages/InvoicesPage.vue?vue&type=template&id=70156e1e ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoicesPage_vue_vue_type_template_id_70156e1e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./InvoicesPage.vue?vue&type=template&id=70156e1e */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/InvoicesPage.vue?vue&type=template&id=70156e1e");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoicesPage_vue_vue_type_template_id_70156e1e__WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoicesPage_vue_vue_type_template_id_70156e1e__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -71387,6 +73045,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_ToursPage_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/ToursPage.vue */ "./resources/js/pages/ToursPage.vue");
 /* harmony import */ var _pages_BookingsPage_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/BookingsPage.vue */ "./resources/js/pages/BookingsPage.vue");
 /* harmony import */ var _pages_PassengersPage_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/PassengersPage.vue */ "./resources/js/pages/PassengersPage.vue");
+/* harmony import */ var _pages_InvoicesPage_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/InvoicesPage.vue */ "./resources/js/pages/InvoicesPage.vue");
+
 
 
 
@@ -71431,6 +73091,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     path: '/passengers/:id/edit',
     name: 'passengers.edit',
     component: _pages_PassengersPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }, {
+    path: '/invoices',
+    name: 'invoices.index',
+    component: _pages_InvoicesPage_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }, {
+    path: '/invoices/:id/edit',
+    name: 'invoices.edit',
+    component: _pages_InvoicesPage_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   }]
 }));
 
