@@ -128,3 +128,36 @@ docker compose exec app php artisan migrate
 ```bash
 docker compose down
 ```
+
+## Testing
+
+### Booking creation unit tests
+
+Booking creation business logic is covered in:
+
+- `tests/Unit/Services/BookingServiceTest.php`
+
+Covered scenarios:
+
+- Creates booking with `Submitted` status, generated reference, passengers, and invoice.
+- Rejects creation when tour is not `Public`.
+- Rejects creation when selected tour date belongs to a different tour.
+- Rejects creation when selected tour date is not `Enabled`.
+
+Run only booking creation tests:
+
+```bash
+./vendor/bin/phpunit tests/Unit/Services/BookingServiceTest.php
+```
+
+If using Docker:
+
+```bash
+docker compose exec app ./vendor/bin/phpunit tests/Unit/Services/BookingServiceTest.php
+```
+
+Run all tests:
+
+```bash
+./vendor/bin/phpunit
+```
