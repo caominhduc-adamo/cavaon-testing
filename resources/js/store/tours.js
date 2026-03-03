@@ -8,6 +8,7 @@ const state = {
     loading: false,
     error: null,
     search: '',
+    statusFilter: '',
     pagination: {
         current_page: 1,
         last_page: 1,
@@ -26,6 +27,9 @@ const mutations = {
     setSearch(currentState, search) {
         currentState.search = search;
     },
+    setStatusFilter(currentState, status) {
+        currentState.statusFilter = status;
+    },
     setTours(currentState, payload) {
         currentState.items = payload.data || [];
         currentState.pagination = {
@@ -38,15 +42,17 @@ const mutations = {
 };
 
 const actions = {
-    async fetchTours({ commit, state }, { q = '', page = 1 } = {}) {
+    async fetchTours({ commit, state }, { q = '', page = 1, status = '' } = {}) {
         commit('setLoading', true);
         commit('setError', null);
         commit('setSearch', q);
+        commit('setStatusFilter', status);
 
         try {
             const response = await window.axios.get('/api/v1/tours', {
                 params: {
                     q: q || undefined,
+                    status: status || undefined,
                     page,
                     per_page: state.pagination.per_page,
                 },

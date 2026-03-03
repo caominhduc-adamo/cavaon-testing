@@ -20,4 +20,3 @@ Route::get('/', function () {
 Route::get('/{any}', 'HomeController@spa')->where(['any' => '.*']);
 
 Auth::routes();
-

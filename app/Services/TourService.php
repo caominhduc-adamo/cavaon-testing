@@ -4,29 +4,144 @@ namespace App\Services;
 
 use App\Tour;
 use App\TourDate;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class TourService
 {
     public function listTours(array $validated, array $queryParams = [])
     {
         $search = isset($validated['q']) ? trim($validated['q']) : null;
+        $status = isset($validated['status']) ? $validated['status'] : null;
         $perPage = isset($validated['per_page']) ? (int) $validated['per_page'] : 10;
 
         return Tour::query()
-            ->where('status', Tour::STATUS_PUBLIC)
             ->when($search, function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%');
             })
-            ->whereHas('tourDates', function ($query) {
-                $query->where('status', TourDate::STATUS_ENABLED);
+            ->when($status, function ($query) use ($status) {
+                $query->where('status', $status);
             })
             ->with(['tourDates' => function ($query) {
-                $query->where('status', TourDate::STATUS_ENABLED)
-                    ->orderBy('start_date')
+                $query->orderBy('start_date')
+                    ->where('status', TourDate::STATUS_ENABLED)
                     ->select(['id', 'tour_id', 'start_date', 'end_date', 'status']);
             }])
-            ->orderBy('name')
+            ->orderBy('id', 'desc')
             ->paginate($perPage)
             ->appends($queryParams);
+    }
+
+    public function getTour(Tour $tour)
+    {
+        return $tour->load(['tourDates' => function ($query) {
+            $query->orderBy('start_date');
+        }]);
+    }
+
+    public function createTour(array $validated)
+    {
+        return DB::transaction(function () use ($validated) {
+            $tour = Tour::create([
+                'name' => $validated['name'],
+                'description' => isset($validated['description']) ? $validated['description'] : null,
+                'status' => Tour::STATUS_DRAFT,
+            ]);
+
+            $this->syncTourDates($tour, isset($validated['tour_dates']) ? $validated['tour_dates'] : []);
+
+            if (isset($validated['status'])) {
+                $this->validateStatusTransition($tour, $validated['status']);
+                $tour->status = $validated['status'];
+                $tour->save();
+            }
+
+            return $tour->load(['tourDates' => function ($query) {
+                $query->orderBy('start_date');
+            }]);
+        });
+    }
+
+    public function updateTour(Tour $tour, array $validated)
+    {
+        return DB::transaction(function () use ($tour, $validated) {
+            $tour->fill([
+                'name' => $validated['name'],
+                'description' => isset($validated['description']) ? $validated['description'] : null,
+            ]);
+            $tour->save();
+
+            $this->syncTourDates($tour, isset($validated['tour_dates']) ? $validated['tour_dates'] : []);
+
+            if (isset($validated['status']) && $validated['status'] !== $tour->status) {
+                $this->validateStatusTransition($tour, $validated['status']);
+                $tour->status = $validated['status'];
+                $tour->save();
+            }
+
+            return $tour->load(['tourDates' => function ($query) {
+                $query->orderBy('start_date');
+            }]);
+        });
+    }
+
+    public function publishTour(Tour $tour)
+    {
+        return DB::transaction(function () use ($tour) {
+            if ($tour->status !== Tour::STATUS_PUBLIC) {
+                $this->validateStatusTransition($tour, Tour::STATUS_PUBLIC);
+                $tour->status = Tour::STATUS_PUBLIC;
+                $tour->save();
+            }
+
+            return $tour->load(['tourDates' => function ($query) {
+                $query->orderBy('start_date');
+            }]);
+        });
+    }
+
+    protected function syncTourDates(Tour $tour, array $tourDates)
+    {
+        foreach ($tourDates as $tourDatePayload) {
+            if (isset($tourDatePayload['id'])) {
+                $tourDate = $tour->tourDates()->where('id', $tourDatePayload['id'])->first();
+
+                if (!$tourDate) {
+                    throw ValidationException::withMessages([
+                        'tour_dates' => ['One or more tour dates do not belong to this tour.'],
+                    ]);
+                }
+
+                $tourDate->fill([
+                    'start_date' => $tourDatePayload['start_date'],
+                    'end_date' => isset($tourDatePayload['end_date']) ? $tourDatePayload['end_date'] : null,
+                    'status' => isset($tourDatePayload['status']) ? $tourDatePayload['status'] : TourDate::STATUS_ENABLED,
+                ]);
+                $tourDate->save();
+
+                continue;
+            }
+
+            $tour->tourDates()->create([
+                'start_date' => $tourDatePayload['start_date'],
+                'end_date' => isset($tourDatePayload['end_date']) ? $tourDatePayload['end_date'] : null,
+                'status' => isset($tourDatePayload['status']) ? $tourDatePayload['status'] : TourDate::STATUS_ENABLED,
+            ]);
+        }
+    }
+
+    protected function validateStatusTransition(Tour $tour, $nextStatus)
+    {
+        if ($nextStatus === Tour::STATUS_PUBLIC) {
+            $hasEnabledDate = $tour->tourDates()
+                ->where('status', TourDate::STATUS_ENABLED)
+                ->exists();
+
+            if (!$hasEnabledDate) {
+                throw ValidationException::withMessages([
+                    'status' => ['Tour must have at least one enabled date before publishing.'],
+                ]);
+            }
+        }
     }
 }

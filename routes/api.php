@@ -19,4 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::get('/tours', 'Api\V1\TourController@index');
+    Route::get('/tours/{tour}', 'Api\V1\TourController@show');
+    Route::post('/tours', 'Api\V1\TourController@store');
+    Route::put('/tours/{tour}', 'Api\V1\TourController@update');
+    Route::patch('/tours/{tour}/publish', 'Api\V1\TourController@publish');
 });

@@ -12,5 +12,15 @@ export default new Router({
             name: 'tours.index',
             component: ToursPage,
         },
+        {
+            path: '/tours/create',
+            name: 'tours.create',
+            component: ToursPage,
+        },
+        {
+            path: '/tours/:id/edit',
+            name: 'tours.edit',
+            component: ToursPage,
+        },
     ],
 });
