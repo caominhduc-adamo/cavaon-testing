@@ -20,6 +20,7 @@ class UpdateBookingRequest extends FormRequest
             'tour_date_id' => ['required', 'integer', Rule::exists('tour_dates', 'id')],
             'passenger_ids' => ['required', 'array', 'min:1'],
             'passenger_ids.*' => ['required', 'integer', 'distinct', Rule::exists('passengers', 'id')],
+            'updated_at' => ['required', 'date'],
             'status' => ['required', Rule::in([
                 Booking::STATUS_SUBMITTED,
                 Booking::STATUS_CONFIRMED,

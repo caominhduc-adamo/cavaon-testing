@@ -2,22 +2,6 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mb-0">Invoices Management</h1>
-            <div>
-                <button
-                    type="button"
-                    class="btn btn-outline-primary mr-2"
-                    @click="goToBookings"
-                >
-                    Bookings
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-outline-primary"
-                    @click="goToPassengers"
-                >
-                    Passengers
-                </button>
-            </div>
         </div>
 
         <div v-if="isEditRoute" class="card mb-4">
@@ -267,6 +251,7 @@ export default {
                 amount: 0,
                 currency: 'USD',
                 status: 'Unpaid',
+                updated_at: null,
             };
         },
         getFieldError(field) {
@@ -358,6 +343,7 @@ export default {
                     amount: Number(item.amount || 0),
                     currency: item.currency || 'USD',
                     status: item.status || 'Unpaid',
+                    updated_at: item.updated_at || null,
                 };
             } catch (error) {
                 this.formError = this.extractApiError(error, 'Unable to load this invoice.');
@@ -375,6 +361,7 @@ export default {
                     amount: this.form.amount,
                     currency: (this.form.currency || '').toUpperCase(),
                     status: this.form.status,
+                    updated_at: this.form.updated_at,
                 });
                 await Swal.fire({
                     toast: true,

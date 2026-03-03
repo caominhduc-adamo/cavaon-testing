@@ -21,6 +21,9 @@ class UpsertPassengerRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:50'],
             'status' => ['nullable', Rule::in([Passenger::STATUS_ENABLED, Passenger::STATUS_DISABLED])],
+            'updated_at' => $this->isMethod('put')
+                ? ['required', 'date']
+                : ['nullable', 'date'],
         ];
     }
 }

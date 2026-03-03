@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Invoice;
+use Illuminate\Support\Carbon;
+use Illuminate\Validation\ValidationException;
 
 class InvoiceService
 {
@@ -32,6 +34,8 @@ class InvoiceService
 
     public function updateInvoice(Invoice $invoice, array $validated)
     {
+        $this->ensureInvoiceNotStale($invoice, $validated['updated_at']);
+
         $status = $validated['status'];
 
         $invoice->fill([
@@ -43,5 +47,17 @@ class InvoiceService
         $invoice->save();
 
         return $invoice->load('booking');
+    }
+
+    protected function ensureInvoiceNotStale(Invoice $invoice, $clientUpdatedAt)
+    {
+        $currentUpdatedAt = $invoice->updated_at ? $invoice->updated_at->format('Y-m-d H:i:s') : null;
+        $requestUpdatedAt = Carbon::parse($clientUpdatedAt)->format('Y-m-d H:i:s');
+
+        if ($currentUpdatedAt !== $requestUpdatedAt) {
+            throw ValidationException::withMessages([
+                'invoice' => ['This invoice has been updated by another user. Please refresh and try again.'],
+            ]);
+        }
     }
 }

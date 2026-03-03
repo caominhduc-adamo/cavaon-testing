@@ -11,20 +11,6 @@
                 >
                     Create
                 </button>
-                <button
-                    type="button"
-                    class="btn btn-outline-primary mr-2"
-                    @click="goToBookings"
-                >
-                    Bookings
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-outline-primary"
-                    @click="goToInvoices"
-                >
-                    Invoices
-                </button>
             </div>
         </div>
 
@@ -283,6 +269,7 @@ export default {
                 email: '',
                 phone: '',
                 status: 'Enabled',
+                updated_at: null,
             };
         },
         getFieldError(field) {
@@ -375,6 +362,7 @@ export default {
                     email: item.email || '',
                     phone: item.phone || '',
                     status: item.status || 'Enabled',
+                    updated_at: item.updated_at || null,
                 };
             } catch (error) {
                 this.formError = this.extractApiError(error, 'Unable to load this passenger.');
@@ -398,6 +386,7 @@ export default {
                 };
 
                 if (wasEditing) {
+                    payload.updated_at = this.form.updated_at;
                     await window.axios.put('/api/v1/passengers/' + this.form.id, payload);
                 } else {
                     await window.axios.post('/api/v1/passengers', payload);

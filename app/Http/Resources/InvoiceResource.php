@@ -23,6 +23,7 @@ class InvoiceResource extends JsonResource
             'status' => $this->status,
             'issued_at' => $this->issued_at ? $this->issued_at->toDateTimeString() : null,
             'paid_at' => $this->paid_at ? $this->paid_at->toDateTimeString() : null,
+            'updated_at' => $this->updated_at ? $this->updated_at->toDateTimeString() : null,
             'booking' => $this->whenLoaded('booking', function () {
                 return [
                     'id' => $this->booking->id,

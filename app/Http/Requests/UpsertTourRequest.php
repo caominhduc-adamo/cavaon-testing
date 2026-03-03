@@ -21,6 +21,9 @@ class UpsertTourRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'status' => ['nullable', Rule::in([Tour::STATUS_DRAFT, Tour::STATUS_PUBLIC])],
+            'updated_at' => $this->isMethod('put')
+                ? ['required', 'date']
+                : ['nullable', 'date'],
             'tour_dates' => ['nullable', 'array'],
             'tour_dates.*.id' => ['nullable', 'integer', Rule::exists('tour_dates', 'id')],
             'tour_dates.*.start_date' => ['required_with:tour_dates', 'date', 'after_or_equal:today'],

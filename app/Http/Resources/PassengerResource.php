@@ -21,6 +21,7 @@ class PassengerResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'status' => $this->status,
+            'updated_at' => $this->updated_at ? $this->updated_at->toDateTimeString() : null,
         ];
     }
 }

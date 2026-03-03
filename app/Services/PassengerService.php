@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Passenger;
+use Illuminate\Support\Carbon;
+use Illuminate\Validation\ValidationException;
 
 class PassengerService
 {
@@ -47,6 +49,8 @@ class PassengerService
 
     public function updatePassenger(Passenger $passenger, array $validated)
     {
+        $this->ensurePassengerNotStale($passenger, $validated['updated_at']);
+
         $passenger->fill([
             'first_name' => $validated['first_name'],
             'last_name' => $validated['last_name'],
@@ -57,5 +61,17 @@ class PassengerService
         $passenger->save();
 
         return $passenger;
+    }
+
+    protected function ensurePassengerNotStale(Passenger $passenger, $clientUpdatedAt)
+    {
+        $currentUpdatedAt = $passenger->updated_at ? $passenger->updated_at->format('Y-m-d H:i:s') : null;
+        $requestUpdatedAt = Carbon::parse($clientUpdatedAt)->format('Y-m-d H:i:s');
+
+        if ($currentUpdatedAt !== $requestUpdatedAt) {
+            throw ValidationException::withMessages([
+                'passenger' => ['This passenger has been updated by another user. Please refresh and try again.'],
+            ]);
+        }
     }
 }

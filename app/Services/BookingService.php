@@ -6,6 +6,7 @@ use App\Booking;
 use App\Invoice;
 use App\Tour;
 use App\TourDate;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -69,6 +70,8 @@ class BookingService
     public function updateBooking(Booking $booking, array $validated)
     {
         return DB::transaction(function () use ($booking, $validated) {
+            $this->ensureBookingNotStale($booking, $validated['updated_at']);
+
             $tour = Tour::query()->findOrFail($validated['tour_id']);
             $tourDate = TourDate::query()->findOrFail($validated['tour_date_id']);
 
@@ -124,5 +127,17 @@ class BookingService
         } while (Invoice::query()->where('invoice_number', $invoiceNumber)->exists());
 
         return $invoiceNumber;
+    }
+
+    protected function ensureBookingNotStale(Booking $booking, $clientUpdatedAt)
+    {
+        $currentUpdatedAt = $booking->updated_at ? $booking->updated_at->format('Y-m-d H:i:s') : null;
+        $requestUpdatedAt = Carbon::parse($clientUpdatedAt)->format('Y-m-d H:i:s');
+
+        if ($currentUpdatedAt !== $requestUpdatedAt) {
+            throw ValidationException::withMessages([
+                'booking' => ['This booking has been updated by another user. Please refresh and try again.'],
+            ]);
+        }
     }
 }

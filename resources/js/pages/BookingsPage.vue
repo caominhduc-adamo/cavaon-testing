@@ -11,20 +11,6 @@
                 >
                     Create
                 </button>
-                <button
-                    type="button"
-                    class="btn btn-outline-primary mr-2"
-                    @click="goToPassengers"
-                >
-                    Passengers
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-outline-primary"
-                    @click="goToInvoices"
-                >
-                    Invoices
-                </button>
             </div>
         </div>
 
@@ -494,6 +480,7 @@ export default {
                 tour_id: null,
                 tour_date_id: null,
                 status: 'Submitted',
+                updated_at: null,
                 passenger_ids: [],
             };
         },
@@ -808,6 +795,7 @@ export default {
                     tour_id: item.tour_id || null,
                     tour_date_id: item.tour_date_id || null,
                     status: item.status || 'Submitted',
+                    updated_at: item.updated_at || null,
                     passenger_ids: Array.isArray(item.passengers) ? item.passengers.map((p) => Number(p.id)) : [],
                 };
                 this.onTourChanged();
@@ -832,6 +820,7 @@ export default {
 
                 if (wasEditing) {
                     payload.status = this.form.status;
+                    payload.updated_at = this.form.updated_at;
                     await window.axios.put('/api/v1/bookings/' + this.form.id, payload);
                 } else {
                     await window.axios.post('/api/v1/bookings', payload);

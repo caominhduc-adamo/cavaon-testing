@@ -2299,20 +2299,6 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2479,6 +2465,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         tour_id: null,
         tour_date_id: null,
         status: 'Submitted',
+        updated_at: null,
         passenger_ids: []
       };
     },
@@ -2870,6 +2857,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 tour_id: item.tour_id || null,
                 tour_date_id: item.tour_date_id || null,
                 status: item.status || 'Submitted',
+                updated_at: item.updated_at || null,
                 passenger_ids: Array.isArray(item.passengers) ? item.passengers.map(function (p) {
                   return Number(p.id);
                 }) : []
@@ -2913,6 +2901,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 break;
               }
               payload.status = _this13.form.status;
+              payload.updated_at = _this13.form.updated_at;
               _context6.n = 2;
               return window.axios.put('/api/v1/bookings/' + _this13.form.id, payload);
             case 2:
@@ -3246,22 +3235,6 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3355,7 +3328,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         booking_reference: '',
         amount: 0,
         currency: 'USD',
-        status: 'Unpaid'
+        status: 'Unpaid',
+        updated_at: null
       };
     },
     getFieldError: function getFieldError(field) {
@@ -3472,7 +3446,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 booking_reference: item.booking ? item.booking.reference : '',
                 amount: Number(item.amount || 0),
                 currency: item.currency || 'USD',
-                status: item.status || 'Unpaid'
+                status: item.status || 'Unpaid',
+                updated_at: item.updated_at || null
               };
               _context2.n = 5;
               break;
@@ -3505,7 +3480,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               return window.axios.put('/api/v1/invoices/' + _this4.form.id, {
                 amount: _this4.form.amount,
                 currency: (_this4.form.currency || '').toUpperCase(),
-                status: _this4.form.status
+                status: _this4.form.status,
+                updated_at: _this4.form.updated_at
               });
             case 2:
               _context3.n = 3;
@@ -3821,20 +3797,6 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3931,7 +3893,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         last_name: '',
         email: '',
         phone: '',
-        status: 'Enabled'
+        status: 'Enabled',
+        updated_at: null
       };
     },
     getFieldError: function getFieldError(field) {
@@ -4048,7 +4011,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 last_name: item.last_name || '',
                 email: item.email || '',
                 phone: item.phone || '',
-                status: item.status || 'Enabled'
+                status: item.status || 'Enabled',
+                updated_at: item.updated_at || null
               };
               _context2.n = 5;
               break;
@@ -4089,6 +4053,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 _context3.n = 3;
                 break;
               }
+              payload.updated_at = _this4.form.updated_at;
               _context3.n = 2;
               return window.axios.put('/api/v1/passengers/' + _this4.form.id, payload);
             case 2:
@@ -4530,27 +4495,6 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4655,6 +4599,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         name: '',
         description: '',
         status: 'Draft',
+        updated_at: null,
         tour_dates: []
       };
     },
@@ -4677,7 +4622,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
       this.form.tour_dates.splice(index, 1);
     },
     buildPayload: function buildPayload() {
-      return {
+      var payload = {
         name: this.form.name,
         description: this.form.description || null,
         tour_dates: this.form.tour_dates.map(function (tourDate) {
@@ -4689,6 +4634,10 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           };
         })
       };
+      if (this.isEditing) {
+        payload.updated_at = this.form.updated_at;
+      }
+      return payload;
     },
     getFieldError: function getFieldError(field) {
       var errors = this.validationErrors[field];
@@ -4908,6 +4857,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         name: tour.name,
         description: tour.description || '',
         status: tour.status || 'Draft',
+        updated_at: tour.updated_at || null,
         tour_dates: (tour.tour_dates || []).map(function (tourDate) {
           _this4.localDateCounter += 1;
           return {
@@ -52286,26 +52236,6 @@ var render = function () {
                   [_vm._v("\n                Create\n            ")]
                 )
               : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary mr-2",
-                attrs: { type: "button" },
-                on: { click: _vm.goToPassengers },
-              },
-              [_vm._v("\n                Passengers\n            ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary",
-                attrs: { type: "button" },
-                on: { click: _vm.goToInvoices },
-              },
-              [_vm._v("\n                Invoices\n            ")]
-            ),
           ]),
         ]
       ),
@@ -53687,37 +53617,7 @@ var render = function () {
     "div",
     { staticClass: "container" },
     [
-      _c(
-        "div",
-        {
-          staticClass: "d-flex justify-content-between align-items-center mb-4",
-        },
-        [
-          _c("h1", { staticClass: "mb-0" }, [_vm._v("Invoices Management")]),
-          _vm._v(" "),
-          _c("div", [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary mr-2",
-                attrs: { type: "button" },
-                on: { click: _vm.goToBookings },
-              },
-              [_vm._v("\n                Bookings\n            ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary",
-                attrs: { type: "button" },
-                on: { click: _vm.goToPassengers },
-              },
-              [_vm._v("\n                Passengers\n            ")]
-            ),
-          ]),
-        ]
-      ),
+      _vm._m(0),
       _vm._v(" "),
       _vm.isEditRoute
         ? _c("div", { staticClass: "card mb-4" }, [
@@ -54099,7 +53999,7 @@ var render = function () {
                     "table",
                     { staticClass: "table table-striped table-bordered" },
                     [
-                      _vm._m(0),
+                      _vm._m(1),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -54247,6 +54147,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "d-flex justify-content-between align-items-center mb-4" },
+      [_c("h1", { staticClass: "mb-0" }, [_vm._v("Invoices Management")])]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
         _c("th", { staticStyle: { width: "70px" } }, [_vm._v("ID")]),
@@ -54311,26 +54221,6 @@ var render = function () {
                   [_vm._v("\n                Create\n            ")]
                 )
               : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary mr-2",
-                attrs: { type: "button" },
-                on: { click: _vm.goToBookings },
-              },
-              [_vm._v("\n                Bookings\n            ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary",
-                attrs: { type: "button" },
-                on: { click: _vm.goToInvoices },
-              },
-              [_vm._v("\n                Invoices\n            ")]
-            ),
           ]),
         ]
       ),
@@ -54985,36 +54875,6 @@ var render = function () {
           _c("h1", { staticClass: "mb-0" }, [_vm._v("Tours Management")]),
           _vm._v(" "),
           _c("div", [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary mr-2",
-                attrs: { type: "button" },
-                on: { click: _vm.goToBookings },
-              },
-              [_vm._v("\n                Bookings\n            ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary mr-2",
-                attrs: { type: "button" },
-                on: { click: _vm.goToPassengers },
-              },
-              [_vm._v("\n                Passengers\n            ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary mr-2",
-                attrs: { type: "button" },
-                on: { click: _vm.goToInvoices },
-              },
-              [_vm._v("\n                Invoices\n            ")]
-            ),
-            _vm._v(" "),
             !_vm.isFormRoute
               ? _c(
                   "button",

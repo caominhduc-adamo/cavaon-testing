@@ -4,27 +4,6 @@
             <h1 class="mb-0">Tours Management</h1>
             <div>
                 <button
-                    type="button"
-                    class="btn btn-outline-primary mr-2"
-                    @click="goToBookings"
-                >
-                    Bookings
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-outline-primary mr-2"
-                    @click="goToPassengers"
-                >
-                    Passengers
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-outline-primary mr-2"
-                    @click="goToInvoices"
-                >
-                    Invoices
-                </button>
-                <button
                     v-if="!isFormRoute"
                     type="button"
                     class="btn btn-success"
@@ -412,6 +391,7 @@ export default {
                 name: '',
                 description: '',
                 status: 'Draft',
+                updated_at: null,
                 tour_dates: [],
             };
         },
@@ -434,7 +414,7 @@ export default {
             this.form.tour_dates.splice(index, 1);
         },
         buildPayload() {
-            return {
+            const payload = {
                 name: this.form.name,
                 description: this.form.description || null,
                 tour_dates: this.form.tour_dates.map((tourDate) => ({
@@ -444,6 +424,12 @@ export default {
                     status: tourDate.status,
                 })),
             };
+
+            if (this.isEditing) {
+                payload.updated_at = this.form.updated_at;
+            }
+
+            return payload;
         },
         getFieldError(field) {
             const errors = this.validationErrors[field];
@@ -631,6 +617,7 @@ export default {
                 name: tour.name,
                 description: tour.description || '',
                 status: tour.status || 'Draft',
+                updated_at: tour.updated_at || null,
                 tour_dates: (tour.tour_dates || []).map((tourDate) => {
                     this.localDateCounter += 1;
 

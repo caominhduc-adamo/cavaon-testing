@@ -21,6 +21,7 @@ class BookingResource extends JsonResource
             'reference' => $this->reference,
             'status' => $this->status,
             'booked_at' => $this->booked_at ? $this->booked_at->toDateTimeString() : null,
+            'updated_at' => $this->updated_at ? $this->updated_at->toDateTimeString() : null,
             'tour' => $this->whenLoaded('tour', function () {
                 return [
                     'id' => $this->tour->id,

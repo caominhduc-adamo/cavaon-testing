@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Booking;
 use App\Tour;
 use App\TourDate;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -65,6 +67,8 @@ class TourService
     public function updateTour(Tour $tour, array $validated)
     {
         return DB::transaction(function () use ($tour, $validated) {
+            $this->ensureTourNotStale($tour, $validated['updated_at']);
+
             $tour->fill([
                 'name' => $validated['name'],
                 'description' => isset($validated['description']) ? $validated['description'] : null,
@@ -102,6 +106,8 @@ class TourService
 
     protected function syncTourDates(Tour $tour, array $tourDates)
     {
+        $incomingIds = [];
+
         foreach ($tourDates as $tourDatePayload) {
             if (isset($tourDatePayload['id'])) {
                 $tourDate = $tour->tourDates()->where('id', $tourDatePayload['id'])->first();
@@ -112,6 +118,7 @@ class TourService
                     ]);
                 }
 
+                $incomingIds[] = (int) $tourDate->id;
                 $tourDate->fill([
                     'start_date' => $tourDatePayload['start_date'],
                     'end_date' => isset($tourDatePayload['end_date']) ? $tourDatePayload['end_date'] : null,
@@ -128,6 +135,27 @@ class TourService
                 'status' => isset($tourDatePayload['status']) ? $tourDatePayload['status'] : TourDate::STATUS_ENABLED,
             ]);
         }
+
+        $existingIds = $tour->tourDates()->pluck('id')->map(function ($id) {
+            return (int) $id;
+        })->all();
+        $idsToDelete = array_values(array_diff($existingIds, $incomingIds));
+
+        if (empty($idsToDelete)) {
+            return;
+        }
+
+        $hasBookingsOnDeletedDates = Booking::query()
+            ->whereIn('tour_date_id', $idsToDelete)
+            ->exists();
+
+        if ($hasBookingsOnDeletedDates) {
+            throw ValidationException::withMessages([
+                'tour_dates' => ['Cannot delete tour dates that already have bookings.'],
+            ]);
+        }
+
+        $tour->tourDates()->whereIn('id', $idsToDelete)->delete();
     }
 
     protected function validateStatusTransition(Tour $tour, $nextStatus)
@@ -142,6 +170,18 @@ class TourService
                     'status' => ['Tour must have at least one enabled date before publishing.'],
                 ]);
             }
+        }
+    }
+
+    protected function ensureTourNotStale(Tour $tour, $clientUpdatedAt)
+    {
+        $currentUpdatedAt = $tour->updated_at ? $tour->updated_at->format('Y-m-d H:i:s') : null;
+        $requestUpdatedAt = Carbon::parse($clientUpdatedAt)->format('Y-m-d H:i:s');
+
+        if ($currentUpdatedAt !== $requestUpdatedAt) {
+            throw ValidationException::withMessages([
+                'tour' => ['This tour has been updated by another user. Please refresh and try again.'],
+            ]);
         }
     }
 }

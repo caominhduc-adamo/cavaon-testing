@@ -19,6 +19,7 @@ class TourResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'status' => $this->status,
+            'updated_at' => $this->updated_at ? $this->updated_at->toDateTimeString() : null,
             'tour_dates' => $this->whenLoaded('tourDates', function () {
                 return $this->tourDates->values()->map(function ($tourDate) {
                     return [

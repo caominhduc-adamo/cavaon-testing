@@ -18,6 +18,7 @@ class UpdateInvoiceRequest extends FormRequest
         return [
             'amount' => ['required', 'numeric', 'min:0'],
             'currency' => ['required', 'string', 'size:3'],
+            'updated_at' => ['required', 'date'],
             'status' => ['required', Rule::in([
                 Invoice::STATUS_UNPAID,
                 Invoice::STATUS_PAID,
