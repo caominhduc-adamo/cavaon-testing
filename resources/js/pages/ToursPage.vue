@@ -4,6 +4,20 @@
             <h1 class="mb-0">Tours Management</h1>
             <div>
                 <button
+                    type="button"
+                    class="btn btn-outline-primary mr-2"
+                    @click="goToBookings"
+                >
+                    Bookings
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-outline-primary mr-2"
+                    @click="goToPassengers"
+                >
+                    Passengers
+                </button>
+                <button
                     v-if="!isFormRoute"
                     type="button"
                     class="btn btn-success"
@@ -657,6 +671,12 @@ export default {
                 name: 'tours.create',
                 query: this.$route.query,
             });
+        },
+        goToBookings() {
+            this.$router.push({ name: 'bookings.index' });
+        },
+        goToPassengers() {
+            this.$router.push({ name: 'passengers.index' });
         },
         goToIndex() {
             this.$router.push({

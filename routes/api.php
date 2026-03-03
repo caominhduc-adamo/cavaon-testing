@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,14 @@ Route::prefix('v1')->group(function () {
     Route::post('/tours', 'Api\V1\TourController@store');
     Route::put('/tours/{tour}', 'Api\V1\TourController@update');
     Route::patch('/tours/{tour}/publish', 'Api\V1\TourController@publish');
+
+    Route::get('/passengers', 'Api\V1\PassengerController@index');
+    Route::get('/passengers/{passenger}', 'Api\V1\PassengerController@show');
+    Route::post('/passengers', 'Api\V1\PassengerController@store');
+    Route::put('/passengers/{passenger}', 'Api\V1\PassengerController@update');
+
+    Route::get('/bookings', 'Api\V1\BookingController@index');
+    Route::get('/bookings/{booking}', 'Api\V1\BookingController@show');
+    Route::post('/bookings', 'Api\V1\BookingController@store');
+    Route::put('/bookings/{booking}', 'Api\V1\BookingController@update');
 });

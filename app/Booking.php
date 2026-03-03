@@ -14,6 +14,7 @@ class Booking extends Model
 
     protected $fillable = [
         'tour_id',
+        'tour_date_id',
         'reference',
         'status',
         'booked_at',
@@ -26,6 +27,11 @@ class Booking extends Model
     public function tour()
     {
         return $this->belongsTo(Tour::class, 'tour_id');
+    }
+
+    public function tourDate()
+    {
+        return $this->belongsTo(TourDate::class, 'tour_date_id');
     }
 
     public function passengers()

@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+require('select2');
+import 'select2/dist/css/select2.min.css';
 
 import Vue from 'vue';
 import toursRouter from './router/tours';
