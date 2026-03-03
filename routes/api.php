@@ -38,4 +38,10 @@ Route::prefix('v1')->group(function () {
     Route::get('/invoices', 'Api\V1\InvoiceController@index');
     Route::get('/invoices/{invoice}', 'Api\V1\InvoiceController@show');
     Route::put('/invoices/{invoice}', 'Api\V1\InvoiceController@update');
+
+    Route::fallback(function () {
+        return response()->json([
+            'message' => 'API endpoint not found.',
+        ], 404);
+    });
 });

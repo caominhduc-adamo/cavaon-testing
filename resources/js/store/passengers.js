@@ -25,7 +25,7 @@ const mutations = {
     setStatusFilter(currentState, status) {
         currentState.statusFilter = status;
     },
-    setTours(currentState, payload) {
+    setPassengers(currentState, payload) {
         currentState.items = payload.data || [];
         currentState.pagination = {
             current_page: payload.meta ? payload.meta.current_page : 1,
@@ -37,14 +37,14 @@ const mutations = {
 };
 
 const actions = {
-    async fetchTours({ commit, state }, { q = '', page = 1, status = '' } = {}) {
+    async fetchPassengers({ commit, state }, { q = '', page = 1, status = '' } = {}) {
         commit('setLoading', true);
         commit('setError', null);
         commit('setSearch', q);
         commit('setStatusFilter', status);
 
         try {
-            const response = await window.axios.get('/api/v1/tours', {
+            const response = await window.axios.get('/api/v1/passengers', {
                 params: {
                     q: q || undefined,
                     status: status || undefined,
@@ -53,7 +53,7 @@ const actions = {
                 },
             });
 
-            commit('setTours', response.data);
+            commit('setPassengers', response.data || {});
         } catch (error) {
             const apiMessage = error.response &&
                 error.response.data &&
@@ -61,26 +61,25 @@ const actions = {
                 ? error.response.data.message
                 : null;
 
-            commit('setError', apiMessage || 'Unable to load tours. Please try again.');
+            commit('setError', apiMessage || 'Unable to load passengers. Please try again.');
         } finally {
             commit('setLoading', false);
         }
     },
-    async fetchTourById(_, id) {
-        const response = await window.axios.get('/api/v1/tours/' + id);
+    async fetchPassengerById(_, id) {
+        const response = await window.axios.get('/api/v1/passengers/' + id);
         const payload = response.data || {};
 
         return payload.data || null;
     },
-    async fetchPublicToursForSelection(_, { perPage = 50 } = {}) {
+    async fetchPassengersForSelection(_, { perPage = 50 } = {}) {
         let page = 1;
         let lastPage = 1;
         const allItems = [];
 
         do {
-            const response = await window.axios.get('/api/v1/tours', {
+            const response = await window.axios.get('/api/v1/passengers', {
                 params: {
-                    status: 'Public',
                     page,
                     per_page: perPage,
                 },
@@ -96,18 +95,14 @@ const actions = {
 
         return allItems;
     },
-    async createTour(_, payload) {
-        const response = await window.axios.post('/api/v1/tours', payload);
+    async createPassenger(_, payload) {
+        const response = await window.axios.post('/api/v1/passengers', payload);
+        const responsePayload = response.data || {};
 
-        return response.data || {};
+        return responsePayload.data || null;
     },
-    async updateTour(_, { id, payload }) {
-        const response = await window.axios.put('/api/v1/tours/' + id, payload);
-
-        return response.data || {};
-    },
-    async publishTour(_, id) {
-        const response = await window.axios.patch('/api/v1/tours/' + id + '/publish');
+    async updatePassenger(_, { id, payload }) {
+        const response = await window.axios.put('/api/v1/passengers/' + id, payload);
 
         return response.data || {};
     },

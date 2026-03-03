@@ -1,18 +1,10 @@
 <template>
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="mb-0">Passengers Management</h1>
-            <div>
-                <button
-                    v-if="!isFormRoute"
-                    type="button"
-                    class="btn btn-success mr-2"
-                    @click="goToCreate"
-                >
-                    Create
-                </button>
-            </div>
-        </div>
+        <module-page-header
+            title="Passengers Management"
+            :show-create-button="!isFormRoute"
+            @create="goToCreate"
+        />
 
         <div v-if="isFormRoute" class="card mb-4">
             <div class="card-header">
@@ -107,19 +99,15 @@
         </div>
 
         <template v-if="!isFormRoute">
-            <div class="form-inline mb-3">
-                <input
-                    v-model.trim="searchInput"
-                    type="text"
-                    class="form-control mr-2"
-                    placeholder="Search by name/email/phone"
-                >
-                <select v-model="statusFilter" class="form-control mr-2" @change="submitSearch">
-                    <option value="">All statuses</option>
-                    <option value="Enabled">Enabled</option>
-                    <option value="Disabled">Disabled</option>
-                </select>
-            </div>
+            <module-filter-bar
+                :search-value="searchInput"
+                search-placeholder="Search by name/email/phone"
+                :status-value="statusFilter"
+                :status-options="statusOptions"
+                @update:searchValue="searchInput = $event.trim()"
+                @update:statusValue="statusFilter = $event"
+                @change="submitSearch"
+            />
 
             <div v-if="loadingList" class="alert alert-info mb-3">Loading passengers...</div>
             <div v-else-if="listError" class="alert alert-danger mb-3">{{ listError }}</div>
@@ -154,33 +142,35 @@
                 </table>
             </div>
 
-            <nav v-if="hasPagination" aria-label="Passengers pagination">
-                <ul class="pagination">
-                    <li class="page-item" :class="{ disabled: isFirstPage || loadingList }">
-                        <button class="page-link" type="button" @click="goToPage(currentPage - 1)">Previous</button>
-                    </li>
-                    <li class="page-item disabled">
-                        <span class="page-link">Page {{ currentPage }} of {{ lastPage }}</span>
-                    </li>
-                    <li class="page-item" :class="{ disabled: isLastPage || loadingList }">
-                        <button class="page-link" type="button" @click="goToPage(currentPage + 1)">Next</button>
-                    </li>
-                </ul>
-            </nav>
+            <module-pagination
+                :show="hasPagination"
+                aria-label="Passengers pagination"
+                :is-first-page="isFirstPage"
+                :is-last-page="isLastPage"
+                :loading="loadingList"
+                :current-page="currentPage"
+                :last-page="lastPage"
+                @go-to-page="goToPage"
+            />
         </template>
     </div>
 </template>
 
 <script>
 import Swal from 'sweetalert2';
+import ModulePageHeader from '../components/modules/ModulePageHeader.vue';
+import ModuleFilterBar from '../components/modules/ModuleFilterBar.vue';
+import ModulePagination from '../components/modules/ModulePagination.vue';
 
 export default {
     name: 'PassengersPage',
+    components: {
+        ModulePageHeader,
+        ModuleFilterBar,
+        ModulePagination,
+    },
     data() {
         return {
-            items: [],
-            loadingList: false,
-            listError: null,
             loadingForm: false,
             submitting: false,
             formError: null,
@@ -188,12 +178,6 @@ export default {
             searchInput: '',
             statusFilter: '',
             searchDebounceTimer: null,
-            pagination: {
-                current_page: 1,
-                last_page: 1,
-                per_page: 10,
-                total: 0,
-            },
             form: this.getDefaultForm(),
         };
     },
@@ -204,20 +188,35 @@ export default {
         isEditing() {
             return !!this.form.id;
         },
+        items() {
+            return this.$store.state.passengers.items;
+        },
+        loadingList() {
+            return this.$store.state.passengers.loading;
+        },
+        listError() {
+            return this.$store.state.passengers.error;
+        },
         currentPage() {
-            return this.pagination.current_page;
+            return this.$store.state.passengers.pagination.current_page;
         },
         lastPage() {
-            return this.pagination.last_page;
+            return this.$store.state.passengers.pagination.last_page;
         },
         hasPagination() {
-            return this.pagination.total > this.pagination.per_page;
+            return this.$store.state.passengers.pagination.total > this.$store.state.passengers.pagination.per_page;
         },
         isFirstPage() {
             return this.currentPage <= 1;
         },
         isLastPage() {
             return this.currentPage >= this.lastPage;
+        },
+        statusOptions() {
+            return [
+                { value: 'Enabled', label: 'Enabled' },
+                { value: 'Disabled', label: 'Disabled' },
+            ];
         },
     },
     watch: {
@@ -314,32 +313,11 @@ export default {
                 return;
             }
 
-            this.loadingList = true;
-            this.listError = null;
-
-            try {
-                const response = await window.axios.get('/api/v1/passengers', {
-                    params: {
-                        q: q || undefined,
-                        status: status || undefined,
-                        page,
-                        per_page: this.pagination.per_page,
-                    },
-                });
-
-                const payload = response.data || {};
-                this.items = payload.data || [];
-                this.pagination = {
-                    current_page: payload.meta ? payload.meta.current_page : 1,
-                    last_page: payload.meta ? payload.meta.last_page : 1,
-                    per_page: payload.meta ? payload.meta.per_page : 10,
-                    total: payload.meta ? payload.meta.total : 0,
-                };
-            } catch (error) {
-                this.listError = this.extractApiError(error, 'Unable to load passengers. Please try again.');
-            } finally {
-                this.loadingList = false;
-            }
+            await this.$store.dispatch('passengers/fetchPassengers', {
+                q,
+                status,
+                page,
+            });
         },
         async fetchPassengerForEdit(id) {
             this.loadingForm = true;
@@ -347,8 +325,7 @@ export default {
             this.form = this.getDefaultForm();
 
             try {
-                const response = await window.axios.get('/api/v1/passengers/' + id);
-                const item = response.data && response.data.data ? response.data.data : null;
+                const item = await this.$store.dispatch('passengers/fetchPassengerById', id);
 
                 if (!item) {
                     this.formError = 'Passenger not found.';
@@ -387,12 +364,12 @@ export default {
 
                 if (wasEditing) {
                     payload.updated_at = this.form.updated_at;
-                    await window.axios.put('/api/v1/passengers/' + this.form.id, payload);
+                    await this.$store.dispatch('passengers/updatePassenger', { id: this.form.id, payload });
                 } else {
-                    await window.axios.post('/api/v1/passengers', payload);
+                    await this.$store.dispatch('passengers/createPassenger', payload);
                 }
 
-                this.form = this.getDefaultForm();
+                this.goToIndex();
                 await Swal.fire({
                     toast: true,
                     position: 'top-end',
@@ -402,7 +379,6 @@ export default {
                     timer: 3000,
                     timerProgressBar: true,
                 });
-                this.goToIndex();
             } catch (error) {
                 const hasFieldErrors = this.setValidationErrors(error);
                 const errorMessage = this.extractApiError(error, 'Unable to save passenger.');

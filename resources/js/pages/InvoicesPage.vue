@@ -1,8 +1,6 @@
 <template>
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="mb-0">Invoices Management</h1>
-        </div>
+        <module-page-header title="Invoices Management" />
 
         <div v-if="isEditRoute" class="card mb-4">
             <div class="card-header">Edit invoice #{{ form.id }}</div>
@@ -77,20 +75,15 @@
         </div>
 
         <template v-if="!isEditRoute">
-            <div class="form-inline mb-3">
-                <input
-                    v-model.trim="invoiceNumberInput"
-                    type="text"
-                    class="form-control mr-2"
-                    placeholder="Search by invoice number"
-                >
-                <select v-model="statusFilter" class="form-control mr-2" @change="submitSearch">
-                    <option value="">All statuses</option>
-                    <option value="Unpaid">Unpaid</option>
-                    <option value="Paid">Paid</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
-            </div>
+            <module-filter-bar
+                :search-value="invoiceNumberInput"
+                search-placeholder="Search by invoice number"
+                :status-value="statusFilter"
+                :status-options="statusOptions"
+                @update:searchValue="invoiceNumberInput = $event.trim()"
+                @update:statusValue="statusFilter = $event"
+                @change="submitSearch"
+            />
 
             <div v-if="loadingList" class="alert alert-info mb-3">Loading invoices...</div>
             <div v-else-if="listError" class="alert alert-danger mb-3">{{ listError }}</div>
@@ -137,33 +130,35 @@
                 </table>
             </div>
 
-            <nav v-if="hasPagination" aria-label="Invoices pagination">
-                <ul class="pagination">
-                    <li class="page-item" :class="{ disabled: isFirstPage || loadingList }">
-                        <button class="page-link" type="button" @click="goToPage(currentPage - 1)">Previous</button>
-                    </li>
-                    <li class="page-item disabled">
-                        <span class="page-link">Page {{ currentPage }} of {{ lastPage }}</span>
-                    </li>
-                    <li class="page-item" :class="{ disabled: isLastPage || loadingList }">
-                        <button class="page-link" type="button" @click="goToPage(currentPage + 1)">Next</button>
-                    </li>
-                </ul>
-            </nav>
+            <module-pagination
+                :show="hasPagination"
+                aria-label="Invoices pagination"
+                :is-first-page="isFirstPage"
+                :is-last-page="isLastPage"
+                :loading="loadingList"
+                :current-page="currentPage"
+                :last-page="lastPage"
+                @go-to-page="goToPage"
+            />
         </template>
     </div>
 </template>
 
 <script>
 import Swal from 'sweetalert2';
+import ModulePageHeader from '../components/modules/ModulePageHeader.vue';
+import ModuleFilterBar from '../components/modules/ModuleFilterBar.vue';
+import ModulePagination from '../components/modules/ModulePagination.vue';
 
 export default {
     name: 'InvoicesPage',
+    components: {
+        ModulePageHeader,
+        ModuleFilterBar,
+        ModulePagination,
+    },
     data() {
         return {
-            items: [],
-            loadingList: false,
-            listError: null,
             loadingForm: false,
             submitting: false,
             formError: null,
@@ -171,12 +166,6 @@ export default {
             invoiceNumberInput: '',
             statusFilter: '',
             searchDebounceTimer: null,
-            pagination: {
-                current_page: 1,
-                last_page: 1,
-                per_page: 10,
-                total: 0,
-            },
             form: this.getDefaultForm(),
         };
     },
@@ -184,20 +173,36 @@ export default {
         isEditRoute() {
             return this.$route.name === 'invoices.edit';
         },
+        items() {
+            return this.$store.state.invoices.items;
+        },
+        loadingList() {
+            return this.$store.state.invoices.loading;
+        },
+        listError() {
+            return this.$store.state.invoices.error;
+        },
         currentPage() {
-            return this.pagination.current_page;
+            return this.$store.state.invoices.pagination.current_page;
         },
         lastPage() {
-            return this.pagination.last_page;
+            return this.$store.state.invoices.pagination.last_page;
         },
         hasPagination() {
-            return this.pagination.total > this.pagination.per_page;
+            return this.$store.state.invoices.pagination.total > this.$store.state.invoices.pagination.per_page;
         },
         isFirstPage() {
             return this.currentPage <= 1;
         },
         isLastPage() {
             return this.currentPage >= this.lastPage;
+        },
+        statusOptions() {
+            return [
+                { value: 'Unpaid', label: 'Unpaid' },
+                { value: 'Paid', label: 'Paid' },
+                { value: 'Cancelled', label: 'Cancelled' },
+            ];
         },
     },
     watch: {
@@ -295,32 +300,11 @@ export default {
                 return;
             }
 
-            this.loadingList = true;
-            this.listError = null;
-
-            try {
-                const response = await window.axios.get('/api/v1/invoices', {
-                    params: {
-                        invoice_number: invoiceNumber || undefined,
-                        status: status || undefined,
-                        page,
-                        per_page: this.pagination.per_page,
-                    },
-                });
-
-                const payload = response.data || {};
-                this.items = payload.data || [];
-                this.pagination = {
-                    current_page: payload.meta ? payload.meta.current_page : 1,
-                    last_page: payload.meta ? payload.meta.last_page : 1,
-                    per_page: payload.meta ? payload.meta.per_page : 10,
-                    total: payload.meta ? payload.meta.total : 0,
-                };
-            } catch (error) {
-                this.listError = this.extractApiError(error, 'Unable to load invoices. Please try again.');
-            } finally {
-                this.loadingList = false;
-            }
+            await this.$store.dispatch('invoices/fetchInvoices', {
+                invoiceNumber,
+                status,
+                page,
+            });
         },
         async fetchInvoiceForEdit(id) {
             this.loadingForm = true;
@@ -328,8 +312,7 @@ export default {
             this.form = this.getDefaultForm();
 
             try {
-                const response = await window.axios.get('/api/v1/invoices/' + id);
-                const item = response.data && response.data.data ? response.data.data : null;
+                const item = await this.$store.dispatch('invoices/fetchInvoiceById', id);
 
                 if (!item) {
                     this.formError = 'Invoice not found.';
@@ -357,12 +340,16 @@ export default {
             this.clearValidationErrors();
 
             try {
-                await window.axios.put('/api/v1/invoices/' + this.form.id, {
+                await this.$store.dispatch('invoices/updateInvoice', {
+                    id: this.form.id,
+                    payload: {
                     amount: this.form.amount,
                     currency: (this.form.currency || '').toUpperCase(),
                     status: this.form.status,
                     updated_at: this.form.updated_at,
+                    },
                 });
+                this.goToIndex();
                 await Swal.fire({
                     toast: true,
                     position: 'top-end',
@@ -372,7 +359,6 @@ export default {
                     timer: 3000,
                     timerProgressBar: true,
                 });
-                this.goToIndex();
             } catch (error) {
                 const hasFieldErrors = this.setValidationErrors(error);
                 const errorMessage = this.extractApiError(error, 'Unable to save invoice.');

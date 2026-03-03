@@ -2,7 +2,7 @@ const state = {
     items: [],
     loading: false,
     error: null,
-    search: '',
+    referenceFilter: '',
     statusFilter: '',
     pagination: {
         current_page: 1,
@@ -19,13 +19,13 @@ const mutations = {
     setError(currentState, error) {
         currentState.error = error;
     },
-    setSearch(currentState, search) {
-        currentState.search = search;
+    setReferenceFilter(currentState, reference) {
+        currentState.referenceFilter = reference;
     },
     setStatusFilter(currentState, status) {
         currentState.statusFilter = status;
     },
-    setTours(currentState, payload) {
+    setBookings(currentState, payload) {
         currentState.items = payload.data || [];
         currentState.pagination = {
             current_page: payload.meta ? payload.meta.current_page : 1,
@@ -37,23 +37,23 @@ const mutations = {
 };
 
 const actions = {
-    async fetchTours({ commit, state }, { q = '', page = 1, status = '' } = {}) {
+    async fetchBookings({ commit, state }, { reference = '', page = 1, status = '' } = {}) {
         commit('setLoading', true);
         commit('setError', null);
-        commit('setSearch', q);
+        commit('setReferenceFilter', reference);
         commit('setStatusFilter', status);
 
         try {
-            const response = await window.axios.get('/api/v1/tours', {
+            const response = await window.axios.get('/api/v1/bookings', {
                 params: {
-                    q: q || undefined,
+                    reference: reference || undefined,
                     status: status || undefined,
                     page,
                     per_page: state.pagination.per_page,
                 },
             });
 
-            commit('setTours', response.data);
+            commit('setBookings', response.data || {});
         } catch (error) {
             const apiMessage = error.response &&
                 error.response.data &&
@@ -61,53 +61,24 @@ const actions = {
                 ? error.response.data.message
                 : null;
 
-            commit('setError', apiMessage || 'Unable to load tours. Please try again.');
+            commit('setError', apiMessage || 'Unable to load bookings. Please try again.');
         } finally {
             commit('setLoading', false);
         }
     },
-    async fetchTourById(_, id) {
-        const response = await window.axios.get('/api/v1/tours/' + id);
+    async fetchBookingById(_, id) {
+        const response = await window.axios.get('/api/v1/bookings/' + id);
         const payload = response.data || {};
 
         return payload.data || null;
     },
-    async fetchPublicToursForSelection(_, { perPage = 50 } = {}) {
-        let page = 1;
-        let lastPage = 1;
-        const allItems = [];
-
-        do {
-            const response = await window.axios.get('/api/v1/tours', {
-                params: {
-                    status: 'Public',
-                    page,
-                    per_page: perPage,
-                },
-            });
-            const payload = response.data || {};
-            const batch = payload.data || [];
-            const meta = payload.meta || {};
-
-            allItems.push(...batch);
-            lastPage = meta.last_page || 1;
-            page += 1;
-        } while (page <= lastPage);
-
-        return allItems;
-    },
-    async createTour(_, payload) {
-        const response = await window.axios.post('/api/v1/tours', payload);
+    async createBooking(_, payload) {
+        const response = await window.axios.post('/api/v1/bookings', payload);
 
         return response.data || {};
     },
-    async updateTour(_, { id, payload }) {
-        const response = await window.axios.put('/api/v1/tours/' + id, payload);
-
-        return response.data || {};
-    },
-    async publishTour(_, id) {
-        const response = await window.axios.patch('/api/v1/tours/' + id + '/publish');
+    async updateBooking(_, { id, payload }) {
+        const response = await window.axios.put('/api/v1/bookings/' + id, payload);
 
         return response.data || {};
     },

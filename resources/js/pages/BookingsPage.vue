@@ -1,18 +1,10 @@
 <template>
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="mb-0">Booking Management</h1>
-            <div>
-                <button
-                    v-if="!isFormRoute"
-                    type="button"
-                    class="btn btn-success mr-2"
-                    @click="goToCreate"
-                >
-                    Create
-                </button>
-            </div>
-        </div>
+        <module-page-header
+            title="Booking Management"
+            :show-create-button="!isFormRoute"
+            @create="goToCreate"
+        />
 
         <div v-if="isFormRoute" class="card mb-4">
             <div class="card-header">
@@ -231,20 +223,15 @@
         </div>
 
         <template v-if="!isFormRoute">
-            <div class="form-inline mb-3">
-                <input
-                    v-model.trim="referenceInput"
-                    type="text"
-                    class="form-control mr-2"
-                    placeholder="Search by booking reference"
-                >
-                <select v-model="statusFilter" class="form-control mr-2" @change="submitSearch">
-                    <option value="">All statuses</option>
-                    <option value="Submitted">Submitted</option>
-                    <option value="Confirmed">Confirmed</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
-            </div>
+            <module-filter-bar
+                :search-value="referenceInput"
+                search-placeholder="Search by booking reference"
+                :status-value="statusFilter"
+                :status-options="statusOptions"
+                @update:searchValue="referenceInput = $event.trim()"
+                @update:statusValue="statusFilter = $event"
+                @change="submitSearch"
+            />
 
             <div v-if="loadingList" class="alert alert-info mb-3">Loading bookings...</div>
             <div v-else-if="listError" class="alert alert-danger mb-3">{{ listError }}</div>
@@ -300,36 +287,38 @@
                 </table>
             </div>
 
-            <nav v-if="hasPagination" aria-label="Bookings pagination">
-                <ul class="pagination">
-                    <li class="page-item" :class="{ disabled: isFirstPage || loadingList }">
-                        <button class="page-link" type="button" @click="goToPage(currentPage - 1)">Previous</button>
-                    </li>
-                    <li class="page-item disabled">
-                        <span class="page-link">Page {{ currentPage }} of {{ lastPage }}</span>
-                    </li>
-                    <li class="page-item" :class="{ disabled: isLastPage || loadingList }">
-                        <button class="page-link" type="button" @click="goToPage(currentPage + 1)">Next</button>
-                    </li>
-                </ul>
-            </nav>
+            <module-pagination
+                :show="hasPagination"
+                aria-label="Bookings pagination"
+                :is-first-page="isFirstPage"
+                :is-last-page="isLastPage"
+                :loading="loadingList"
+                :current-page="currentPage"
+                :last-page="lastPage"
+                @go-to-page="goToPage"
+            />
         </template>
     </div>
 </template>
 
 <script>
 import Swal from 'sweetalert2';
+import ModulePageHeader from '../components/modules/ModulePageHeader.vue';
+import ModuleFilterBar from '../components/modules/ModuleFilterBar.vue';
+import ModulePagination from '../components/modules/ModulePagination.vue';
 
 export default {
     name: 'BookingsPage',
+    components: {
+        ModulePageHeader,
+        ModuleFilterBar,
+        ModulePagination,
+    },
     data() {
         return {
-            items: [],
             tours: [],
             passengers: [],
-            loadingList: false,
             passengersLoading: false,
-            listError: null,
             loadingForm: false,
             submitting: false,
             formError: null,
@@ -343,12 +332,6 @@ export default {
             newPassengerValidationErrors: {},
             newPassengerForm: this.getDefaultNewPassengerForm(),
             searchDebounceTimer: null,
-            pagination: {
-                current_page: 1,
-                last_page: 1,
-                per_page: 10,
-                total: 0,
-            },
             form: this.getDefaultForm(),
         };
     },
@@ -359,14 +342,23 @@ export default {
         isEditing() {
             return !!this.form.id;
         },
+        items() {
+            return this.$store.state.bookings.items;
+        },
+        loadingList() {
+            return this.$store.state.bookings.loading;
+        },
+        listError() {
+            return this.$store.state.bookings.error;
+        },
         currentPage() {
-            return this.pagination.current_page;
+            return this.$store.state.bookings.pagination.current_page;
         },
         lastPage() {
-            return this.pagination.last_page;
+            return this.$store.state.bookings.pagination.last_page;
         },
         hasPagination() {
-            return this.pagination.total > this.pagination.per_page;
+            return this.$store.state.bookings.pagination.total > this.$store.state.bookings.pagination.per_page;
         },
         isFirstPage() {
             return this.currentPage <= 1;
@@ -402,6 +394,13 @@ export default {
 
                 return fullName.includes(keyword) || email.includes(keyword) || phone.includes(keyword);
             });
+        },
+        statusOptions() {
+            return [
+                { value: 'Submitted', label: 'Submitted' },
+                { value: 'Confirmed', label: 'Confirmed' },
+                { value: 'Cancelled', label: 'Cancelled' },
+            ];
         },
     },
     watch: {
@@ -620,8 +619,7 @@ export default {
                     phone: this.newPassengerForm.phone || null,
                     status: 'Enabled',
                 };
-                const response = await window.axios.post('/api/v1/passengers', payload);
-                const newPassenger = response.data && response.data.data ? response.data.data : null;
+                const newPassenger = await this.$store.dispatch('passengers/createPassenger', payload);
 
                 if (!newPassenger) {
                     throw new Error('Passenger payload missing');
@@ -678,31 +676,8 @@ export default {
             }
         },
         async fetchToursForSelection() {
-            const perPage = 50;
-            let page = 1;
-            let lastPage = 1;
-            const allItems = [];
-
             try {
-                do {
-                    const response = await window.axios.get('/api/v1/tours', {
-                        params: {
-                            status: 'Public',
-                            page,
-                            per_page: perPage,
-                        },
-                    });
-
-                    const payload = response.data || {};
-                    const batch = payload.data || [];
-                    const meta = payload.meta || {};
-
-                    allItems.push(...batch);
-                    lastPage = meta.last_page || 1;
-                    page += 1;
-                } while (page <= lastPage);
-
-                this.tours = allItems;
+                this.tours = await this.$store.dispatch('tours/fetchPublicToursForSelection');
                 this.$nextTick(() => {
                     this.initTourSelect2();
                     this.syncTourSelect2Value();
@@ -713,30 +688,9 @@ export default {
         },
         async fetchPassengersForSelection() {
             this.passengersLoading = true;
-            const perPage = 50;
-            let page = 1;
-            let lastPage = 1;
-            const allItems = [];
 
             try {
-                do {
-                    const response = await window.axios.get('/api/v1/passengers', {
-                        params: {
-                            page,
-                            per_page: perPage,
-                        },
-                    });
-
-                    const payload = response.data || {};
-                    const batch = payload.data || [];
-                    const meta = payload.meta || {};
-
-                    allItems.push(...batch);
-                    lastPage = meta.last_page || 1;
-                    page += 1;
-                } while (page <= lastPage);
-
-                this.passengers = allItems;
+                this.passengers = await this.$store.dispatch('passengers/fetchPassengersForSelection');
             } catch (error) {
                 this.formError = this.extractApiError(error, 'Unable to load passengers for booking.');
             } finally {
@@ -748,32 +702,11 @@ export default {
                 return;
             }
 
-            this.loadingList = true;
-            this.listError = null;
-
-            try {
-                const response = await window.axios.get('/api/v1/bookings', {
-                    params: {
-                        reference: reference || undefined,
-                        status: status || undefined,
-                        page,
-                        per_page: this.pagination.per_page,
-                    },
-                });
-
-                const payload = response.data || {};
-                this.items = payload.data || [];
-                this.pagination = {
-                    current_page: payload.meta ? payload.meta.current_page : 1,
-                    last_page: payload.meta ? payload.meta.last_page : 1,
-                    per_page: payload.meta ? payload.meta.per_page : 10,
-                    total: payload.meta ? payload.meta.total : 0,
-                };
-            } catch (error) {
-                this.listError = this.extractApiError(error, 'Unable to load bookings. Please try again.');
-            } finally {
-                this.loadingList = false;
-            }
+            await this.$store.dispatch('bookings/fetchBookings', {
+                reference,
+                status,
+                page,
+            });
         },
         async fetchBookingForEdit(id) {
             this.loadingForm = true;
@@ -781,8 +714,7 @@ export default {
             this.form = this.getDefaultForm();
 
             try {
-                const response = await window.axios.get('/api/v1/bookings/' + id);
-                const item = response.data && response.data.data ? response.data.data : null;
+                const item = await this.$store.dispatch('bookings/fetchBookingById', id);
 
                 if (!item) {
                     this.formError = 'Booking not found.';
@@ -821,12 +753,12 @@ export default {
                 if (wasEditing) {
                     payload.status = this.form.status;
                     payload.updated_at = this.form.updated_at;
-                    await window.axios.put('/api/v1/bookings/' + this.form.id, payload);
+                    await this.$store.dispatch('bookings/updateBooking', { id: this.form.id, payload });
                 } else {
-                    await window.axios.post('/api/v1/bookings', payload);
+                    await this.$store.dispatch('bookings/createBooking', payload);
                 }
 
-                this.form = this.getDefaultForm();
+                this.goToIndex();
                 await Swal.fire({
                     toast: true,
                     position: 'top-end',
@@ -836,7 +768,6 @@ export default {
                     timer: 3000,
                     timerProgressBar: true,
                 });
-                this.goToIndex();
             } catch (error) {
                 const hasFieldErrors = this.setValidationErrors(error);
                 const errorMessage = this.extractApiError(

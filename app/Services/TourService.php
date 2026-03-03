@@ -129,11 +129,12 @@ class TourService
                 continue;
             }
 
-            $tour->tourDates()->create([
+            $createdTourDate = $tour->tourDates()->create([
                 'start_date' => $tourDatePayload['start_date'],
                 'end_date' => isset($tourDatePayload['end_date']) ? $tourDatePayload['end_date'] : null,
                 'status' => isset($tourDatePayload['status']) ? $tourDatePayload['status'] : TourDate::STATUS_ENABLED,
             ]);
+            $incomingIds[] = (int) $createdTourDate->id;
         }
 
         $existingIds = $tour->tourDates()->pluck('id')->map(function ($id) {

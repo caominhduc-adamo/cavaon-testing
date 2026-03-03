@@ -4,6 +4,7 @@ import ToursPage from '../pages/ToursPage.vue';
 import BookingsPage from '../pages/BookingsPage.vue';
 import PassengersPage from '../pages/PassengersPage.vue';
 import InvoicesPage from '../pages/InvoicesPage.vue';
+import NotFoundPage from '../pages/NotFoundPage.vue';
 
 Vue.use(Router);
 
@@ -64,6 +65,11 @@ export default new Router({
             path: '/invoices/:id/edit',
             name: 'invoices.edit',
             component: InvoicesPage,
+        },
+        {
+            path: '*',
+            name: 'not-found',
+            component: NotFoundPage,
         },
     ],
 });

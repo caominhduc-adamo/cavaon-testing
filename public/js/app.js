@@ -1959,6 +1959,193 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModuleFilterBar.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/ModuleFilterBar.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ModuleFilterBar',
+  props: {
+    searchValue: {
+      type: String,
+      "default": ''
+    },
+    searchPlaceholder: {
+      type: String,
+      "default": ''
+    },
+    statusValue: {
+      type: String,
+      "default": ''
+    },
+    statusOptions: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModulePageHeader.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/ModulePageHeader.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ModulePageHeader',
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    showCreateButton: {
+      type: Boolean,
+      "default": false
+    },
+    createLabel: {
+      type: String,
+      "default": 'Create'
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModulePagination.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/ModulePagination.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ModulePagination',
+  props: {
+    show: {
+      type: Boolean,
+      "default": false
+    },
+    ariaLabel: {
+      type: String,
+      required: true
+    },
+    isFirstPage: {
+      type: Boolean,
+      "default": false
+    },
+    isLastPage: {
+      type: Boolean,
+      "default": false
+    },
+    loading: {
+      type: Boolean,
+      "default": false
+    },
+    currentPage: {
+      type: Number,
+      "default": 1
+    },
+    lastPage: {
+      type: Number,
+      "default": 1
+    }
+  },
+  methods: {
+    onPrevious: function onPrevious() {
+      this.$emit('go-to-page', this.currentPage - 1);
+    },
+    onNext: function onNext() {
+      this.$emit('go-to-page', this.currentPage + 1);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=script&lang=js":
 /*!*****************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/BookingsPage.vue?vue&type=script&lang=js ***!
@@ -1970,12 +2157,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+/* harmony import */ var _components_modules_ModulePageHeader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/modules/ModulePageHeader.vue */ "./resources/js/components/modules/ModulePageHeader.vue");
+/* harmony import */ var _components_modules_ModuleFilterBar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modules/ModuleFilterBar.vue */ "./resources/js/components/modules/ModuleFilterBar.vue");
+/* harmony import */ var _components_modules_ModulePagination_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/modules/ModulePagination.vue */ "./resources/js/components/modules/ModulePagination.vue");
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -2283,34 +2467,23 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BookingsPage',
+  components: {
+    ModulePageHeader: _components_modules_ModulePageHeader_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ModuleFilterBar: _components_modules_ModuleFilterBar_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ModulePagination: _components_modules_ModulePagination_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
   data: function data() {
     return {
-      items: [],
       tours: [],
       passengers: [],
-      loadingList: false,
       passengersLoading: false,
-      listError: null,
       loadingForm: false,
       submitting: false,
       formError: null,
@@ -2324,12 +2497,6 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       newPassengerValidationErrors: {},
       newPassengerForm: this.getDefaultNewPassengerForm(),
       searchDebounceTimer: null,
-      pagination: {
-        current_page: 1,
-        last_page: 1,
-        per_page: 10,
-        total: 0
-      },
       form: this.getDefaultForm()
     };
   },
@@ -2340,14 +2507,23 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     isEditing: function isEditing() {
       return !!this.form.id;
     },
+    items: function items() {
+      return this.$store.state.bookings.items;
+    },
+    loadingList: function loadingList() {
+      return this.$store.state.bookings.loading;
+    },
+    listError: function listError() {
+      return this.$store.state.bookings.error;
+    },
     currentPage: function currentPage() {
-      return this.pagination.current_page;
+      return this.$store.state.bookings.pagination.current_page;
     },
     lastPage: function lastPage() {
-      return this.pagination.last_page;
+      return this.$store.state.bookings.pagination.last_page;
     },
     hasPagination: function hasPagination() {
-      return this.pagination.total > this.pagination.per_page;
+      return this.$store.state.bookings.pagination.total > this.$store.state.bookings.pagination.per_page;
     },
     isFirstPage: function isFirstPage() {
       return this.currentPage <= 1;
@@ -2383,6 +2559,18 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         var phone = (passenger.phone || '').toLowerCase();
         return fullName.includes(keyword) || email.includes(keyword) || phone.includes(keyword);
       });
+    },
+    statusOptions: function statusOptions() {
+      return [{
+        value: 'Submitted',
+        label: 'Submitted'
+      }, {
+        value: 'Confirmed',
+        label: 'Confirmed'
+      }, {
+        value: 'Cancelled',
+        label: 'Cancelled'
+      }];
     }
   },
   watch: {
@@ -2586,7 +2774,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     submitQuickPassenger: function submitQuickPassenger() {
       var _this9 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var payload, response, newPassenger, hasFieldErrors, errorMessage, _t;
+        var payload, newPassenger, hasFieldErrors, errorMessage, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
@@ -2602,10 +2790,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 status: 'Enabled'
               };
               _context.n = 2;
-              return window.axios.post('/api/v1/passengers', payload);
+              return _this9.$store.dispatch('passengers/createPassenger', payload);
             case 2:
-              response = _context.v;
-              newPassenger = response.data && response.data.data ? response.data.data : null;
+              newPassenger = _context.v;
               if (newPassenger) {
                 _context.n = 3;
                 break;
@@ -2674,114 +2861,67 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     fetchToursForSelection: function fetchToursForSelection() {
       var _this1 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-        var perPage, page, lastPage, allItems, response, payload, batch, meta, _t2;
+        var _t2;
         return _regenerator().w(function (_context2) {
           while (1) switch (_context2.p = _context2.n) {
             case 0:
-              perPage = 50;
-              page = 1;
-              lastPage = 1;
-              allItems = [];
-              _context2.p = 1;
-            case 2:
-              _context2.n = 3;
-              return window.axios.get('/api/v1/tours', {
-                params: {
-                  status: 'Public',
-                  page: page,
-                  per_page: perPage
-                }
-              });
-            case 3:
-              response = _context2.v;
-              payload = response.data || {};
-              batch = payload.data || [];
-              meta = payload.meta || {};
-              allItems.push.apply(allItems, _toConsumableArray(batch));
-              lastPage = meta.last_page || 1;
-              page += 1;
-            case 4:
-              if (page <= lastPage) {
-                _context2.n = 2;
-                break;
-              }
-            case 5:
-              _this1.tours = allItems;
+              _context2.p = 0;
+              _context2.n = 1;
+              return _this1.$store.dispatch('tours/fetchPublicToursForSelection');
+            case 1:
+              _this1.tours = _context2.v;
               _this1.$nextTick(function () {
                 _this1.initTourSelect2();
                 _this1.syncTourSelect2Value();
               });
-              _context2.n = 7;
+              _context2.n = 3;
               break;
-            case 6:
-              _context2.p = 6;
+            case 2:
+              _context2.p = 2;
               _t2 = _context2.v;
               _this1.formError = _this1.extractApiError(_t2, 'Unable to load tours for booking.');
-            case 7:
+            case 3:
               return _context2.a(2);
           }
-        }, _callee2, null, [[1, 6]]);
+        }, _callee2, null, [[0, 2]]);
       }))();
     },
     fetchPassengersForSelection: function fetchPassengersForSelection() {
       var _this10 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-        var perPage, page, lastPage, allItems, response, payload, batch, meta, _t3;
+        var _t3;
         return _regenerator().w(function (_context3) {
           while (1) switch (_context3.p = _context3.n) {
             case 0:
               _this10.passengersLoading = true;
-              perPage = 50;
-              page = 1;
-              lastPage = 1;
-              allItems = [];
               _context3.p = 1;
+              _context3.n = 2;
+              return _this10.$store.dispatch('passengers/fetchPassengersForSelection');
             case 2:
-              _context3.n = 3;
-              return window.axios.get('/api/v1/passengers', {
-                params: {
-                  page: page,
-                  per_page: perPage
-                }
-              });
-            case 3:
-              response = _context3.v;
-              payload = response.data || {};
-              batch = payload.data || [];
-              meta = payload.meta || {};
-              allItems.push.apply(allItems, _toConsumableArray(batch));
-              lastPage = meta.last_page || 1;
-              page += 1;
-            case 4:
-              if (page <= lastPage) {
-                _context3.n = 2;
-                break;
-              }
-            case 5:
-              _this10.passengers = allItems;
-              _context3.n = 7;
+              _this10.passengers = _context3.v;
+              _context3.n = 4;
               break;
-            case 6:
-              _context3.p = 6;
+            case 3:
+              _context3.p = 3;
               _t3 = _context3.v;
               _this10.formError = _this10.extractApiError(_t3, 'Unable to load passengers for booking.');
-            case 7:
-              _context3.p = 7;
+            case 4:
+              _context3.p = 4;
               _this10.passengersLoading = false;
-              return _context3.f(7);
-            case 8:
+              return _context3.f(4);
+            case 5:
               return _context3.a(2);
           }
-        }, _callee3, null, [[1, 6, 7, 8]]);
+        }, _callee3, null, [[1, 3, 4, 5]]);
       }))();
     },
     fetchBookings: function fetchBookings() {
       var _arguments = arguments,
         _this11 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
-        var _ref, _ref$reference, reference, _ref$status, status, _ref$page, page, response, payload, _t4;
+        var _ref, _ref$reference, reference, _ref$status, status, _ref$page, page;
         return _regenerator().w(function (_context4) {
-          while (1) switch (_context4.p = _context4.n) {
+          while (1) switch (_context4.n) {
             case 0:
               _ref = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {}, _ref$reference = _ref.reference, reference = _ref$reference === void 0 ? '' : _ref$reference, _ref$status = _ref.status, status = _ref$status === void 0 ? '' : _ref$status, _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page;
               if (!_this11.isFormRoute) {
@@ -2790,48 +2930,22 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               }
               return _context4.a(2);
             case 1:
-              _this11.loadingList = true;
-              _this11.listError = null;
-              _context4.p = 2;
-              _context4.n = 3;
-              return window.axios.get('/api/v1/bookings', {
-                params: {
-                  reference: reference || undefined,
-                  status: status || undefined,
-                  page: page,
-                  per_page: _this11.pagination.per_page
-                }
+              _context4.n = 2;
+              return _this11.$store.dispatch('bookings/fetchBookings', {
+                reference: reference,
+                status: status,
+                page: page
               });
-            case 3:
-              response = _context4.v;
-              payload = response.data || {};
-              _this11.items = payload.data || [];
-              _this11.pagination = {
-                current_page: payload.meta ? payload.meta.current_page : 1,
-                last_page: payload.meta ? payload.meta.last_page : 1,
-                per_page: payload.meta ? payload.meta.per_page : 10,
-                total: payload.meta ? payload.meta.total : 0
-              };
-              _context4.n = 5;
-              break;
-            case 4:
-              _context4.p = 4;
-              _t4 = _context4.v;
-              _this11.listError = _this11.extractApiError(_t4, 'Unable to load bookings. Please try again.');
-            case 5:
-              _context4.p = 5;
-              _this11.loadingList = false;
-              return _context4.f(5);
-            case 6:
+            case 2:
               return _context4.a(2);
           }
-        }, _callee4, null, [[2, 4, 5, 6]]);
+        }, _callee4);
       }))();
     },
     fetchBookingForEdit: function fetchBookingForEdit(id) {
       var _this12 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
-        var response, item, _t5;
+        var item, _t4;
         return _regenerator().w(function (_context5) {
           while (1) switch (_context5.p = _context5.n) {
             case 0:
@@ -2840,10 +2954,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _this12.form = _this12.getDefaultForm();
               _context5.p = 1;
               _context5.n = 2;
-              return window.axios.get('/api/v1/bookings/' + id);
+              return _this12.$store.dispatch('bookings/fetchBookingById', id);
             case 2:
-              response = _context5.v;
-              item = response.data && response.data.data ? response.data.data : null;
+              item = _context5.v;
               if (item) {
                 _context5.n = 3;
                 break;
@@ -2867,8 +2980,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               break;
             case 4:
               _context5.p = 4;
-              _t5 = _context5.v;
-              _this12.formError = _this12.extractApiError(_t5, 'Unable to load this booking.');
+              _t4 = _context5.v;
+              _this12.formError = _this12.extractApiError(_t4, 'Unable to load this booking.');
             case 5:
               _context5.p = 5;
               _this12.loadingForm = false;
@@ -2882,7 +2995,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     submitBookingForm: function submitBookingForm() {
       var _this13 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
-        var wasEditing, payload, hasFieldErrors, errorMessage, _t6;
+        var wasEditing, payload, hasFieldErrors, errorMessage, _t5;
         return _regenerator().w(function (_context6) {
           while (1) switch (_context6.p = _context6.n) {
             case 0:
@@ -2903,15 +3016,18 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               payload.status = _this13.form.status;
               payload.updated_at = _this13.form.updated_at;
               _context6.n = 2;
-              return window.axios.put('/api/v1/bookings/' + _this13.form.id, payload);
+              return _this13.$store.dispatch('bookings/updateBooking', {
+                id: _this13.form.id,
+                payload: payload
+              });
             case 2:
               _context6.n = 4;
               break;
             case 3:
               _context6.n = 4;
-              return window.axios.post('/api/v1/bookings', payload);
+              return _this13.$store.dispatch('bookings/createBooking', payload);
             case 4:
-              _this13.form = _this13.getDefaultForm();
+              _this13.goToIndex();
               _context6.n = 5;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
                 toast: true,
@@ -2923,14 +3039,13 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 timerProgressBar: true
               });
             case 5:
-              _this13.goToIndex();
               _context6.n = 7;
               break;
             case 6:
               _context6.p = 6;
-              _t6 = _context6.v;
-              hasFieldErrors = _this13.setValidationErrors(_t6);
-              errorMessage = _this13.extractApiError(_t6, 'Unable to save booking. Please review your selections.');
+              _t5 = _context6.v;
+              hasFieldErrors = _this13.setValidationErrors(_t5);
+              errorMessage = _this13.extractApiError(_t5, 'Unable to save booking. Please review your selections.');
               if (!hasFieldErrors) {
                 _this13.formError = errorMessage;
               }
@@ -3075,6 +3190,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_modules_ModulePageHeader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/modules/ModulePageHeader.vue */ "./resources/js/components/modules/ModulePageHeader.vue");
+/* harmony import */ var _components_modules_ModuleFilterBar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modules/ModuleFilterBar.vue */ "./resources/js/components/modules/ModuleFilterBar.vue");
+/* harmony import */ var _components_modules_ModulePagination_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/modules/ModulePagination.vue */ "./resources/js/components/modules/ModulePagination.vue");
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -3225,25 +3343,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'InvoicesPage',
+  components: {
+    ModulePageHeader: _components_modules_ModulePageHeader_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ModuleFilterBar: _components_modules_ModuleFilterBar_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ModulePagination: _components_modules_ModulePagination_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
   data: function data() {
     return {
-      items: [],
-      loadingList: false,
-      listError: null,
       loadingForm: false,
       submitting: false,
       formError: null,
@@ -3251,12 +3364,6 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       invoiceNumberInput: '',
       statusFilter: '',
       searchDebounceTimer: null,
-      pagination: {
-        current_page: 1,
-        last_page: 1,
-        per_page: 10,
-        total: 0
-      },
       form: this.getDefaultForm()
     };
   },
@@ -3264,20 +3371,41 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     isEditRoute: function isEditRoute() {
       return this.$route.name === 'invoices.edit';
     },
+    items: function items() {
+      return this.$store.state.invoices.items;
+    },
+    loadingList: function loadingList() {
+      return this.$store.state.invoices.loading;
+    },
+    listError: function listError() {
+      return this.$store.state.invoices.error;
+    },
     currentPage: function currentPage() {
-      return this.pagination.current_page;
+      return this.$store.state.invoices.pagination.current_page;
     },
     lastPage: function lastPage() {
-      return this.pagination.last_page;
+      return this.$store.state.invoices.pagination.last_page;
     },
     hasPagination: function hasPagination() {
-      return this.pagination.total > this.pagination.per_page;
+      return this.$store.state.invoices.pagination.total > this.$store.state.invoices.pagination.per_page;
     },
     isFirstPage: function isFirstPage() {
       return this.currentPage <= 1;
     },
     isLastPage: function isLastPage() {
       return this.currentPage >= this.lastPage;
+    },
+    statusOptions: function statusOptions() {
+      return [{
+        value: 'Unpaid',
+        label: 'Unpaid'
+      }, {
+        value: 'Paid',
+        label: 'Paid'
+      }, {
+        value: 'Cancelled',
+        label: 'Cancelled'
+      }];
     }
   },
   watch: {
@@ -3368,9 +3496,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       var _arguments = arguments,
         _this2 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _ref, _ref$invoiceNumber, invoiceNumber, _ref$status, status, _ref$page, page, response, payload, _t;
+        var _ref, _ref$invoiceNumber, invoiceNumber, _ref$status, status, _ref$page, page;
         return _regenerator().w(function (_context) {
-          while (1) switch (_context.p = _context.n) {
+          while (1) switch (_context.n) {
             case 0:
               _ref = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {}, _ref$invoiceNumber = _ref.invoiceNumber, invoiceNumber = _ref$invoiceNumber === void 0 ? '' : _ref$invoiceNumber, _ref$status = _ref.status, status = _ref$status === void 0 ? '' : _ref$status, _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page;
               if (!_this2.isEditRoute) {
@@ -3379,48 +3507,22 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               }
               return _context.a(2);
             case 1:
-              _this2.loadingList = true;
-              _this2.listError = null;
-              _context.p = 2;
-              _context.n = 3;
-              return window.axios.get('/api/v1/invoices', {
-                params: {
-                  invoice_number: invoiceNumber || undefined,
-                  status: status || undefined,
-                  page: page,
-                  per_page: _this2.pagination.per_page
-                }
+              _context.n = 2;
+              return _this2.$store.dispatch('invoices/fetchInvoices', {
+                invoiceNumber: invoiceNumber,
+                status: status,
+                page: page
               });
-            case 3:
-              response = _context.v;
-              payload = response.data || {};
-              _this2.items = payload.data || [];
-              _this2.pagination = {
-                current_page: payload.meta ? payload.meta.current_page : 1,
-                last_page: payload.meta ? payload.meta.last_page : 1,
-                per_page: payload.meta ? payload.meta.per_page : 10,
-                total: payload.meta ? payload.meta.total : 0
-              };
-              _context.n = 5;
-              break;
-            case 4:
-              _context.p = 4;
-              _t = _context.v;
-              _this2.listError = _this2.extractApiError(_t, 'Unable to load invoices. Please try again.');
-            case 5:
-              _context.p = 5;
-              _this2.loadingList = false;
-              return _context.f(5);
-            case 6:
+            case 2:
               return _context.a(2);
           }
-        }, _callee, null, [[2, 4, 5, 6]]);
+        }, _callee);
       }))();
     },
     fetchInvoiceForEdit: function fetchInvoiceForEdit(id) {
       var _this3 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-        var response, item, _t2;
+        var item, _t;
         return _regenerator().w(function (_context2) {
           while (1) switch (_context2.p = _context2.n) {
             case 0:
@@ -3429,10 +3531,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _this3.form = _this3.getDefaultForm();
               _context2.p = 1;
               _context2.n = 2;
-              return window.axios.get('/api/v1/invoices/' + id);
+              return _this3.$store.dispatch('invoices/fetchInvoiceById', id);
             case 2:
-              response = _context2.v;
-              item = response.data && response.data.data ? response.data.data : null;
+              item = _context2.v;
               if (item) {
                 _context2.n = 3;
                 break;
@@ -3453,8 +3554,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               break;
             case 4:
               _context2.p = 4;
-              _t2 = _context2.v;
-              _this3.formError = _this3.extractApiError(_t2, 'Unable to load this invoice.');
+              _t = _context2.v;
+              _this3.formError = _this3.extractApiError(_t, 'Unable to load this invoice.');
             case 5:
               _context2.p = 5;
               _this3.loadingForm = false;
@@ -3468,7 +3569,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     submitInvoiceForm: function submitInvoiceForm() {
       var _this4 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-        var hasFieldErrors, errorMessage, _t3;
+        var hasFieldErrors, errorMessage, _t2;
         return _regenerator().w(function (_context3) {
           while (1) switch (_context3.p = _context3.n) {
             case 0:
@@ -3477,13 +3578,17 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _this4.clearValidationErrors();
               _context3.p = 1;
               _context3.n = 2;
-              return window.axios.put('/api/v1/invoices/' + _this4.form.id, {
-                amount: _this4.form.amount,
-                currency: (_this4.form.currency || '').toUpperCase(),
-                status: _this4.form.status,
-                updated_at: _this4.form.updated_at
+              return _this4.$store.dispatch('invoices/updateInvoice', {
+                id: _this4.form.id,
+                payload: {
+                  amount: _this4.form.amount,
+                  currency: (_this4.form.currency || '').toUpperCase(),
+                  status: _this4.form.status,
+                  updated_at: _this4.form.updated_at
+                }
               });
             case 2:
+              _this4.goToIndex();
               _context3.n = 3;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
                 toast: true,
@@ -3495,14 +3600,13 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 timerProgressBar: true
               });
             case 3:
-              _this4.goToIndex();
               _context3.n = 5;
               break;
             case 4:
               _context3.p = 4;
-              _t3 = _context3.v;
-              hasFieldErrors = _this4.setValidationErrors(_t3);
-              errorMessage = _this4.extractApiError(_t3, 'Unable to save invoice.');
+              _t2 = _context3.v;
+              hasFieldErrors = _this4.setValidationErrors(_t2);
+              errorMessage = _this4.extractApiError(_t2, 'Unable to save invoice.');
               if (!hasFieldErrors) {
                 _this4.formError = errorMessage;
               }
@@ -3609,6 +3713,36 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/NotFoundPage.vue?vue&type=script&lang=js":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/NotFoundPage.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'NotFoundPage'
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/PassengersPage.vue?vue&type=script&lang=js":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/PassengersPage.vue?vue&type=script&lang=js ***!
@@ -3620,6 +3754,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_modules_ModulePageHeader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/modules/ModulePageHeader.vue */ "./resources/js/components/modules/ModulePageHeader.vue");
+/* harmony import */ var _components_modules_ModuleFilterBar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modules/ModuleFilterBar.vue */ "./resources/js/components/modules/ModuleFilterBar.vue");
+/* harmony import */ var _components_modules_ModulePagination_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/modules/ModulePagination.vue */ "./resources/js/components/modules/ModulePagination.vue");
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -3782,30 +3919,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PassengersPage',
+  components: {
+    ModulePageHeader: _components_modules_ModulePageHeader_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ModuleFilterBar: _components_modules_ModuleFilterBar_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ModulePagination: _components_modules_ModulePagination_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
   data: function data() {
     return {
-      items: [],
-      loadingList: false,
-      listError: null,
       loadingForm: false,
       submitting: false,
       formError: null,
@@ -3813,12 +3940,6 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       searchInput: '',
       statusFilter: '',
       searchDebounceTimer: null,
-      pagination: {
-        current_page: 1,
-        last_page: 1,
-        per_page: 10,
-        total: 0
-      },
       form: this.getDefaultForm()
     };
   },
@@ -3829,20 +3950,38 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     isEditing: function isEditing() {
       return !!this.form.id;
     },
+    items: function items() {
+      return this.$store.state.passengers.items;
+    },
+    loadingList: function loadingList() {
+      return this.$store.state.passengers.loading;
+    },
+    listError: function listError() {
+      return this.$store.state.passengers.error;
+    },
     currentPage: function currentPage() {
-      return this.pagination.current_page;
+      return this.$store.state.passengers.pagination.current_page;
     },
     lastPage: function lastPage() {
-      return this.pagination.last_page;
+      return this.$store.state.passengers.pagination.last_page;
     },
     hasPagination: function hasPagination() {
-      return this.pagination.total > this.pagination.per_page;
+      return this.$store.state.passengers.pagination.total > this.$store.state.passengers.pagination.per_page;
     },
     isFirstPage: function isFirstPage() {
       return this.currentPage <= 1;
     },
     isLastPage: function isLastPage() {
       return this.currentPage >= this.lastPage;
+    },
+    statusOptions: function statusOptions() {
+      return [{
+        value: 'Enabled',
+        label: 'Enabled'
+      }, {
+        value: 'Disabled',
+        label: 'Disabled'
+      }];
     }
   },
   watch: {
@@ -3933,9 +4072,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       var _arguments = arguments,
         _this2 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _ref, _ref$q, q, _ref$status, status, _ref$page, page, response, payload, _t;
+        var _ref, _ref$q, q, _ref$status, status, _ref$page, page;
         return _regenerator().w(function (_context) {
-          while (1) switch (_context.p = _context.n) {
+          while (1) switch (_context.n) {
             case 0:
               _ref = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {}, _ref$q = _ref.q, q = _ref$q === void 0 ? '' : _ref$q, _ref$status = _ref.status, status = _ref$status === void 0 ? '' : _ref$status, _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page;
               if (!_this2.isFormRoute) {
@@ -3944,48 +4083,22 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               }
               return _context.a(2);
             case 1:
-              _this2.loadingList = true;
-              _this2.listError = null;
-              _context.p = 2;
-              _context.n = 3;
-              return window.axios.get('/api/v1/passengers', {
-                params: {
-                  q: q || undefined,
-                  status: status || undefined,
-                  page: page,
-                  per_page: _this2.pagination.per_page
-                }
+              _context.n = 2;
+              return _this2.$store.dispatch('passengers/fetchPassengers', {
+                q: q,
+                status: status,
+                page: page
               });
-            case 3:
-              response = _context.v;
-              payload = response.data || {};
-              _this2.items = payload.data || [];
-              _this2.pagination = {
-                current_page: payload.meta ? payload.meta.current_page : 1,
-                last_page: payload.meta ? payload.meta.last_page : 1,
-                per_page: payload.meta ? payload.meta.per_page : 10,
-                total: payload.meta ? payload.meta.total : 0
-              };
-              _context.n = 5;
-              break;
-            case 4:
-              _context.p = 4;
-              _t = _context.v;
-              _this2.listError = _this2.extractApiError(_t, 'Unable to load passengers. Please try again.');
-            case 5:
-              _context.p = 5;
-              _this2.loadingList = false;
-              return _context.f(5);
-            case 6:
+            case 2:
               return _context.a(2);
           }
-        }, _callee, null, [[2, 4, 5, 6]]);
+        }, _callee);
       }))();
     },
     fetchPassengerForEdit: function fetchPassengerForEdit(id) {
       var _this3 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-        var response, item, _t2;
+        var item, _t;
         return _regenerator().w(function (_context2) {
           while (1) switch (_context2.p = _context2.n) {
             case 0:
@@ -3994,10 +4107,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _this3.form = _this3.getDefaultForm();
               _context2.p = 1;
               _context2.n = 2;
-              return window.axios.get('/api/v1/passengers/' + id);
+              return _this3.$store.dispatch('passengers/fetchPassengerById', id);
             case 2:
-              response = _context2.v;
-              item = response.data && response.data.data ? response.data.data : null;
+              item = _context2.v;
               if (item) {
                 _context2.n = 3;
                 break;
@@ -4018,8 +4130,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               break;
             case 4:
               _context2.p = 4;
-              _t2 = _context2.v;
-              _this3.formError = _this3.extractApiError(_t2, 'Unable to load this passenger.');
+              _t = _context2.v;
+              _this3.formError = _this3.extractApiError(_t, 'Unable to load this passenger.');
             case 5:
               _context2.p = 5;
               _this3.loadingForm = false;
@@ -4033,7 +4145,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     submitPassengerForm: function submitPassengerForm() {
       var _this4 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-        var wasEditing, payload, hasFieldErrors, errorMessage, _t3;
+        var wasEditing, payload, hasFieldErrors, errorMessage, _t2;
         return _regenerator().w(function (_context3) {
           while (1) switch (_context3.p = _context3.n) {
             case 0:
@@ -4055,15 +4167,18 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               }
               payload.updated_at = _this4.form.updated_at;
               _context3.n = 2;
-              return window.axios.put('/api/v1/passengers/' + _this4.form.id, payload);
+              return _this4.$store.dispatch('passengers/updatePassenger', {
+                id: _this4.form.id,
+                payload: payload
+              });
             case 2:
               _context3.n = 4;
               break;
             case 3:
               _context3.n = 4;
-              return window.axios.post('/api/v1/passengers', payload);
+              return _this4.$store.dispatch('passengers/createPassenger', payload);
             case 4:
-              _this4.form = _this4.getDefaultForm();
+              _this4.goToIndex();
               _context3.n = 5;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
                 toast: true,
@@ -4075,14 +4190,13 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 timerProgressBar: true
               });
             case 5:
-              _this4.goToIndex();
               _context3.n = 7;
               break;
             case 6:
               _context3.p = 6;
-              _t3 = _context3.v;
-              hasFieldErrors = _this4.setValidationErrors(_t3);
-              errorMessage = _this4.extractApiError(_t3, 'Unable to save passenger.');
+              _t2 = _context3.v;
+              hasFieldErrors = _this4.setValidationErrors(_t2);
+              errorMessage = _this4.extractApiError(_t2, 'Unable to save passenger.');
               if (!hasFieldErrors) {
                 _this4.formError = errorMessage;
               }
@@ -4205,6 +4319,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_modules_ModulePageHeader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/modules/ModulePageHeader.vue */ "./resources/js/components/modules/ModulePageHeader.vue");
+/* harmony import */ var _components_modules_ModuleFilterBar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modules/ModuleFilterBar.vue */ "./resources/js/components/modules/ModuleFilterBar.vue");
+/* harmony import */ var _components_modules_ModulePagination_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/modules/ModulePagination.vue */ "./resources/js/components/modules/ModulePagination.vue");
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -4477,28 +4594,18 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ToursPage',
+  components: {
+    ModulePageHeader: _components_modules_ModulePageHeader_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ModuleFilterBar: _components_modules_ModuleFilterBar_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ModulePagination: _components_modules_ModulePagination_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
   data: function data() {
     return {
       searchInput: '',
@@ -4528,28 +4635,37 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
       return !!this.form.id;
     },
     tours: function tours() {
-      return this.$store.state.items;
+      return this.$store.state.tours.items;
     },
     loading: function loading() {
-      return this.$store.state.loading;
+      return this.$store.state.tours.loading;
     },
     error: function error() {
-      return this.$store.state.error;
+      return this.$store.state.tours.error;
     },
     currentPage: function currentPage() {
-      return this.$store.state.pagination.current_page;
+      return this.$store.state.tours.pagination.current_page;
     },
     lastPage: function lastPage() {
-      return this.$store.state.pagination.last_page;
+      return this.$store.state.tours.pagination.last_page;
     },
     hasPagination: function hasPagination() {
-      return this.$store.state.pagination.total > this.$store.state.pagination.per_page;
+      return this.$store.state.tours.pagination.total > this.$store.state.tours.pagination.per_page;
     },
     isFirstPage: function isFirstPage() {
       return this.currentPage <= 1;
     },
     isLastPage: function isLastPage() {
       return this.currentPage >= this.lastPage;
+    },
+    statusOptions: function statusOptions() {
+      return [{
+        value: 'Public',
+        label: 'Public'
+      }, {
+        value: 'Draft',
+        label: 'Draft'
+      }];
     }
   },
   watch: {
@@ -4562,7 +4678,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         var page = Number.isNaN(parsedPage) || parsedPage < 1 ? 1 : parsedPage;
         this.searchInput = q;
         this.statusFilter = status;
-        this.$store.dispatch('fetchTours', {
+        this.$store.dispatch('tours/fetchTours', {
           q: q,
           status: status,
           page: page
@@ -4695,22 +4811,25 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
                 break;
               }
               _context.n = 2;
-              return window.axios.put('/api/v1/tours/' + _this2.form.id, payload);
+              return _this2.$store.dispatch('tours/updateTour', {
+                id: _this2.form.id,
+                payload: payload
+              });
             case 2:
               _context.n = 4;
               break;
             case 3:
               _context.n = 4;
-              return window.axios.post('/api/v1/tours', payload);
+              return _this2.$store.dispatch('tours/createTour', payload);
             case 4:
-              _this2.resetForm();
               _context.n = 5;
-              return _this2.$store.dispatch('fetchTours', {
+              return _this2.$store.dispatch('tours/fetchTours', {
                 q: _this2.searchInput,
                 status: _this2.statusFilter,
                 page: _this2.currentPage
               });
             case 5:
+              _this2.goToIndex();
               _context.n = 6;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
                 toast: true,
@@ -4722,7 +4841,6 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
                 timerProgressBar: true
               });
             case 6:
-              _this2.goToIndex();
               _context.n = 8;
               break;
             case 7:
@@ -4787,16 +4905,16 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
               _this3.formError = null;
               _context2.p = 4;
               _context2.n = 5;
-              return window.axios.patch('/api/v1/tours/' + _this3.form.id + '/publish');
+              return _this3.$store.dispatch('tours/publishTour', _this3.form.id);
             case 5:
               response = _context2.v;
-              tour = response.data && response.data.data ? response.data.data : null;
-              message = response.data && response.data.message ? response.data.message : 'Tour published successfully.';
+              tour = response.data || null;
+              message = response.message ? response.message : 'Tour published successfully.';
               if (tour) {
                 _this3.fillFormFromTour(tour);
               }
               _context2.n = 6;
-              return _this3.$store.dispatch('fetchTours', {
+              return _this3.$store.dispatch('tours/fetchTours', {
                 q: _this3.searchInput,
                 status: _this3.statusFilter,
                 page: _this3.currentPage
@@ -4873,7 +4991,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
     fetchTourForEdit: function fetchTourForEdit(routeId) {
       var _this5 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-        var response, tour, _t3;
+        var tour, _t3;
         return _regenerator().w(function (_context3) {
           while (1) switch (_context3.p = _context3.n) {
             case 0:
@@ -4882,10 +5000,9 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
               _this5.form = _this5.getDefaultForm();
               _context3.p = 1;
               _context3.n = 2;
-              return window.axios.get('/api/v1/tours/' + routeId);
+              return _this5.$store.dispatch('tours/fetchTourById', routeId);
             case 2:
-              response = _context3.v;
-              tour = response.data && response.data.data ? response.data.data : null;
+              tour = _context3.v;
               if (tour) {
                 _context3.n = 3;
                 break;
@@ -52197,6 +52314,212 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModuleFilterBar.vue?vue&type=template&id=460951cc":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/ModuleFilterBar.vue?vue&type=template&id=460951cc ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "form-inline mb-3" },
+    [
+      _c("input", {
+        staticClass: "form-control mr-2",
+        attrs: { type: "text", placeholder: _vm.searchPlaceholder },
+        domProps: { value: _vm.searchValue },
+        on: {
+          input: function ($event) {
+            return _vm.$emit("update:searchValue", $event.target.value)
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass: "form-control mr-2",
+          domProps: { value: _vm.statusValue },
+          on: {
+            input: function ($event) {
+              return _vm.$emit("update:statusValue", $event.target.value)
+            },
+            change: function ($event) {
+              return _vm.$emit("change")
+            },
+          },
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("All statuses")]),
+          _vm._v(" "),
+          _vm._l(_vm.statusOptions, function (option) {
+            return _c(
+              "option",
+              { key: option.value, domProps: { value: option.value } },
+              [_vm._v("\n            " + _vm._s(option.label) + "\n        ")]
+            )
+          }),
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _vm._t("default"),
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModulePageHeader.vue?vue&type=template&id=3323d30a":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/ModulePageHeader.vue?vue&type=template&id=3323d30a ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "d-flex justify-content-between align-items-center mb-4" },
+    [
+      _c("h1", { staticClass: "mb-0" }, [_vm._v(_vm._s(_vm.title))]),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _vm.showCreateButton
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.$emit("create")
+                    },
+                  },
+                },
+                [
+                  _vm._v(
+                    "\n            " + _vm._s(_vm.createLabel) + "\n        "
+                  ),
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._t("actions"),
+        ],
+        2
+      ),
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModulePagination.vue?vue&type=template&id=0a38f5ce":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/ModulePagination.vue?vue&type=template&id=0a38f5ce ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.show
+    ? _c("nav", { attrs: { "aria-label": _vm.ariaLabel } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: { disabled: _vm.isFirstPage || _vm.loading },
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "page-link",
+                  attrs: { type: "button" },
+                  on: { click: _vm.onPrevious },
+                },
+                [_vm._v("\n                Previous\n            ")]
+              ),
+            ]
+          ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item disabled" }, [
+            _c("span", { staticClass: "page-link" }, [
+              _vm._v(
+                "\n                Page " +
+                  _vm._s(_vm.currentPage) +
+                  " of " +
+                  _vm._s(_vm.lastPage) +
+                  "\n            "
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: { disabled: _vm.isLastPage || _vm.loading },
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "page-link",
+                  attrs: { type: "button" },
+                  on: { click: _vm.onNext },
+                },
+                [_vm._v("\n                Next\n            ")]
+              ),
+            ]
+          ),
+        ]),
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72":
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72 ***!
@@ -52216,29 +52539,13 @@ var render = function () {
     "div",
     { staticClass: "container" },
     [
-      _c(
-        "div",
-        {
-          staticClass: "d-flex justify-content-between align-items-center mb-4",
+      _c("module-page-header", {
+        attrs: {
+          title: "Booking Management",
+          "show-create-button": !_vm.isFormRoute,
         },
-        [
-          _c("h1", { staticClass: "mb-0" }, [_vm._v("Booking Management")]),
-          _vm._v(" "),
-          _c("div", [
-            !_vm.isFormRoute
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success mr-2",
-                    attrs: { type: "button" },
-                    on: { click: _vm.goToCreate },
-                  },
-                  [_vm._v("\n                Create\n            ")]
-                )
-              : _vm._e(),
-          ]),
-        ]
-      ),
+        on: { create: _vm.goToCreate },
+      }),
       _vm._v(" "),
       _vm.isFormRoute
         ? _c("div", { staticClass: "card mb-4" }, [
@@ -53292,86 +53599,23 @@ var render = function () {
       _vm._v(" "),
       !_vm.isFormRoute
         ? [
-            _c("div", { staticClass: "form-inline mb-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.referenceInput,
-                    expression: "referenceInput",
-                    modifiers: { trim: true },
-                  },
-                ],
-                staticClass: "form-control mr-2",
-                attrs: {
-                  type: "text",
-                  placeholder: "Search by booking reference",
+            _c("module-filter-bar", {
+              attrs: {
+                "search-value": _vm.referenceInput,
+                "search-placeholder": "Search by booking reference",
+                "status-value": _vm.statusFilter,
+                "status-options": _vm.statusOptions,
+              },
+              on: {
+                "update:searchValue": function ($event) {
+                  _vm.referenceInput = $event.trim()
                 },
-                domProps: { value: _vm.referenceInput },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.referenceInput = $event.target.value.trim()
-                  },
-                  blur: function ($event) {
-                    return _vm.$forceUpdate()
-                  },
+                "update:statusValue": function ($event) {
+                  _vm.statusFilter = $event
                 },
-              }),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.statusFilter,
-                      expression: "statusFilter",
-                    },
-                  ],
-                  staticClass: "form-control mr-2",
-                  on: {
-                    change: [
-                      function ($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function (o) {
-                            return o.selected
-                          })
-                          .map(function (o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.statusFilter = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                      _vm.submitSearch,
-                    ],
-                  },
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("All statuses"),
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Submitted" } }, [
-                    _vm._v("Submitted"),
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Confirmed" } }, [
-                    _vm._v("Confirmed"),
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Cancelled" } }, [
-                    _vm._v("Cancelled"),
-                  ]),
-                ]
-              ),
-            ]),
+                change: _vm.submitSearch,
+              },
+            }),
             _vm._v(" "),
             _vm.loadingList
               ? _c("div", { staticClass: "alert alert-info mb-3" }, [
@@ -53498,68 +53742,18 @@ var render = function () {
                   ),
                 ]),
             _vm._v(" "),
-            _vm.hasPagination
-              ? _c("nav", { attrs: { "aria-label": "Bookings pagination" } }, [
-                  _c("ul", { staticClass: "pagination" }, [
-                    _c(
-                      "li",
-                      {
-                        staticClass: "page-item",
-                        class: { disabled: _vm.isFirstPage || _vm.loadingList },
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "page-link",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.goToPage(_vm.currentPage - 1)
-                              },
-                            },
-                          },
-                          [_vm._v("Previous")]
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "page-item disabled" }, [
-                      _c("span", { staticClass: "page-link" }, [
-                        _vm._v(
-                          "Page " +
-                            _vm._s(_vm.currentPage) +
-                            " of " +
-                            _vm._s(_vm.lastPage)
-                        ),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass: "page-item",
-                        class: { disabled: _vm.isLastPage || _vm.loadingList },
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "page-link",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.goToPage(_vm.currentPage + 1)
-                              },
-                            },
-                          },
-                          [_vm._v("Next")]
-                        ),
-                      ]
-                    ),
-                  ]),
-                ])
-              : _vm._e(),
+            _c("module-pagination", {
+              attrs: {
+                show: _vm.hasPagination,
+                "aria-label": "Bookings pagination",
+                "is-first-page": _vm.isFirstPage,
+                "is-last-page": _vm.isLastPage,
+                loading: _vm.loadingList,
+                "current-page": _vm.currentPage,
+                "last-page": _vm.lastPage,
+              },
+              on: { "go-to-page": _vm.goToPage },
+            }),
           ]
         : _vm._e(),
     ],
@@ -53617,7 +53811,7 @@ var render = function () {
     "div",
     { staticClass: "container" },
     [
-      _vm._m(0),
+      _c("module-page-header", { attrs: { title: "Invoices Management" } }),
       _vm._v(" "),
       _vm.isEditRoute
         ? _c("div", { staticClass: "card mb-4" }, [
@@ -53903,84 +54097,23 @@ var render = function () {
       _vm._v(" "),
       !_vm.isEditRoute
         ? [
-            _c("div", { staticClass: "form-inline mb-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.invoiceNumberInput,
-                    expression: "invoiceNumberInput",
-                    modifiers: { trim: true },
-                  },
-                ],
-                staticClass: "form-control mr-2",
-                attrs: {
-                  type: "text",
-                  placeholder: "Search by invoice number",
+            _c("module-filter-bar", {
+              attrs: {
+                "search-value": _vm.invoiceNumberInput,
+                "search-placeholder": "Search by invoice number",
+                "status-value": _vm.statusFilter,
+                "status-options": _vm.statusOptions,
+              },
+              on: {
+                "update:searchValue": function ($event) {
+                  _vm.invoiceNumberInput = $event.trim()
                 },
-                domProps: { value: _vm.invoiceNumberInput },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.invoiceNumberInput = $event.target.value.trim()
-                  },
-                  blur: function ($event) {
-                    return _vm.$forceUpdate()
-                  },
+                "update:statusValue": function ($event) {
+                  _vm.statusFilter = $event
                 },
-              }),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.statusFilter,
-                      expression: "statusFilter",
-                    },
-                  ],
-                  staticClass: "form-control mr-2",
-                  on: {
-                    change: [
-                      function ($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function (o) {
-                            return o.selected
-                          })
-                          .map(function (o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.statusFilter = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                      _vm.submitSearch,
-                    ],
-                  },
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("All statuses"),
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Unpaid" } }, [
-                    _vm._v("Unpaid"),
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Paid" } }, [_vm._v("Paid")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Cancelled" } }, [
-                    _vm._v("Cancelled"),
-                  ]),
-                ]
-              ),
-            ]),
+                change: _vm.submitSearch,
+              },
+            }),
             _vm._v(" "),
             _vm.loadingList
               ? _c("div", { staticClass: "alert alert-info mb-3" }, [
@@ -53999,7 +54132,7 @@ var render = function () {
                     "table",
                     { staticClass: "table table-striped table-bordered" },
                     [
-                      _vm._m(1),
+                      _vm._m(0),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -54074,68 +54207,18 @@ var render = function () {
                   ),
                 ]),
             _vm._v(" "),
-            _vm.hasPagination
-              ? _c("nav", { attrs: { "aria-label": "Invoices pagination" } }, [
-                  _c("ul", { staticClass: "pagination" }, [
-                    _c(
-                      "li",
-                      {
-                        staticClass: "page-item",
-                        class: { disabled: _vm.isFirstPage || _vm.loadingList },
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "page-link",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.goToPage(_vm.currentPage - 1)
-                              },
-                            },
-                          },
-                          [_vm._v("Previous")]
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "page-item disabled" }, [
-                      _c("span", { staticClass: "page-link" }, [
-                        _vm._v(
-                          "Page " +
-                            _vm._s(_vm.currentPage) +
-                            " of " +
-                            _vm._s(_vm.lastPage)
-                        ),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass: "page-item",
-                        class: { disabled: _vm.isLastPage || _vm.loadingList },
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "page-link",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.goToPage(_vm.currentPage + 1)
-                              },
-                            },
-                          },
-                          [_vm._v("Next")]
-                        ),
-                      ]
-                    ),
-                  ]),
-                ])
-              : _vm._e(),
+            _c("module-pagination", {
+              attrs: {
+                show: _vm.hasPagination,
+                "aria-label": "Invoices pagination",
+                "is-first-page": _vm.isFirstPage,
+                "is-last-page": _vm.isLastPage,
+                loading: _vm.loadingList,
+                "current-page": _vm.currentPage,
+                "last-page": _vm.lastPage,
+              },
+              on: { "go-to-page": _vm.goToPage },
+            }),
           ]
         : _vm._e(),
     ],
@@ -54143,16 +54226,6 @@ var render = function () {
   )
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "d-flex justify-content-between align-items-center mb-4" },
-      [_c("h1", { staticClass: "mb-0" }, [_vm._v("Invoices Management")])]
-    )
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -54182,6 +54255,54 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/NotFoundPage.vue?vue&type=template&id=70390ab2":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/NotFoundPage.vue?vue&type=template&id=70390ab2 ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container py-5" }, [
+    _c("div", { staticClass: "card" }, [
+      _c(
+        "div",
+        { staticClass: "card-body text-center py-5" },
+        [
+          _c("h1", { staticClass: "display-4 mb-3" }, [_vm._v("404")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "lead mb-4" }, [
+            _vm._v("The page you are looking for does not exist."),
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { to: { name: "tours.index" } },
+            },
+            [_vm._v("\n                Go to Tour Management\n            ")]
+          ),
+        ],
+        1
+      ),
+    ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/PassengersPage.vue?vue&type=template&id=f8f6e1de":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/PassengersPage.vue?vue&type=template&id=f8f6e1de ***!
@@ -54201,29 +54322,13 @@ var render = function () {
     "div",
     { staticClass: "container" },
     [
-      _c(
-        "div",
-        {
-          staticClass: "d-flex justify-content-between align-items-center mb-4",
+      _c("module-page-header", {
+        attrs: {
+          title: "Passengers Management",
+          "show-create-button": !_vm.isFormRoute,
         },
-        [
-          _c("h1", { staticClass: "mb-0" }, [_vm._v("Passengers Management")]),
-          _vm._v(" "),
-          _c("div", [
-            !_vm.isFormRoute
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success mr-2",
-                    attrs: { type: "button" },
-                    on: { click: _vm.goToCreate },
-                  },
-                  [_vm._v("\n                Create\n            ")]
-                )
-              : _vm._e(),
-          ]),
-        ]
-      ),
+        on: { create: _vm.goToCreate },
+      }),
       _vm._v(" "),
       _vm.isFormRoute
         ? _c("div", { staticClass: "card mb-4" }, [
@@ -54600,82 +54705,23 @@ var render = function () {
       _vm._v(" "),
       !_vm.isFormRoute
         ? [
-            _c("div", { staticClass: "form-inline mb-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.searchInput,
-                    expression: "searchInput",
-                    modifiers: { trim: true },
-                  },
-                ],
-                staticClass: "form-control mr-2",
-                attrs: {
-                  type: "text",
-                  placeholder: "Search by name/email/phone",
+            _c("module-filter-bar", {
+              attrs: {
+                "search-value": _vm.searchInput,
+                "search-placeholder": "Search by name/email/phone",
+                "status-value": _vm.statusFilter,
+                "status-options": _vm.statusOptions,
+              },
+              on: {
+                "update:searchValue": function ($event) {
+                  _vm.searchInput = $event.trim()
                 },
-                domProps: { value: _vm.searchInput },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.searchInput = $event.target.value.trim()
-                  },
-                  blur: function ($event) {
-                    return _vm.$forceUpdate()
-                  },
+                "update:statusValue": function ($event) {
+                  _vm.statusFilter = $event
                 },
-              }),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.statusFilter,
-                      expression: "statusFilter",
-                    },
-                  ],
-                  staticClass: "form-control mr-2",
-                  on: {
-                    change: [
-                      function ($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function (o) {
-                            return o.selected
-                          })
-                          .map(function (o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.statusFilter = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                      _vm.submitSearch,
-                    ],
-                  },
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("All statuses"),
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Enabled" } }, [
-                    _vm._v("Enabled"),
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Disabled" } }, [
-                    _vm._v("Disabled"),
-                  ]),
-                ]
-              ),
-            ]),
+                change: _vm.submitSearch,
+              },
+            }),
             _vm._v(" "),
             _vm.loadingList
               ? _c("div", { staticClass: "alert alert-info mb-3" }, [
@@ -54743,76 +54789,18 @@ var render = function () {
                   ),
                 ]),
             _vm._v(" "),
-            _vm.hasPagination
-              ? _c(
-                  "nav",
-                  { attrs: { "aria-label": "Passengers pagination" } },
-                  [
-                    _c("ul", { staticClass: "pagination" }, [
-                      _c(
-                        "li",
-                        {
-                          staticClass: "page-item",
-                          class: {
-                            disabled: _vm.isFirstPage || _vm.loadingList,
-                          },
-                        },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "page-link",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.goToPage(_vm.currentPage - 1)
-                                },
-                              },
-                            },
-                            [_vm._v("Previous")]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "page-item disabled" }, [
-                        _c("span", { staticClass: "page-link" }, [
-                          _vm._v(
-                            "Page " +
-                              _vm._s(_vm.currentPage) +
-                              " of " +
-                              _vm._s(_vm.lastPage)
-                          ),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass: "page-item",
-                          class: {
-                            disabled: _vm.isLastPage || _vm.loadingList,
-                          },
-                        },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "page-link",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.goToPage(_vm.currentPage + 1)
-                                },
-                              },
-                            },
-                            [_vm._v("Next")]
-                          ),
-                        ]
-                      ),
-                    ]),
-                  ]
-                )
-              : _vm._e(),
+            _c("module-pagination", {
+              attrs: {
+                show: _vm.hasPagination,
+                "aria-label": "Passengers pagination",
+                "is-first-page": _vm.isFirstPage,
+                "is-last-page": _vm.isLastPage,
+                loading: _vm.loadingList,
+                "current-page": _vm.currentPage,
+                "last-page": _vm.lastPage,
+              },
+              on: { "go-to-page": _vm.goToPage },
+            }),
           ]
         : _vm._e(),
     ],
@@ -54866,50 +54854,45 @@ var render = function () {
     "div",
     { staticClass: "container" },
     [
-      _c(
-        "div",
-        {
-          staticClass: "d-flex justify-content-between align-items-center mb-4",
+      _c("module-page-header", {
+        attrs: {
+          title: "Tours Management",
+          "show-create-button": !_vm.isFormRoute,
         },
-        [
-          _c("h1", { staticClass: "mb-0" }, [_vm._v("Tours Management")]),
-          _vm._v(" "),
-          _c("div", [
-            !_vm.isFormRoute
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success",
-                    attrs: { type: "button" },
-                    on: { click: _vm.goToCreate },
-                  },
-                  [_vm._v("\n                Create\n            ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.isEditing && _vm.form.status !== "Public"
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      type: "button",
-                      disabled: _vm.publishing || _vm.submitting,
-                    },
-                    on: { click: _vm.publishTour },
-                  },
-                  [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(_vm.publishing ? "Publishing..." : "Public") +
-                        "\n            "
-                    ),
-                  ]
-                )
-              : _vm._e(),
-          ]),
-        ]
-      ),
+        on: { create: _vm.goToCreate },
+        scopedSlots: _vm._u([
+          {
+            key: "actions",
+            fn: function () {
+              return [
+                _vm.isEditing && _vm.form.status !== "Public"
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: {
+                          type: "button",
+                          disabled: _vm.publishing || _vm.submitting,
+                        },
+                        on: { click: _vm.publishTour },
+                      },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(
+                              _vm.publishing ? "Publishing..." : "Public"
+                            ) +
+                            "\n            "
+                        ),
+                      ]
+                    )
+                  : _vm._e(),
+              ]
+            },
+            proxy: true,
+          },
+        ]),
+      }),
       _vm._v(" "),
       _vm.isFormRoute
         ? _c("div", { staticClass: "card mb-4" }, [
@@ -55513,79 +55496,23 @@ var render = function () {
       _vm._v(" "),
       !_vm.isFormRoute
         ? [
-            _c("div", { staticClass: "form-inline mb-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.searchInput,
-                    expression: "searchInput",
-                    modifiers: { trim: true },
-                  },
-                ],
-                staticClass: "form-control mr-2",
-                attrs: { type: "text", placeholder: "Search by tour name" },
-                domProps: { value: _vm.searchInput },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.searchInput = $event.target.value.trim()
-                  },
-                  blur: function ($event) {
-                    return _vm.$forceUpdate()
-                  },
+            _c("module-filter-bar", {
+              attrs: {
+                "search-value": _vm.searchInput,
+                "search-placeholder": "Search by tour name",
+                "status-value": _vm.statusFilter,
+                "status-options": _vm.statusOptions,
+              },
+              on: {
+                "update:searchValue": function ($event) {
+                  _vm.searchInput = $event.trim()
                 },
-              }),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.statusFilter,
-                      expression: "statusFilter",
-                    },
-                  ],
-                  staticClass: "form-control mr-2",
-                  on: {
-                    change: [
-                      function ($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function (o) {
-                            return o.selected
-                          })
-                          .map(function (o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.statusFilter = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                      _vm.submitSearch,
-                    ],
-                  },
+                "update:statusValue": function ($event) {
+                  _vm.statusFilter = $event
                 },
-                [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("All statuses"),
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Public" } }, [
-                    _vm._v("Public"),
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Draft" } }, [
-                    _vm._v("Draft"),
-                  ]),
-                ]
-              ),
-            ]),
+                change: _vm.submitSearch,
+              },
+            }),
             _vm._v(" "),
             _vm.loading
               ? _c("div", { staticClass: "alert alert-info mb-3" }, [
@@ -55680,77 +55607,18 @@ var render = function () {
                   ),
                 ]),
             _vm._v(" "),
-            _vm.hasPagination
-              ? _c("nav", { attrs: { "aria-label": "Tours pagination" } }, [
-                  _c("ul", { staticClass: "pagination" }, [
-                    _c(
-                      "li",
-                      {
-                        staticClass: "page-item",
-                        class: { disabled: _vm.isFirstPage || _vm.loading },
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "page-link",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.goToPage(_vm.currentPage - 1)
-                              },
-                            },
-                          },
-                          [
-                            _vm._v(
-                              "\n                        Previous\n                    "
-                            ),
-                          ]
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "page-item disabled" }, [
-                      _c("span", { staticClass: "page-link" }, [
-                        _vm._v(
-                          "\n                        Page " +
-                            _vm._s(_vm.currentPage) +
-                            " of " +
-                            _vm._s(_vm.lastPage) +
-                            "\n                    "
-                        ),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass: "page-item",
-                        class: { disabled: _vm.isLastPage || _vm.loading },
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "page-link",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.goToPage(_vm.currentPage + 1)
-                              },
-                            },
-                          },
-                          [
-                            _vm._v(
-                              "\n                        Next\n                    "
-                            ),
-                          ]
-                        ),
-                      ]
-                    ),
-                  ]),
-                ])
-              : _vm._e(),
+            _c("module-pagination", {
+              attrs: {
+                show: _vm.hasPagination,
+                "aria-label": "Tours pagination",
+                "is-first-page": _vm.isFirstPage,
+                "is-last-page": _vm.isLastPage,
+                loading: _vm.loading,
+                "current-page": _vm.currentPage,
+                "last-page": _vm.lastPage,
+              },
+              on: { "go-to-page": _vm.goToPage },
+            }),
           ]
         : _vm._e(),
     ],
@@ -72458,7 +72326,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _router_tours__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router/tours */ "./resources/js/router/tours.js");
-/* harmony import */ var _store_tours__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/tours */ "./resources/js/store/tours.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var _components_AppSidebarLayout_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/AppSidebarLayout.vue */ "./resources/js/components/AppSidebarLayout.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -72488,7 +72356,7 @@ __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
 var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
   el: '#app',
   router: _router_tours__WEBPACK_IMPORTED_MODULE_2__["default"],
-  store: _store_tours__WEBPACK_IMPORTED_MODULE_3__["default"],
+  store: _store__WEBPACK_IMPORTED_MODULE_3__["default"],
   render: function render(h) {
     return h(_components_AppSidebarLayout_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
   }
@@ -72609,6 +72477,213 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppSidebarLayout_vue_vue_type_template_id_193f0e20__WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppSidebarLayout_vue_vue_type_template_id_193f0e20__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/ModuleFilterBar.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/modules/ModuleFilterBar.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModuleFilterBar_vue_vue_type_template_id_460951cc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModuleFilterBar.vue?vue&type=template&id=460951cc */ "./resources/js/components/modules/ModuleFilterBar.vue?vue&type=template&id=460951cc");
+/* harmony import */ var _ModuleFilterBar_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModuleFilterBar.vue?vue&type=script&lang=js */ "./resources/js/components/modules/ModuleFilterBar.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ModuleFilterBar_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModuleFilterBar_vue_vue_type_template_id_460951cc__WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModuleFilterBar_vue_vue_type_template_id_460951cc__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/modules/ModuleFilterBar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/ModuleFilterBar.vue?vue&type=script&lang=js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/modules/ModuleFilterBar.vue?vue&type=script&lang=js ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModuleFilterBar_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModuleFilterBar.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModuleFilterBar.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModuleFilterBar_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/ModuleFilterBar.vue?vue&type=template&id=460951cc":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/modules/ModuleFilterBar.vue?vue&type=template&id=460951cc ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModuleFilterBar_vue_vue_type_template_id_460951cc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModuleFilterBar.vue?vue&type=template&id=460951cc */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModuleFilterBar.vue?vue&type=template&id=460951cc");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModuleFilterBar_vue_vue_type_template_id_460951cc__WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModuleFilterBar_vue_vue_type_template_id_460951cc__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/ModulePageHeader.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/modules/ModulePageHeader.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModulePageHeader_vue_vue_type_template_id_3323d30a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModulePageHeader.vue?vue&type=template&id=3323d30a */ "./resources/js/components/modules/ModulePageHeader.vue?vue&type=template&id=3323d30a");
+/* harmony import */ var _ModulePageHeader_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModulePageHeader.vue?vue&type=script&lang=js */ "./resources/js/components/modules/ModulePageHeader.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ModulePageHeader_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModulePageHeader_vue_vue_type_template_id_3323d30a__WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModulePageHeader_vue_vue_type_template_id_3323d30a__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/modules/ModulePageHeader.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/ModulePageHeader.vue?vue&type=script&lang=js":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/modules/ModulePageHeader.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePageHeader_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModulePageHeader.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModulePageHeader.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePageHeader_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/ModulePageHeader.vue?vue&type=template&id=3323d30a":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/modules/ModulePageHeader.vue?vue&type=template&id=3323d30a ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePageHeader_vue_vue_type_template_id_3323d30a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModulePageHeader.vue?vue&type=template&id=3323d30a */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModulePageHeader.vue?vue&type=template&id=3323d30a");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePageHeader_vue_vue_type_template_id_3323d30a__WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePageHeader_vue_vue_type_template_id_3323d30a__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/ModulePagination.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/modules/ModulePagination.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModulePagination_vue_vue_type_template_id_0a38f5ce__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModulePagination.vue?vue&type=template&id=0a38f5ce */ "./resources/js/components/modules/ModulePagination.vue?vue&type=template&id=0a38f5ce");
+/* harmony import */ var _ModulePagination_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModulePagination.vue?vue&type=script&lang=js */ "./resources/js/components/modules/ModulePagination.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ModulePagination_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModulePagination_vue_vue_type_template_id_0a38f5ce__WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModulePagination_vue_vue_type_template_id_0a38f5ce__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/modules/ModulePagination.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/ModulePagination.vue?vue&type=script&lang=js":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/modules/ModulePagination.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePagination_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModulePagination.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModulePagination.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePagination_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/ModulePagination.vue?vue&type=template&id=0a38f5ce":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/modules/ModulePagination.vue?vue&type=template&id=0a38f5ce ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePagination_vue_vue_type_template_id_0a38f5ce__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModulePagination.vue?vue&type=template&id=0a38f5ce */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ModulePagination.vue?vue&type=template&id=0a38f5ce");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePagination_vue_vue_type_template_id_0a38f5ce__WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModulePagination_vue_vue_type_template_id_0a38f5ce__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -72747,6 +72822,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoicesPage_vue_vue_type_template_id_70156e1e__WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvoicesPage_vue_vue_type_template_id_70156e1e__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/NotFoundPage.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/pages/NotFoundPage.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _NotFoundPage_vue_vue_type_template_id_70390ab2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NotFoundPage.vue?vue&type=template&id=70390ab2 */ "./resources/js/pages/NotFoundPage.vue?vue&type=template&id=70390ab2");
+/* harmony import */ var _NotFoundPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NotFoundPage.vue?vue&type=script&lang=js */ "./resources/js/pages/NotFoundPage.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _NotFoundPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  _NotFoundPage_vue_vue_type_template_id_70390ab2__WEBPACK_IMPORTED_MODULE_0__["render"],
+  _NotFoundPage_vue_vue_type_template_id_70390ab2__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/NotFoundPage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/NotFoundPage.vue?vue&type=script&lang=js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/pages/NotFoundPage.vue?vue&type=script&lang=js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFoundPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./NotFoundPage.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/NotFoundPage.vue?vue&type=script&lang=js");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFoundPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/NotFoundPage.vue?vue&type=template&id=70390ab2":
+/*!***************************************************************************!*\
+  !*** ./resources/js/pages/NotFoundPage.vue?vue&type=template&id=70390ab2 ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFoundPage_vue_vue_type_template_id_70390ab2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./NotFoundPage.vue?vue&type=template&id=70390ab2 */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/NotFoundPage.vue?vue&type=template&id=70390ab2");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFoundPage_vue_vue_type_template_id_70390ab2__WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFoundPage_vue_vue_type_template_id_70390ab2__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -72905,7 +73049,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_ToursPage_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/ToursPage.vue */ "./resources/js/pages/ToursPage.vue");
 /* harmony import */ var _pages_BookingsPage_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/BookingsPage.vue */ "./resources/js/pages/BookingsPage.vue");
 /* harmony import */ var _pages_PassengersPage_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/PassengersPage.vue */ "./resources/js/pages/PassengersPage.vue");
-/* harmony import */ var _pages_InvoicesPage_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/InvoicesPage.vue */ "./resources/js/pages/InvoicesPage.vue");
+/* harmony import */ var _pages_InvoicesPage_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pages/InvoicesPage.vue */ "./resources/js/pages/InvoicesPage.vue");
+/* harmony import */ var _pages_NotFoundPage_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/NotFoundPage.vue */ "./resources/js/pages/NotFoundPage.vue");
+
 
 
 
@@ -72954,13 +73100,531 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   }, {
     path: '/invoices',
     name: 'invoices.index',
-    component: _pages_InvoicesPage_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _pages_InvoicesPage_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
     path: '/invoices/:id/edit',
     name: 'invoices.edit',
-    component: _pages_InvoicesPage_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _pages_InvoicesPage_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }, {
+    path: '*',
+    name: 'not-found',
+    component: _pages_NotFoundPage_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   }]
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/bookings.js":
+/*!****************************************!*\
+  !*** ./resources/js/store/bookings.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+var state = {
+  items: [],
+  loading: false,
+  error: null,
+  referenceFilter: '',
+  statusFilter: '',
+  pagination: {
+    current_page: 1,
+    last_page: 1,
+    per_page: 10,
+    total: 0
+  }
+};
+var mutations = {
+  setLoading: function setLoading(currentState, isLoading) {
+    currentState.loading = isLoading;
+  },
+  setError: function setError(currentState, error) {
+    currentState.error = error;
+  },
+  setReferenceFilter: function setReferenceFilter(currentState, reference) {
+    currentState.referenceFilter = reference;
+  },
+  setStatusFilter: function setStatusFilter(currentState, status) {
+    currentState.statusFilter = status;
+  },
+  setBookings: function setBookings(currentState, payload) {
+    currentState.items = payload.data || [];
+    currentState.pagination = {
+      current_page: payload.meta ? payload.meta.current_page : 1,
+      last_page: payload.meta ? payload.meta.last_page : 1,
+      per_page: payload.meta ? payload.meta.per_page : 10,
+      total: payload.meta ? payload.meta.total : 0
+    };
+  }
+};
+var actions = {
+  fetchBookings: function fetchBookings(_ref) {
+    var _arguments = arguments;
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var commit, state, _ref2, _ref2$reference, reference, _ref2$page, page, _ref2$status, status, response, apiMessage, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            commit = _ref.commit, state = _ref.state;
+            _ref2 = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {}, _ref2$reference = _ref2.reference, reference = _ref2$reference === void 0 ? '' : _ref2$reference, _ref2$page = _ref2.page, page = _ref2$page === void 0 ? 1 : _ref2$page, _ref2$status = _ref2.status, status = _ref2$status === void 0 ? '' : _ref2$status;
+            commit('setLoading', true);
+            commit('setError', null);
+            commit('setReferenceFilter', reference);
+            commit('setStatusFilter', status);
+            _context.p = 1;
+            _context.n = 2;
+            return window.axios.get('/api/v1/bookings', {
+              params: {
+                reference: reference || undefined,
+                status: status || undefined,
+                page: page,
+                per_page: state.pagination.per_page
+              }
+            });
+          case 2:
+            response = _context.v;
+            commit('setBookings', response.data || {});
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            apiMessage = _t.response && _t.response.data && _t.response.data.message ? _t.response.data.message : null;
+            commit('setError', apiMessage || 'Unable to load bookings. Please try again.');
+          case 4:
+            _context.p = 4;
+            commit('setLoading', false);
+            return _context.f(4);
+          case 5:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3, 4, 5]]);
+    }))();
+  },
+  fetchBookingById: function fetchBookingById(_, id) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var response, payload;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.n) {
+          case 0:
+            _context2.n = 1;
+            return window.axios.get('/api/v1/bookings/' + id);
+          case 1:
+            response = _context2.v;
+            payload = response.data || {};
+            return _context2.a(2, payload.data || null);
+        }
+      }, _callee2);
+    }))();
+  },
+  createBooking: function createBooking(_, payload) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+      var response;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.n) {
+          case 0:
+            _context3.n = 1;
+            return window.axios.post('/api/v1/bookings', payload);
+          case 1:
+            response = _context3.v;
+            return _context3.a(2, response.data || {});
+        }
+      }, _callee3);
+    }))();
+  },
+  updateBooking: function updateBooking(_, _ref3) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var id, payload, response;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.n) {
+          case 0:
+            id = _ref3.id, payload = _ref3.payload;
+            _context4.n = 1;
+            return window.axios.put('/api/v1/bookings/' + id, payload);
+          case 1:
+            response = _context4.v;
+            return _context4.a(2, response.data || {});
+        }
+      }, _callee4);
+    }))();
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  mutations: mutations,
+  actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/index.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _tours__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tours */ "./resources/js/store/tours.js");
+/* harmony import */ var _bookings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bookings */ "./resources/js/store/bookings.js");
+/* harmony import */ var _passengers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./passengers */ "./resources/js/store/passengers.js");
+/* harmony import */ var _invoices__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./invoices */ "./resources/js/store/invoices.js");
+
+
+
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  modules: {
+    tours: _tours__WEBPACK_IMPORTED_MODULE_2__["default"],
+    bookings: _bookings__WEBPACK_IMPORTED_MODULE_3__["default"],
+    passengers: _passengers__WEBPACK_IMPORTED_MODULE_4__["default"],
+    invoices: _invoices__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }
+}));
+
+/***/ }),
+
+/***/ "./resources/js/store/invoices.js":
+/*!****************************************!*\
+  !*** ./resources/js/store/invoices.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+var state = {
+  items: [],
+  loading: false,
+  error: null,
+  invoiceNumberFilter: '',
+  statusFilter: '',
+  pagination: {
+    current_page: 1,
+    last_page: 1,
+    per_page: 10,
+    total: 0
+  }
+};
+var mutations = {
+  setLoading: function setLoading(currentState, isLoading) {
+    currentState.loading = isLoading;
+  },
+  setError: function setError(currentState, error) {
+    currentState.error = error;
+  },
+  setInvoiceNumberFilter: function setInvoiceNumberFilter(currentState, invoiceNumber) {
+    currentState.invoiceNumberFilter = invoiceNumber;
+  },
+  setStatusFilter: function setStatusFilter(currentState, status) {
+    currentState.statusFilter = status;
+  },
+  setInvoices: function setInvoices(currentState, payload) {
+    currentState.items = payload.data || [];
+    currentState.pagination = {
+      current_page: payload.meta ? payload.meta.current_page : 1,
+      last_page: payload.meta ? payload.meta.last_page : 1,
+      per_page: payload.meta ? payload.meta.per_page : 10,
+      total: payload.meta ? payload.meta.total : 0
+    };
+  }
+};
+var actions = {
+  fetchInvoices: function fetchInvoices(_ref) {
+    var _arguments = arguments;
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var commit, state, _ref2, _ref2$invoiceNumber, invoiceNumber, _ref2$page, page, _ref2$status, status, response, apiMessage, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            commit = _ref.commit, state = _ref.state;
+            _ref2 = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {}, _ref2$invoiceNumber = _ref2.invoiceNumber, invoiceNumber = _ref2$invoiceNumber === void 0 ? '' : _ref2$invoiceNumber, _ref2$page = _ref2.page, page = _ref2$page === void 0 ? 1 : _ref2$page, _ref2$status = _ref2.status, status = _ref2$status === void 0 ? '' : _ref2$status;
+            commit('setLoading', true);
+            commit('setError', null);
+            commit('setInvoiceNumberFilter', invoiceNumber);
+            commit('setStatusFilter', status);
+            _context.p = 1;
+            _context.n = 2;
+            return window.axios.get('/api/v1/invoices', {
+              params: {
+                invoice_number: invoiceNumber || undefined,
+                status: status || undefined,
+                page: page,
+                per_page: state.pagination.per_page
+              }
+            });
+          case 2:
+            response = _context.v;
+            commit('setInvoices', response.data || {});
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            apiMessage = _t.response && _t.response.data && _t.response.data.message ? _t.response.data.message : null;
+            commit('setError', apiMessage || 'Unable to load invoices. Please try again.');
+          case 4:
+            _context.p = 4;
+            commit('setLoading', false);
+            return _context.f(4);
+          case 5:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3, 4, 5]]);
+    }))();
+  },
+  fetchInvoiceById: function fetchInvoiceById(_, id) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var response, payload;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.n) {
+          case 0:
+            _context2.n = 1;
+            return window.axios.get('/api/v1/invoices/' + id);
+          case 1:
+            response = _context2.v;
+            payload = response.data || {};
+            return _context2.a(2, payload.data || null);
+        }
+      }, _callee2);
+    }))();
+  },
+  updateInvoice: function updateInvoice(_, _ref3) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+      var id, payload, response;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.n) {
+          case 0:
+            id = _ref3.id, payload = _ref3.payload;
+            _context3.n = 1;
+            return window.axios.put('/api/v1/invoices/' + id, payload);
+          case 1:
+            response = _context3.v;
+            return _context3.a(2, response.data || {});
+        }
+      }, _callee3);
+    }))();
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  mutations: mutations,
+  actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/passengers.js":
+/*!******************************************!*\
+  !*** ./resources/js/store/passengers.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+var state = {
+  items: [],
+  loading: false,
+  error: null,
+  search: '',
+  statusFilter: '',
+  pagination: {
+    current_page: 1,
+    last_page: 1,
+    per_page: 10,
+    total: 0
+  }
+};
+var mutations = {
+  setLoading: function setLoading(currentState, isLoading) {
+    currentState.loading = isLoading;
+  },
+  setError: function setError(currentState, error) {
+    currentState.error = error;
+  },
+  setSearch: function setSearch(currentState, search) {
+    currentState.search = search;
+  },
+  setStatusFilter: function setStatusFilter(currentState, status) {
+    currentState.statusFilter = status;
+  },
+  setPassengers: function setPassengers(currentState, payload) {
+    currentState.items = payload.data || [];
+    currentState.pagination = {
+      current_page: payload.meta ? payload.meta.current_page : 1,
+      last_page: payload.meta ? payload.meta.last_page : 1,
+      per_page: payload.meta ? payload.meta.per_page : 10,
+      total: payload.meta ? payload.meta.total : 0
+    };
+  }
+};
+var actions = {
+  fetchPassengers: function fetchPassengers(_ref) {
+    var _arguments = arguments;
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var commit, state, _ref2, _ref2$q, q, _ref2$page, page, _ref2$status, status, response, apiMessage, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            commit = _ref.commit, state = _ref.state;
+            _ref2 = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {}, _ref2$q = _ref2.q, q = _ref2$q === void 0 ? '' : _ref2$q, _ref2$page = _ref2.page, page = _ref2$page === void 0 ? 1 : _ref2$page, _ref2$status = _ref2.status, status = _ref2$status === void 0 ? '' : _ref2$status;
+            commit('setLoading', true);
+            commit('setError', null);
+            commit('setSearch', q);
+            commit('setStatusFilter', status);
+            _context.p = 1;
+            _context.n = 2;
+            return window.axios.get('/api/v1/passengers', {
+              params: {
+                q: q || undefined,
+                status: status || undefined,
+                page: page,
+                per_page: state.pagination.per_page
+              }
+            });
+          case 2:
+            response = _context.v;
+            commit('setPassengers', response.data || {});
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            apiMessage = _t.response && _t.response.data && _t.response.data.message ? _t.response.data.message : null;
+            commit('setError', apiMessage || 'Unable to load passengers. Please try again.');
+          case 4:
+            _context.p = 4;
+            commit('setLoading', false);
+            return _context.f(4);
+          case 5:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3, 4, 5]]);
+    }))();
+  },
+  fetchPassengerById: function fetchPassengerById(_, id) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var response, payload;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.n) {
+          case 0:
+            _context2.n = 1;
+            return window.axios.get('/api/v1/passengers/' + id);
+          case 1:
+            response = _context2.v;
+            payload = response.data || {};
+            return _context2.a(2, payload.data || null);
+        }
+      }, _callee2);
+    }))();
+  },
+  fetchPassengersForSelection: function fetchPassengersForSelection(_) {
+    var _arguments2 = arguments;
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+      var _ref3, _ref3$perPage, perPage, page, lastPage, allItems, response, payload, batch, meta;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.n) {
+          case 0:
+            _ref3 = _arguments2.length > 1 && _arguments2[1] !== undefined ? _arguments2[1] : {}, _ref3$perPage = _ref3.perPage, perPage = _ref3$perPage === void 0 ? 50 : _ref3$perPage;
+            page = 1;
+            lastPage = 1;
+            allItems = [];
+          case 1:
+            _context3.n = 2;
+            return window.axios.get('/api/v1/passengers', {
+              params: {
+                page: page,
+                per_page: perPage
+              }
+            });
+          case 2:
+            response = _context3.v;
+            payload = response.data || {};
+            batch = payload.data || [];
+            meta = payload.meta || {};
+            allItems.push.apply(allItems, _toConsumableArray(batch));
+            lastPage = meta.last_page || 1;
+            page += 1;
+          case 3:
+            if (page <= lastPage) {
+              _context3.n = 1;
+              break;
+            }
+          case 4:
+            return _context3.a(2, allItems);
+        }
+      }, _callee3);
+    }))();
+  },
+  createPassenger: function createPassenger(_, payload) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var response, responsePayload;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.n) {
+          case 0:
+            _context4.n = 1;
+            return window.axios.post('/api/v1/passengers', payload);
+          case 1:
+            response = _context4.v;
+            responsePayload = response.data || {};
+            return _context4.a(2, responsePayload.data || null);
+        }
+      }, _callee4);
+    }))();
+  },
+  updatePassenger: function updatePassenger(_, _ref4) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+      var id, payload, response;
+      return _regenerator().w(function (_context5) {
+        while (1) switch (_context5.n) {
+          case 0:
+            id = _ref4.id, payload = _ref4.payload;
+            _context5.n = 1;
+            return window.axios.put('/api/v1/passengers/' + id, payload);
+          case 1:
+            response = _context5.v;
+            return _context5.a(2, response.data || {});
+        }
+      }, _callee5);
+    }))();
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  mutations: mutations,
+  actions: actions
+});
 
 /***/ }),
 
@@ -72973,16 +73637,16 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var state = {
   items: [],
   loading: false,
@@ -73062,13 +73726,115 @@ var actions = {
         }
       }, _callee, null, [[1, 3, 4, 5]]);
     }))();
+  },
+  fetchTourById: function fetchTourById(_, id) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var response, payload;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.n) {
+          case 0:
+            _context2.n = 1;
+            return window.axios.get('/api/v1/tours/' + id);
+          case 1:
+            response = _context2.v;
+            payload = response.data || {};
+            return _context2.a(2, payload.data || null);
+        }
+      }, _callee2);
+    }))();
+  },
+  fetchPublicToursForSelection: function fetchPublicToursForSelection(_) {
+    var _arguments2 = arguments;
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+      var _ref3, _ref3$perPage, perPage, page, lastPage, allItems, response, payload, batch, meta;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.n) {
+          case 0:
+            _ref3 = _arguments2.length > 1 && _arguments2[1] !== undefined ? _arguments2[1] : {}, _ref3$perPage = _ref3.perPage, perPage = _ref3$perPage === void 0 ? 50 : _ref3$perPage;
+            page = 1;
+            lastPage = 1;
+            allItems = [];
+          case 1:
+            _context3.n = 2;
+            return window.axios.get('/api/v1/tours', {
+              params: {
+                status: 'Public',
+                page: page,
+                per_page: perPage
+              }
+            });
+          case 2:
+            response = _context3.v;
+            payload = response.data || {};
+            batch = payload.data || [];
+            meta = payload.meta || {};
+            allItems.push.apply(allItems, _toConsumableArray(batch));
+            lastPage = meta.last_page || 1;
+            page += 1;
+          case 3:
+            if (page <= lastPage) {
+              _context3.n = 1;
+              break;
+            }
+          case 4:
+            return _context3.a(2, allItems);
+        }
+      }, _callee3);
+    }))();
+  },
+  createTour: function createTour(_, payload) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var response;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.n) {
+          case 0:
+            _context4.n = 1;
+            return window.axios.post('/api/v1/tours', payload);
+          case 1:
+            response = _context4.v;
+            return _context4.a(2, response.data || {});
+        }
+      }, _callee4);
+    }))();
+  },
+  updateTour: function updateTour(_, _ref4) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+      var id, payload, response;
+      return _regenerator().w(function (_context5) {
+        while (1) switch (_context5.n) {
+          case 0:
+            id = _ref4.id, payload = _ref4.payload;
+            _context5.n = 1;
+            return window.axios.put('/api/v1/tours/' + id, payload);
+          case 1:
+            response = _context5.v;
+            return _context5.a(2, response.data || {});
+        }
+      }, _callee5);
+    }))();
+  },
+  publishTour: function publishTour(_, id) {
+    return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
+      var response;
+      return _regenerator().w(function (_context6) {
+        while (1) switch (_context6.n) {
+          case 0:
+            _context6.n = 1;
+            return window.axios.patch('/api/v1/tours/' + id + '/publish');
+          case 1:
+            response = _context6.v;
+            return _context6.a(2, response.data || {});
+        }
+      }, _callee6);
+    }))();
   }
 };
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
   state: state,
   mutations: mutations,
   actions: actions
-}));
+});
 
 /***/ }),
 

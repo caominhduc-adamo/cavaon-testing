@@ -15,10 +15,18 @@ class UpsertPassengerRequest extends FormRequest
 
     public function rules()
     {
+        $passenger = $this->route('passenger');
+        $passengerId = $passenger ? $passenger->id : null;
+
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['nullable', 'email', 'max:255'],
+            'email' => [
+                'nullable',
+                'email',
+                'max:255',
+                Rule::unique('passengers', 'email')->ignore($passengerId),
+            ],
             'phone' => ['nullable', 'string', 'max:50'],
             'status' => ['nullable', Rule::in([Passenger::STATUS_ENABLED, Passenger::STATUS_DISABLED])],
             'updated_at' => $this->isMethod('put')

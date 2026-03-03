@@ -10,7 +10,7 @@ import 'select2/dist/css/select2.min.css';
 
 import Vue from 'vue';
 import toursRouter from './router/tours';
-import toursStore from './store/tours';
+import appStore from './store';
 import AppSidebarLayout from './components/AppSidebarLayout.vue';
 
 /**
@@ -27,6 +27,6 @@ import AppSidebarLayout from './components/AppSidebarLayout.vue';
 const app = new Vue({
     el: '#app',
     router: toursRouter,
-    store: toursStore,
+    store: appStore,
     render: h => h(AppSidebarLayout),
 });

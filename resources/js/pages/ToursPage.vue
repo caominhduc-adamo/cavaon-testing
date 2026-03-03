@@ -1,16 +1,11 @@
 <template>
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="mb-0">Tours Management</h1>
-            <div>
-                <button
-                    v-if="!isFormRoute"
-                    type="button"
-                    class="btn btn-success"
-                    @click="goToCreate"
-                >
-                    Create
-                </button>
+        <module-page-header
+            title="Tours Management"
+            :show-create-button="!isFormRoute"
+            @create="goToCreate"
+        >
+            <template #actions>
                 <button
                     v-if="isEditing && form.status !== 'Public'"
                     type="button"
@@ -20,8 +15,8 @@
                 >
                     {{ publishing ? 'Publishing...' : 'Public' }}
                 </button>
-            </div>
-        </div>
+            </template>
+        </module-page-header>
 
         <div v-if="isFormRoute" class="card mb-4">
             <div class="card-header">
@@ -186,19 +181,15 @@
         </div>
 
         <template v-if="!isFormRoute">
-            <div class="form-inline mb-3">
-                <input
-                    v-model.trim="searchInput"
-                    type="text"
-                    class="form-control mr-2"
-                    placeholder="Search by tour name"
-                >
-                <select v-model="statusFilter" class="form-control mr-2" @change="submitSearch">
-                    <option value="">All statuses</option>
-                    <option value="Public">Public</option>
-                    <option value="Draft">Draft</option>
-                </select>
-            </div>
+            <module-filter-bar
+                :search-value="searchInput"
+                search-placeholder="Search by tour name"
+                :status-value="statusFilter"
+                :status-options="statusOptions"
+                @update:searchValue="searchInput = $event.trim()"
+                @update:statusValue="statusFilter = $event"
+                @change="submitSearch"
+            />
 
             <div v-if="loading" class="alert alert-info mb-3">
                 Loading tours...
@@ -260,34 +251,33 @@
                 </table>
             </div>
 
-            <nav v-if="hasPagination" aria-label="Tours pagination">
-                <ul class="pagination">
-                    <li class="page-item" :class="{ disabled: isFirstPage || loading }">
-                        <button class="page-link" type="button" @click="goToPage(currentPage - 1)">
-                            Previous
-                        </button>
-                    </li>
-                    <li class="page-item disabled">
-                        <span class="page-link">
-                            Page {{ currentPage }} of {{ lastPage }}
-                        </span>
-                    </li>
-                    <li class="page-item" :class="{ disabled: isLastPage || loading }">
-                        <button class="page-link" type="button" @click="goToPage(currentPage + 1)">
-                            Next
-                        </button>
-                    </li>
-                </ul>
-            </nav>
+            <module-pagination
+                :show="hasPagination"
+                aria-label="Tours pagination"
+                :is-first-page="isFirstPage"
+                :is-last-page="isLastPage"
+                :loading="loading"
+                :current-page="currentPage"
+                :last-page="lastPage"
+                @go-to-page="goToPage"
+            />
         </template>
     </div>
 </template>
 
 <script>
 import Swal from 'sweetalert2';
+import ModulePageHeader from '../components/modules/ModulePageHeader.vue';
+import ModuleFilterBar from '../components/modules/ModuleFilterBar.vue';
+import ModulePagination from '../components/modules/ModulePagination.vue';
 
 export default {
     name: 'ToursPage',
+    components: {
+        ModulePageHeader,
+        ModuleFilterBar,
+        ModulePagination,
+    },
     data() {
         return {
             searchInput: '',
@@ -318,28 +308,34 @@ export default {
             return !!this.form.id;
         },
         tours() {
-            return this.$store.state.items;
+            return this.$store.state.tours.items;
         },
         loading() {
-            return this.$store.state.loading;
+            return this.$store.state.tours.loading;
         },
         error() {
-            return this.$store.state.error;
+            return this.$store.state.tours.error;
         },
         currentPage() {
-            return this.$store.state.pagination.current_page;
+            return this.$store.state.tours.pagination.current_page;
         },
         lastPage() {
-            return this.$store.state.pagination.last_page;
+            return this.$store.state.tours.pagination.last_page;
         },
         hasPagination() {
-            return this.$store.state.pagination.total > this.$store.state.pagination.per_page;
+            return this.$store.state.tours.pagination.total > this.$store.state.tours.pagination.per_page;
         },
         isFirstPage() {
             return this.currentPage <= 1;
         },
         isLastPage() {
             return this.currentPage >= this.lastPage;
+        },
+        statusOptions() {
+            return [
+                { value: 'Public', label: 'Public' },
+                { value: 'Draft', label: 'Draft' },
+            ];
         },
     },
     watch: {
@@ -355,7 +351,7 @@ export default {
 
                 this.searchInput = q;
                 this.statusFilter = status;
-                this.$store.dispatch('fetchTours', { q, status, page });
+                this.$store.dispatch('tours/fetchTours', { q, status, page });
             },
         },
         '$route': {
@@ -494,17 +490,17 @@ export default {
                 const payload = this.buildPayload();
 
                 if (wasEditing) {
-                    await window.axios.put('/api/v1/tours/' + this.form.id, payload);
+                    await this.$store.dispatch('tours/updateTour', { id: this.form.id, payload });
                 } else {
-                    await window.axios.post('/api/v1/tours', payload);
+                    await this.$store.dispatch('tours/createTour', payload);
                 }
 
-                this.resetForm();
-                await this.$store.dispatch('fetchTours', {
+                await this.$store.dispatch('tours/fetchTours', {
                     q: this.searchInput,
                     status: this.statusFilter,
                     page: this.currentPage,
                 });
+                this.goToIndex();
                 await Swal.fire({
                     toast: true,
                     position: 'top-end',
@@ -514,7 +510,6 @@ export default {
                     timer: 3000,
                     timerProgressBar: true,
                 });
-                this.goToIndex();
             } catch (error) {
                 const hasFieldErrors = this.setValidationErrors(error);
                 const errorMessage = this.extractApiError(
@@ -560,17 +555,17 @@ export default {
             this.formError = null;
 
             try {
-                const response = await window.axios.patch('/api/v1/tours/' + this.form.id + '/publish');
-                const tour = response.data && response.data.data ? response.data.data : null;
-                const message = response.data && response.data.message
-                    ? response.data.message
+                const response = await this.$store.dispatch('tours/publishTour', this.form.id);
+                const tour = response.data || null;
+                const message = response.message
+                    ? response.message
                     : 'Tour published successfully.';
 
                 if (tour) {
                     this.fillFormFromTour(tour);
                 }
 
-                await this.$store.dispatch('fetchTours', {
+                await this.$store.dispatch('tours/fetchTours', {
                     q: this.searchInput,
                     status: this.statusFilter,
                     page: this.currentPage,
@@ -637,8 +632,7 @@ export default {
             this.form = this.getDefaultForm();
 
             try {
-                const response = await window.axios.get('/api/v1/tours/' + routeId);
-                const tour = response.data && response.data.data ? response.data.data : null;
+                const tour = await this.$store.dispatch('tours/fetchTourById', routeId);
 
                 if (!tour) {
                     this.formError = 'Tour not found.';
