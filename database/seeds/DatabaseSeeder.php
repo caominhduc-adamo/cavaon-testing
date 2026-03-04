@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/DummyBookingDataSeeder.php';
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(DummyBookingDataSeeder::class);
     }
 }

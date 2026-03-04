@@ -209,7 +209,7 @@
                         <tr>
                             <th scope="col" style="width: 80px;">ID</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Description</th>
+                            <th scope="col" style="width: 240px;">Description</th>
                             <th scope="col" style="width: 110px;">Status</th>
                             <th scope="col">Dates</th>
                             <th scope="col" style="width: 95px;">Action</th>
@@ -222,7 +222,9 @@
                         >
                             <td>{{ tour.id }}</td>
                             <td>{{ tour.name }}</td>
-                            <td>{{ tour.description || '-' }}</td>
+                            <td style="max-width: 240px; white-space: normal; word-break: break-word;">
+                                {{ tour.description || '-' }}
+                            </td>
                             <td>{{ tour.status }}</td>
                             <td>
                                 <template v-if="tour.tour_dates && tour.tour_dates.length">
