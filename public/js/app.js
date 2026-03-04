@@ -2540,6 +2540,61 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2633,6 +2688,23 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         return fullName.includes(keyword) || email.includes(keyword) || phone.includes(keyword);
       });
     },
+    selectedPassengerCount: function selectedPassengerCount() {
+      return Array.isArray(this.form.passenger_ids) ? this.form.passenger_ids.length : 0;
+    },
+    selectedPassengers: function selectedPassengers() {
+      var _this2 = this;
+      if (!Array.isArray(this.form.passenger_ids) || !this.form.passenger_ids.length) {
+        return [];
+      }
+      var selectedIds = this.form.passenger_ids.map(function (id) {
+        return Number(id);
+      });
+      return selectedIds.map(function (id) {
+        return _this2.passengers.find(function (passenger) {
+          return Number(passenger.id) === id;
+        });
+      }).filter(Boolean);
+    },
     statusOptions: function statusOptions() {
       return [{
         value: 'Submitted',
@@ -2670,7 +2742,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }
     },
     referenceInput: function referenceInput(newValue) {
-      var _this2 = this;
+      var _this3 = this;
       if (this.isFormRoute) {
         return;
       }
@@ -2682,26 +2754,26 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         clearTimeout(this.searchDebounceTimer);
       }
       this.searchDebounceTimer = setTimeout(function () {
-        _this2.submitSearch();
+        _this3.submitSearch();
       }, 800);
     },
     availableTourDates: function availableTourDates() {
-      var _this3 = this;
+      var _this4 = this;
       this.$nextTick(function () {
-        _this3.initTourDateSelect2();
-        _this3.syncTourDateSelect2Value();
+        _this4.initTourDateSelect2();
+        _this4.syncTourDateSelect2Value();
       });
     },
     'form.tour_id': function formTour_id() {
-      var _this4 = this;
+      var _this5 = this;
       this.$nextTick(function () {
-        _this4.syncTourSelect2Value();
+        _this5.syncTourSelect2Value();
       });
     },
     'form.tour_date_id': function formTour_date_id() {
-      var _this5 = this;
+      var _this6 = this;
       this.$nextTick(function () {
-        _this5.syncTourDateSelect2Value();
+        _this6.syncTourDateSelect2Value();
       });
     }
   },
@@ -2710,12 +2782,12 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     this.fetchPassengersForSelection();
   },
   mounted: function mounted() {
-    var _this6 = this;
+    var _this7 = this;
     this.$nextTick(function () {
-      _this6.initTourSelect2();
-      _this6.initTourDateSelect2();
-      _this6.syncTourSelect2Value();
-      _this6.syncTourDateSelect2Value();
+      _this7.initTourSelect2();
+      _this7.initTourDateSelect2();
+      _this7.syncTourSelect2Value();
+      _this7.syncTourDateSelect2Value();
     });
   },
   methods: {
@@ -2785,7 +2857,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       return fallbackMessage;
     },
     initTourSelect2: function initTourSelect2() {
-      var _this7 = this;
+      var _this8 = this;
       if (!this.$refs.tourSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
         return;
       }
@@ -2798,12 +2870,12 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       $tourSelect.off('change.select2-vue');
       $tourSelect.on('change.select2-vue', function () {
         var value = $tourSelect.val();
-        _this7.form.tour_id = value ? Number(value) : null;
-        _this7.onTourChanged();
+        _this8.form.tour_id = value ? Number(value) : null;
+        _this8.onTourChanged();
       });
     },
     initTourDateSelect2: function initTourDateSelect2() {
-      var _this8 = this;
+      var _this9 = this;
       if (!this.$refs.tourDateSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
         return;
       }
@@ -2816,7 +2888,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       $tourDateSelect.off('change.select2-vue');
       $tourDateSelect.on('change.select2-vue', function () {
         var value = $tourDateSelect.val();
-        _this8.form.tour_date_id = value ? Number(value) : null;
+        _this9.form.tour_date_id = value ? Number(value) : null;
       });
     },
     syncTourSelect2Value: function syncTourSelect2Value() {
@@ -2845,25 +2917,25 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       this.clearNewPassengerValidationErrors();
     },
     submitQuickPassenger: function submitQuickPassenger() {
-      var _this9 = this;
+      var _this0 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
         var payload, newPassenger, hasFieldErrors, errorMessage, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
-              _this9.creatingPassenger = true;
-              _this9.newPassengerError = null;
-              _this9.clearNewPassengerValidationErrors();
+              _this0.creatingPassenger = true;
+              _this0.newPassengerError = null;
+              _this0.clearNewPassengerValidationErrors();
               _context.p = 1;
               payload = {
-                first_name: _this9.newPassengerForm.first_name,
-                last_name: _this9.newPassengerForm.last_name,
-                email: _this9.newPassengerForm.email || null,
-                phone: _this9.newPassengerForm.phone || null,
+                first_name: _this0.newPassengerForm.first_name,
+                last_name: _this0.newPassengerForm.last_name,
+                email: _this0.newPassengerForm.email || null,
+                phone: _this0.newPassengerForm.phone || null,
                 status: 'Enabled'
               };
               _context.n = 2;
-              return _this9.$store.dispatch('passengers/createPassenger', payload);
+              return _this0.$store.dispatch('passengers/createPassenger', payload);
             case 2:
               newPassenger = _context.v;
               if (newPassenger) {
@@ -2872,12 +2944,12 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               }
               throw new Error('Passenger payload missing');
             case 3:
-              _this9.passengers.unshift(newPassenger);
-              _this9.form.passenger_ids = [Number(newPassenger.id)].concat(_this9.form.passenger_ids);
-              _this9.form.passenger_ids = Array.from(new Set(_this9.form.passenger_ids));
-              _this9.passengerSearchInput = '';
-              _this9.resetQuickPassengerForm();
-              _this9.showPassengerCreator = false;
+              _this0.passengers.unshift(newPassenger);
+              _this0.form.passenger_ids = [Number(newPassenger.id)].concat(_this0.form.passenger_ids);
+              _this0.form.passenger_ids = Array.from(new Set(_this0.form.passenger_ids));
+              _this0.passengerSearchInput = '';
+              _this0.resetQuickPassengerForm();
+              _this0.showPassengerCreator = false;
               _context.n = 4;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
                 toast: true,
@@ -2894,10 +2966,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 5:
               _context.p = 5;
               _t = _context.v;
-              hasFieldErrors = _this9.setNewPassengerValidationErrors(_t);
-              errorMessage = _this9.extractApiError(_t, 'Unable to create passenger. Please review your input and try again.');
+              hasFieldErrors = _this0.setNewPassengerValidationErrors(_t);
+              errorMessage = _this0.extractApiError(_t, 'Unable to create passenger. Please review your input and try again.');
               if (!hasFieldErrors) {
-                _this9.newPassengerError = errorMessage;
+                _this0.newPassengerError = errorMessage;
               }
               _context.n = 6;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
@@ -2911,7 +2983,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               });
             case 6:
               _context.p = 6;
-              _this9.creatingPassenger = false;
+              _this0.creatingPassenger = false;
               return _context.f(6);
             case 7:
               return _context.a(2);
@@ -2920,7 +2992,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }))();
     },
     onTourChanged: function onTourChanged() {
-      var _this0 = this;
+      var _this1 = this;
       if (!this.form.tour_date_id) {
         return;
       }
@@ -2930,14 +3002,14 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         return;
       }
       var exists = this.availableTourDates.some(function (tourDate) {
-        return Number(tourDate.id) === Number(_this0.form.tour_date_id);
+        return Number(tourDate.id) === Number(_this1.form.tour_date_id);
       });
       if (!exists) {
         this.form.tour_date_id = null;
       }
     },
     fetchToursForSelection: function fetchToursForSelection() {
-      var _this1 = this;
+      var _this10 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
         var _t2;
         return _regenerator().w(function (_context2) {
@@ -2945,20 +3017,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 0:
               _context2.p = 0;
               _context2.n = 1;
-              return _this1.$store.dispatch('tours/fetchPublicToursForSelection');
+              return _this10.$store.dispatch('tours/fetchPublicToursForSelection');
             case 1:
-              _this1.tours = _context2.v;
-              _this1.onTourChanged();
-              _this1.$nextTick(function () {
-                _this1.initTourSelect2();
-                _this1.syncTourSelect2Value();
+              _this10.tours = _context2.v;
+              _this10.onTourChanged();
+              _this10.$nextTick(function () {
+                _this10.initTourSelect2();
+                _this10.syncTourSelect2Value();
               });
               _context2.n = 3;
               break;
             case 2:
               _context2.p = 2;
               _t2 = _context2.v;
-              _this1.formError = _this1.extractApiError(_t2, 'Unable to load tours for booking.');
+              _this10.formError = _this10.extractApiError(_t2, 'Unable to load tours for booking.');
             case 3:
               return _context2.a(2);
           }
@@ -2966,27 +3038,27 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }))();
     },
     fetchPassengersForSelection: function fetchPassengersForSelection() {
-      var _this10 = this;
+      var _this11 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
         var _t3;
         return _regenerator().w(function (_context3) {
           while (1) switch (_context3.p = _context3.n) {
             case 0:
-              _this10.passengersLoading = true;
+              _this11.passengersLoading = true;
               _context3.p = 1;
               _context3.n = 2;
-              return _this10.$store.dispatch('passengers/fetchPassengersForSelection');
+              return _this11.$store.dispatch('passengers/fetchPassengersForSelection');
             case 2:
-              _this10.passengers = _context3.v;
+              _this11.passengers = _context3.v;
               _context3.n = 4;
               break;
             case 3:
               _context3.p = 3;
               _t3 = _context3.v;
-              _this10.formError = _this10.extractApiError(_t3, 'Unable to load passengers for booking.');
+              _this11.formError = _this11.extractApiError(_t3, 'Unable to load passengers for booking.');
             case 4:
               _context3.p = 4;
-              _this10.passengersLoading = false;
+              _this11.passengersLoading = false;
               return _context3.f(4);
             case 5:
               return _context3.a(2);
@@ -2996,21 +3068,21 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     },
     fetchBookings: function fetchBookings() {
       var _arguments = arguments,
-        _this11 = this;
+        _this12 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
         var _ref, _ref$reference, reference, _ref$status, status, _ref$page, page;
         return _regenerator().w(function (_context4) {
           while (1) switch (_context4.n) {
             case 0:
               _ref = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {}, _ref$reference = _ref.reference, reference = _ref$reference === void 0 ? '' : _ref$reference, _ref$status = _ref.status, status = _ref$status === void 0 ? '' : _ref$status, _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page;
-              if (!_this11.isFormRoute) {
+              if (!_this12.isFormRoute) {
                 _context4.n = 1;
                 break;
               }
               return _context4.a(2);
             case 1:
               _context4.n = 2;
-              return _this11.$store.dispatch('bookings/fetchBookings', {
+              return _this12.$store.dispatch('bookings/fetchBookings', {
                 reference: reference,
                 status: status,
                 page: page
@@ -3022,28 +3094,28 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }))();
     },
     fetchBookingForEdit: function fetchBookingForEdit(id) {
-      var _this12 = this;
+      var _this13 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
         var item, _t4;
         return _regenerator().w(function (_context5) {
           while (1) switch (_context5.p = _context5.n) {
             case 0:
-              _this12.loadingForm = true;
-              _this12.formError = null;
-              _this12.form = _this12.getDefaultForm();
+              _this13.loadingForm = true;
+              _this13.formError = null;
+              _this13.form = _this13.getDefaultForm();
               _context5.p = 1;
               _context5.n = 2;
-              return _this12.$store.dispatch('bookings/fetchBookingById', id);
+              return _this13.$store.dispatch('bookings/fetchBookingById', id);
             case 2:
               item = _context5.v;
               if (item) {
                 _context5.n = 3;
                 break;
               }
-              _this12.formError = 'Booking not found.';
+              _this13.formError = 'Booking not found.';
               return _context5.a(2);
             case 3:
-              _this12.form = {
+              _this13.form = {
                 id: item.id,
                 reference: item.reference || '',
                 tour_id: item.tour_id || null,
@@ -3054,16 +3126,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                   return Number(p.id);
                 }) : []
               };
-              _this12.onTourChanged();
+              _this13.onTourChanged();
               _context5.n = 5;
               break;
             case 4:
               _context5.p = 4;
               _t4 = _context5.v;
-              _this12.formError = _this12.extractApiError(_t4, 'Unable to load this booking.');
+              _this13.formError = _this13.extractApiError(_t4, 'Unable to load this booking.');
             case 5:
               _context5.p = 5;
-              _this12.loadingForm = false;
+              _this13.loadingForm = false;
               return _context5.f(5);
             case 6:
               return _context5.a(2);
@@ -3072,31 +3144,31 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }))();
     },
     submitBookingForm: function submitBookingForm() {
-      var _this13 = this;
+      var _this14 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
         var wasEditing, payload, hasFieldErrors, errorMessage, _t5;
         return _regenerator().w(function (_context6) {
           while (1) switch (_context6.p = _context6.n) {
             case 0:
-              _this13.submitting = true;
-              _this13.formError = null;
-              _this13.clearValidationErrors();
+              _this14.submitting = true;
+              _this14.formError = null;
+              _this14.clearValidationErrors();
               _context6.p = 1;
-              wasEditing = _this13.isEditing;
+              wasEditing = _this14.isEditing;
               payload = {
-                tour_id: _this13.form.tour_id,
-                tour_date_id: _this13.form.tour_date_id,
-                passenger_ids: _this13.form.passenger_ids
+                tour_id: _this14.form.tour_id,
+                tour_date_id: _this14.form.tour_date_id,
+                passenger_ids: _this14.form.passenger_ids
               };
               if (!wasEditing) {
                 _context6.n = 3;
                 break;
               }
-              payload.status = _this13.form.status;
-              payload.updated_at = _this13.form.updated_at;
+              payload.status = _this14.form.status;
+              payload.updated_at = _this14.form.updated_at;
               _context6.n = 2;
-              return _this13.$store.dispatch('bookings/updateBooking', {
-                id: _this13.form.id,
+              return _this14.$store.dispatch('bookings/updateBooking', {
+                id: _this14.form.id,
                 payload: payload
               });
             case 2:
@@ -3104,9 +3176,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               break;
             case 3:
               _context6.n = 4;
-              return _this13.$store.dispatch('bookings/createBooking', payload);
+              return _this14.$store.dispatch('bookings/createBooking', payload);
             case 4:
-              _this13.goToIndex();
+              _this14.goToIndex();
               _context6.n = 5;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
                 toast: true,
@@ -3123,10 +3195,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 6:
               _context6.p = 6;
               _t5 = _context6.v;
-              hasFieldErrors = _this13.setValidationErrors(_t5);
-              errorMessage = _this13.extractApiError(_t5, 'Unable to save booking. Please review your selections.');
+              hasFieldErrors = _this14.setValidationErrors(_t5);
+              errorMessage = _this14.extractApiError(_t5, 'Unable to save booking. Please review your selections.');
               if (!hasFieldErrors) {
-                _this13.formError = errorMessage;
+                _this14.formError = errorMessage;
               }
               _context6.n = 7;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
@@ -3140,7 +3212,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               });
             case 7:
               _context6.p = 7;
-              _this13.submitting = false;
+              _this14.submitting = false;
               return _context6.f(7);
             case 8:
               return _context6.a(2);
@@ -3239,6 +3311,14 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         return startDate || '-';
       }
       return startDate + ' to ' + endDate;
+    },
+    isPassengerSelected: function isPassengerSelected(passengerId) {
+      return this.form.passenger_ids.includes(Number(passengerId));
+    },
+    removePassengerFromSelection: function removePassengerFromSelection(passengerId) {
+      this.form.passenger_ids = this.form.passenger_ids.filter(function (selectedId) {
+        return Number(selectedId) !== Number(passengerId);
+      });
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -9573,6 +9653,25 @@ exports = module.exports = __webpack_require__(/*! ../../../css-loader/lib/css-b
 
 // module
 exports.push([module.i, ".select2-container{box-sizing:border-box;display:inline-block;margin:0;position:relative;vertical-align:middle}.select2-container .select2-selection--single{box-sizing:border-box;cursor:pointer;display:block;height:28px;-moz-user-select:none;user-select:none;-webkit-user-select:none}.select2-container .select2-selection--single .select2-selection__rendered{display:block;padding-left:8px;padding-right:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.select2-container .select2-selection--single .select2-selection__clear{background-color:transparent;border:none;font-size:1em}.select2-container[dir=\"rtl\"] .select2-selection--single .select2-selection__rendered{padding-right:8px;padding-left:20px}.select2-container .select2-selection--multiple{box-sizing:border-box;cursor:pointer;display:block;min-height:32px;-moz-user-select:none;user-select:none;-webkit-user-select:none}.select2-container .select2-selection--multiple .select2-selection__rendered{display:inline;list-style:none;padding:0}.select2-container .select2-selection--multiple .select2-selection__clear{background-color:transparent;border:none;font-size:1em}.select2-container .select2-search--inline .select2-search__field{box-sizing:border-box;border:none;font-size:100%;margin-top:5px;margin-left:5px;padding:0;max-width:100%;resize:none;height:18px;vertical-align:bottom;font-family:sans-serif;overflow:hidden;word-break:keep-all}.select2-container .select2-search--inline .select2-search__field::-webkit-search-cancel-button{-webkit-appearance:none}.select2-dropdown{background-color:white;border:1px solid #aaa;border-radius:4px;box-sizing:border-box;display:block;position:absolute;left:-100000px;width:100%;z-index:1051}.select2-results{display:block}.select2-results__options{list-style:none;margin:0;padding:0}.select2-results__option{padding:6px;-moz-user-select:none;user-select:none;-webkit-user-select:none}.select2-results__option--selectable{cursor:pointer}.select2-container--open .select2-dropdown{left:0}.select2-container--open .select2-dropdown--above{border-bottom:none;border-bottom-left-radius:0;border-bottom-right-radius:0}.select2-container--open .select2-dropdown--below{border-top:none;border-top-left-radius:0;border-top-right-radius:0}.select2-search--dropdown{display:block;padding:4px}.select2-search--dropdown .select2-search__field{padding:4px;width:100%;box-sizing:border-box}.select2-search--dropdown .select2-search__field::-webkit-search-cancel-button{-webkit-appearance:none}.select2-search--dropdown.select2-search--hide{display:none}.select2-close-mask{border:0;margin:0;padding:0;display:block;position:fixed;left:0;top:0;min-height:100%;min-width:100%;height:auto;width:auto;opacity:0;z-index:99;background-color:#fff;filter:alpha(opacity=0)}.select2-hidden-accessible{border:0 !important;clip:rect(0 0 0 0) !important;clip-path:inset(50%) !important;height:1px !important;overflow:hidden !important;padding:0 !important;position:absolute !important;width:1px !important;white-space:nowrap !important}.select2-container--default .select2-selection--single{background-color:#fff;border:1px solid #aaa;border-radius:4px}.select2-container--default .select2-selection--single .select2-selection__rendered{color:#444;line-height:28px}.select2-container--default .select2-selection--single .select2-selection__clear{cursor:pointer;float:right;font-weight:bold;height:26px;margin-right:20px;padding-right:0px}.select2-container--default .select2-selection--single .select2-selection__placeholder{color:#999}.select2-container--default .select2-selection--single .select2-selection__arrow{height:26px;position:absolute;top:1px;right:1px;width:20px}.select2-container--default .select2-selection--single .select2-selection__arrow b{border-color:#888 transparent transparent transparent;border-style:solid;border-width:5px 4px 0 4px;height:0;left:50%;margin-left:-4px;margin-top:-2px;position:absolute;top:50%;width:0}.select2-container--default[dir=\"rtl\"] .select2-selection--single .select2-selection__clear{float:left}.select2-container--default[dir=\"rtl\"] .select2-selection--single .select2-selection__arrow{left:1px;right:auto}.select2-container--default.select2-container--disabled .select2-selection--single{background-color:#eee;cursor:default}.select2-container--default.select2-container--disabled .select2-selection--single .select2-selection__clear{display:none}.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b{border-color:transparent transparent #888 transparent;border-width:0 4px 5px 4px}.select2-container--default .select2-selection--multiple{background-color:white;border:1px solid #aaa;border-radius:4px;cursor:text;padding-bottom:5px;padding-right:5px;position:relative}.select2-container--default .select2-selection--multiple.select2-selection--clearable{padding-right:25px}.select2-container--default .select2-selection--multiple .select2-selection__clear{cursor:pointer;font-weight:bold;height:20px;margin-right:10px;margin-top:5px;position:absolute;right:0;padding:1px}.select2-container--default .select2-selection--multiple .select2-selection__choice{background-color:#e4e4e4;border:1px solid #aaa;border-radius:4px;box-sizing:border-box;display:inline-block;margin-left:5px;margin-top:5px;padding:0;padding-left:20px;position:relative;max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:bottom;white-space:nowrap}.select2-container--default .select2-selection--multiple .select2-selection__choice__display{cursor:default;padding-left:2px;padding-right:5px}.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{background-color:transparent;border:none;border-right:1px solid #aaa;border-top-left-radius:4px;border-bottom-left-radius:4px;color:#999;cursor:pointer;font-size:1em;font-weight:bold;padding:0 4px;position:absolute;left:0;top:0}.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover,.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:focus{background-color:#f1f1f1;color:#333;outline:none}.select2-container--default[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice{margin-left:5px;margin-right:auto}.select2-container--default[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice__display{padding-left:5px;padding-right:2px}.select2-container--default[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice__remove{border-left:1px solid #aaa;border-right:none;border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px}.select2-container--default[dir=\"rtl\"] .select2-selection--multiple .select2-selection__clear{float:left;margin-left:10px;margin-right:auto}.select2-container--default.select2-container--focus .select2-selection--multiple{border:solid black 1px;outline:0}.select2-container--default.select2-container--disabled .select2-selection--multiple{background-color:#eee;cursor:default}.select2-container--default.select2-container--disabled .select2-selection__choice__remove{display:none}.select2-container--default.select2-container--open.select2-container--above .select2-selection--single,.select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple{border-top-left-radius:0;border-top-right-radius:0}.select2-container--default.select2-container--open.select2-container--below .select2-selection--single,.select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple{border-bottom-left-radius:0;border-bottom-right-radius:0}.select2-container--default .select2-search--dropdown .select2-search__field{border:1px solid #aaa}.select2-container--default .select2-search--inline .select2-search__field{background:transparent;border:none;outline:0;box-shadow:none;-webkit-appearance:textfield}.select2-container--default .select2-results>.select2-results__options{max-height:200px;overflow-y:auto}.select2-container--default .select2-results__option .select2-results__option{padding-left:1em}.select2-container--default .select2-results__option .select2-results__option .select2-results__group{padding-left:0}.select2-container--default .select2-results__option .select2-results__option .select2-results__option{margin-left:-1em;padding-left:2em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-2em;padding-left:3em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-3em;padding-left:4em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-4em;padding-left:5em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-5em;padding-left:6em}.select2-container--default .select2-results__option--group{padding:0}.select2-container--default .select2-results__option--disabled{color:#999}.select2-container--default .select2-results__option--selected{background-color:#ddd}.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{background-color:#5897fb;color:white}.select2-container--default .select2-results__group{cursor:default;display:block;padding:6px}.select2-container--classic .select2-selection--single{background-color:#f7f7f7;border:1px solid #aaa;border-radius:4px;outline:0;background-image:linear-gradient(to bottom, #fff 50%, #eee 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFEEEEEE', GradientType=0)}.select2-container--classic .select2-selection--single:focus{border:1px solid #5897fb}.select2-container--classic .select2-selection--single .select2-selection__rendered{color:#444;line-height:28px}.select2-container--classic .select2-selection--single .select2-selection__clear{cursor:pointer;float:right;font-weight:bold;height:26px;margin-right:20px}.select2-container--classic .select2-selection--single .select2-selection__placeholder{color:#999}.select2-container--classic .select2-selection--single .select2-selection__arrow{background-color:#ddd;border:none;border-left:1px solid #aaa;border-top-right-radius:4px;border-bottom-right-radius:4px;height:26px;position:absolute;top:1px;right:1px;width:20px;background-image:linear-gradient(to bottom, #eee 50%, #ccc 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEEEEE', endColorstr='#FFCCCCCC', GradientType=0)}.select2-container--classic .select2-selection--single .select2-selection__arrow b{border-color:#888 transparent transparent transparent;border-style:solid;border-width:5px 4px 0 4px;height:0;left:50%;margin-left:-4px;margin-top:-2px;position:absolute;top:50%;width:0}.select2-container--classic[dir=\"rtl\"] .select2-selection--single .select2-selection__clear{float:left}.select2-container--classic[dir=\"rtl\"] .select2-selection--single .select2-selection__arrow{border:none;border-right:1px solid #aaa;border-radius:0;border-top-left-radius:4px;border-bottom-left-radius:4px;left:1px;right:auto}.select2-container--classic.select2-container--open .select2-selection--single{border:1px solid #5897fb}.select2-container--classic.select2-container--open .select2-selection--single .select2-selection__arrow{background:transparent;border:none}.select2-container--classic.select2-container--open .select2-selection--single .select2-selection__arrow b{border-color:transparent transparent #888 transparent;border-width:0 4px 5px 4px}.select2-container--classic.select2-container--open.select2-container--above .select2-selection--single{border-top:none;border-top-left-radius:0;border-top-right-radius:0;background-image:linear-gradient(to bottom, #fff 0%, #eee 50%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFEEEEEE', GradientType=0)}.select2-container--classic.select2-container--open.select2-container--below .select2-selection--single{border-bottom:none;border-bottom-left-radius:0;border-bottom-right-radius:0;background-image:linear-gradient(to bottom, #eee 50%, #fff 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEEEEE', endColorstr='#FFFFFFFF', GradientType=0)}.select2-container--classic .select2-selection--multiple{background-color:white;border:1px solid #aaa;border-radius:4px;cursor:text;outline:0;padding-bottom:5px;padding-right:5px}.select2-container--classic .select2-selection--multiple:focus{border:1px solid #5897fb}.select2-container--classic .select2-selection--multiple .select2-selection__clear{display:none}.select2-container--classic .select2-selection--multiple .select2-selection__choice{background-color:#e4e4e4;border:1px solid #aaa;border-radius:4px;display:inline-block;margin-left:5px;margin-top:5px;padding:0}.select2-container--classic .select2-selection--multiple .select2-selection__choice__display{cursor:default;padding-left:2px;padding-right:5px}.select2-container--classic .select2-selection--multiple .select2-selection__choice__remove{background-color:transparent;border:none;border-top-left-radius:4px;border-bottom-left-radius:4px;color:#888;cursor:pointer;font-size:1em;font-weight:bold;padding:0 4px}.select2-container--classic .select2-selection--multiple .select2-selection__choice__remove:hover{color:#555;outline:none}.select2-container--classic[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice{margin-left:5px;margin-right:auto}.select2-container--classic[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice__display{padding-left:5px;padding-right:2px}.select2-container--classic[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice__remove{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px}.select2-container--classic.select2-container--open .select2-selection--multiple{border:1px solid #5897fb}.select2-container--classic.select2-container--open.select2-container--above .select2-selection--multiple{border-top:none;border-top-left-radius:0;border-top-right-radius:0}.select2-container--classic.select2-container--open.select2-container--below .select2-selection--multiple{border-bottom:none;border-bottom-left-radius:0;border-bottom-right-radius:0}.select2-container--classic .select2-search--dropdown .select2-search__field{border:1px solid #aaa;outline:0}.select2-container--classic .select2-search--inline .select2-search__field{outline:0;box-shadow:none}.select2-container--classic .select2-dropdown{background-color:#fff;border:1px solid transparent}.select2-container--classic .select2-dropdown--above{border-bottom:none}.select2-container--classic .select2-dropdown--below{border-top:none}.select2-container--classic .select2-results>.select2-results__options{max-height:200px;overflow-y:auto}.select2-container--classic .select2-results__option--group{padding:0}.select2-container--classic .select2-results__option--disabled{color:grey}.select2-container--classic .select2-results__option--highlighted.select2-results__option--selectable{background-color:#3875d7;color:#fff}.select2-container--classic .select2-results__group{cursor:default;display:block;padding:6px}.select2-container--classic.select2-container--open .select2-dropdown{border-color:#5897fb}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.booking-passenger-option[data-v-063dba72] {\n    border: 1px solid transparent;\n    transition: background-color 0.15s ease, border-color 0.15s ease;\n}\n.booking-passenger-option--selected[data-v-063dba72] {\n    border-color: #28a745;\n    background-color: #eaf7ee;\n}\n.booking-selected-passenger-item[data-v-063dba72] {\n    padding: 8px;\n    border: 1px solid #dcefe2;\n    border-radius: 4px;\n    background-color: #f8fffa;\n    margin-bottom: 8px;\n}\n.booking-selected-passenger-item[data-v-063dba72]:last-child {\n    margin-bottom: 0;\n}\n", ""]);
 
 // exports
 
@@ -46901,6 +47000,36 @@ S2.define('jquery.select2',[
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -52637,10 +52766,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72":
-/*!*********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72 ***!
-  \*********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72&scoped=true":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72&scoped=true ***!
+  \*********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -53494,151 +53623,332 @@ var render = function () {
                           }),
                         ]),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "border rounded p-2",
-                            staticStyle: {
-                              "max-height": "280px",
-                              "overflow-y": "auto",
-                            },
-                          },
-                          [
-                            _vm.passengersLoading
-                              ? _c("div", { staticClass: "text-muted" }, [
-                                  _vm._v("Loading passengers..."),
-                                ])
-                              : !_vm.filteredPassengers.length
-                              ? _c("div", { staticClass: "text-muted" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-7 mb-3 mb-md-0" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "d-flex justify-content-between align-items-center mb-2",
+                              },
+                              [
+                                _c("small", { staticClass: "text-muted" }, [
+                                  _vm._v("All passengers"),
+                                ]),
+                                _vm._v(" "),
+                                _c("small", { staticClass: "text-muted" }, [
                                   _vm._v(
-                                    "\n                            No passengers available.\n                        "
+                                    _vm._s(_vm.filteredPassengers.length) +
+                                      " shown"
                                   ),
-                                ])
-                              : _c(
-                                  "div",
-                                  _vm._l(
-                                    _vm.filteredPassengers,
-                                    function (passenger) {
-                                      return _c(
-                                        "div",
-                                        {
-                                          key: passenger.id,
-                                          staticClass: "form-check mb-2",
-                                        },
-                                        [
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.form.passenger_ids,
-                                                expression:
-                                                  "form.passenger_ids",
-                                              },
-                                            ],
-                                            staticClass: "form-check-input",
-                                            attrs: {
-                                              id: "passenger-" + passenger.id,
-                                              type: "checkbox",
-                                            },
-                                            domProps: {
-                                              value: passenger.id,
-                                              checked: Array.isArray(
-                                                _vm.form.passenger_ids
-                                              )
-                                                ? _vm._i(
-                                                    _vm.form.passenger_ids,
-                                                    passenger.id
-                                                  ) > -1
-                                                : _vm.form.passenger_ids,
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                var $$a =
-                                                    _vm.form.passenger_ids,
-                                                  $$el = $event.target,
-                                                  $$c = $$el.checked
-                                                    ? true
-                                                    : false
-                                                if (Array.isArray($$a)) {
-                                                  var $$v = passenger.id,
-                                                    $$i = _vm._i($$a, $$v)
-                                                  if ($$el.checked) {
-                                                    $$i < 0 &&
-                                                      _vm.$set(
-                                                        _vm.form,
-                                                        "passenger_ids",
-                                                        $$a.concat([$$v])
-                                                      )
-                                                  } else {
-                                                    $$i > -1 &&
-                                                      _vm.$set(
-                                                        _vm.form,
-                                                        "passenger_ids",
-                                                        $$a
-                                                          .slice(0, $$i)
-                                                          .concat(
-                                                            $$a.slice($$i + 1)
-                                                          )
-                                                      )
-                                                  }
-                                                } else {
-                                                  _vm.$set(
-                                                    _vm.form,
-                                                    "passenger_ids",
-                                                    $$c
-                                                  )
-                                                }
-                                              },
-                                            },
-                                          }),
-                                          _vm._v(" "),
-                                          _c(
-                                            "label",
+                                ]),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "border rounded p-2",
+                                staticStyle: {
+                                  "max-height": "280px",
+                                  "overflow-y": "auto",
+                                },
+                              },
+                              [
+                                _vm.passengersLoading
+                                  ? _c("div", { staticClass: "text-muted" }, [
+                                      _vm._v("Loading passengers..."),
+                                    ])
+                                  : !_vm.filteredPassengers.length
+                                  ? _c("div", { staticClass: "text-muted" }, [
+                                      _vm._v(
+                                        "\n                                    No passengers available.\n                                "
+                                      ),
+                                    ])
+                                  : _c(
+                                      "div",
+                                      _vm._l(
+                                        _vm.filteredPassengers,
+                                        function (passenger) {
+                                          return _c(
+                                            "div",
                                             {
-                                              staticClass: "form-check-label",
-                                              attrs: {
-                                                for:
-                                                  "passenger-" + passenger.id,
-                                              },
+                                              key: passenger.id,
+                                              class: [
+                                                "form-check mb-2 p-2 rounded booking-passenger-option",
+                                                {
+                                                  "booking-passenger-option--selected":
+                                                    _vm.isPassengerSelected(
+                                                      passenger.id
+                                                    ),
+                                                },
+                                              ],
                                             },
                                             [
-                                              _vm._v(
-                                                "\n                                    #" +
-                                                  _vm._s(passenger.id) +
-                                                  " - " +
-                                                  _vm._s(passenger.first_name) +
-                                                  " " +
-                                                  _vm._s(passenger.last_name) +
-                                                  "\n                                    "
-                                              ),
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value:
+                                                      _vm.form.passenger_ids,
+                                                    expression:
+                                                      "form.passenger_ids",
+                                                  },
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value: false,
+                                                    expression: "false",
+                                                  },
+                                                ],
+                                                staticClass: "form-check-input",
+                                                attrs: {
+                                                  id:
+                                                    "passenger-" + passenger.id,
+                                                  type: "checkbox",
+                                                },
+                                                domProps: {
+                                                  value: passenger.id,
+                                                  checked: Array.isArray(
+                                                    _vm.form.passenger_ids
+                                                  )
+                                                    ? _vm._i(
+                                                        _vm.form.passenger_ids,
+                                                        passenger.id
+                                                      ) > -1
+                                                    : _vm.form.passenger_ids,
+                                                },
+                                                on: {
+                                                  change: function ($event) {
+                                                    var $$a =
+                                                        _vm.form.passenger_ids,
+                                                      $$el = $event.target,
+                                                      $$c = $$el.checked
+                                                        ? true
+                                                        : false
+                                                    if (Array.isArray($$a)) {
+                                                      var $$v = passenger.id,
+                                                        $$i = _vm._i($$a, $$v)
+                                                      if ($$el.checked) {
+                                                        $$i < 0 &&
+                                                          _vm.$set(
+                                                            _vm.form,
+                                                            "passenger_ids",
+                                                            $$a.concat([$$v])
+                                                          )
+                                                      } else {
+                                                        $$i > -1 &&
+                                                          _vm.$set(
+                                                            _vm.form,
+                                                            "passenger_ids",
+                                                            $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              )
+                                                          )
+                                                      }
+                                                    } else {
+                                                      _vm.$set(
+                                                        _vm.form,
+                                                        "passenger_ids",
+                                                        $$c
+                                                      )
+                                                    }
+                                                  },
+                                                },
+                                              }),
+                                              _vm._v(" "),
                                               _c(
-                                                "span",
-                                                { staticClass: "text-muted" },
+                                                "label",
+                                                {
+                                                  staticClass:
+                                                    "form-check-label",
+                                                  attrs: {
+                                                    for:
+                                                      "passenger-" +
+                                                      passenger.id,
+                                                  },
+                                                },
                                                 [
                                                   _vm._v(
-                                                    "\n                                        (" +
+                                                    "\n                                            #" +
+                                                      _vm._s(passenger.id) +
+                                                      " - " +
                                                       _vm._s(
-                                                        passenger.email ||
-                                                          passenger.phone ||
-                                                          "No contact"
+                                                        passenger.first_name
                                                       ) +
-                                                      ", " +
-                                                      _vm._s(passenger.status) +
-                                                      ")\n                                    "
+                                                      " " +
+                                                      _vm._s(
+                                                        passenger.last_name
+                                                      ) +
+                                                      "\n                                            "
+                                                  ),
+                                                  _vm.isPassengerSelected(
+                                                    passenger.id
+                                                  )
+                                                    ? _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            "badge badge-success ml-2",
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                Selected\n                                            "
+                                                          ),
+                                                        ]
+                                                      )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "text-muted",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                                (" +
+                                                          _vm._s(
+                                                            passenger.email ||
+                                                              passenger.phone ||
+                                                              "No contact"
+                                                          ) +
+                                                          ", " +
+                                                          _vm._s(
+                                                            passenger.status
+                                                          ) +
+                                                          ")\n                                            "
+                                                      ),
+                                                    ]
                                                   ),
                                                 ]
                                               ),
                                             ]
-                                          ),
-                                        ]
-                                      )
-                                    }
+                                          )
+                                        }
+                                      ),
+                                      0
+                                    ),
+                              ]
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-5" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "d-flex justify-content-between align-items-center mb-2",
+                              },
+                              [
+                                _c("small", { staticClass: "text-muted" }, [
+                                  _vm._v(
+                                    "\n                                    Checked passengers\n                                "
                                   ),
-                                  0
+                                ]),
+                                _vm._v(" "),
+                                _c("small", { staticClass: "text-muted" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.selectedPassengerCount) +
+                                      " selected\n                                "
+                                  ),
+                                ]),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "border rounded p-2",
+                                staticStyle: {
+                                  "max-height": "280px",
+                                  "overflow-y": "auto",
+                                },
+                              },
+                              [
+                                !_vm.selectedPassengers.length
+                                  ? _c("div", { staticClass: "text-muted" }, [
+                                      _vm._v(
+                                        "\n                                    No passenger selected.\n                                "
+                                      ),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm._l(
+                                  _vm.selectedPassengers,
+                                  function (passenger) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        key:
+                                          "selected-passenger-" + passenger.id,
+                                        staticClass:
+                                          "d-flex justify-content-between align-items-start booking-selected-passenger-item",
+                                      },
+                                      [
+                                        _c("div", { staticClass: "pr-2" }, [
+                                          _c("strong", [
+                                            _vm._v(
+                                              "#" +
+                                                _vm._s(passenger.id) +
+                                                " - " +
+                                                _vm._s(passenger.first_name) +
+                                                " " +
+                                                _vm._s(passenger.last_name)
+                                            ),
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "text-muted small" },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(
+                                                    passenger.email ||
+                                                      passenger.phone ||
+                                                      "No contact"
+                                                  ) +
+                                                  "\n                                        "
+                                              ),
+                                            ]
+                                          ),
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-sm btn-outline-danger",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.removePassengerFromSelection(
+                                                  passenger.id
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                        Remove\n                                    "
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    )
+                                  }
                                 ),
-                          ]
-                        ),
+                              ],
+                              2
+                            ),
+                          ]),
+                        ]),
                         _vm._v(" "),
                         _vm.getFieldError("passenger_ids")
                           ? _c(
@@ -72833,9 +73143,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BookingsPage_vue_vue_type_template_id_063dba72__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookingsPage.vue?vue&type=template&id=063dba72 */ "./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72");
+/* harmony import */ var _BookingsPage_vue_vue_type_template_id_063dba72_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookingsPage.vue?vue&type=template&id=063dba72&scoped=true */ "./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72&scoped=true");
 /* harmony import */ var _BookingsPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookingsPage.vue?vue&type=script&lang=js */ "./resources/js/pages/BookingsPage.vue?vue&type=script&lang=js");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _BookingsPage_vue_vue_type_style_index_0_id_063dba72_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css */ "./resources/js/pages/BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -72843,13 +73155,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _BookingsPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BookingsPage_vue_vue_type_template_id_063dba72__WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BookingsPage_vue_vue_type_template_id_063dba72__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _BookingsPage_vue_vue_type_template_id_063dba72_scoped_true__WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BookingsPage_vue_vue_type_template_id_063dba72_scoped_true__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "063dba72",
   null
   
 )
@@ -72875,19 +73187,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72":
-/*!***************************************************************************!*\
-  !*** ./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72 ***!
-  \***************************************************************************/
+/***/ "./resources/js/pages/BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/pages/BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_style_index_0_id_063dba72_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=style&index=0&id=063dba72&scoped=true&lang=css");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_style_index_0_id_063dba72_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_style_index_0_id_063dba72_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_style_index_0_id_063dba72_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_style_index_0_id_063dba72_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72&scoped=true":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72&scoped=true ***!
+  \***************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_template_id_063dba72__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./BookingsPage.vue?vue&type=template&id=063dba72 */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_template_id_063dba72__WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_template_id_063dba72_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./BookingsPage.vue?vue&type=template&id=063dba72&scoped=true */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/BookingsPage.vue?vue&type=template&id=063dba72&scoped=true");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_template_id_063dba72_scoped_true__WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_template_id_063dba72__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingsPage_vue_vue_type_template_id_063dba72_scoped_true__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

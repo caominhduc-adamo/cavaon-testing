@@ -175,30 +175,85 @@
                             >
                         </div>
 
-                        <div class="border rounded p-2" style="max-height: 280px; overflow-y: auto;">
-                            <div v-if="passengersLoading" class="text-muted">Loading passengers...</div>
-                            <div v-else-if="!filteredPassengers.length" class="text-muted">
-                                No passengers available.
+                        <div class="row">
+                            <div class="col-md-7 mb-3 mb-md-0">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <small class="text-muted">All passengers</small>
+                                    <small class="text-muted">{{ filteredPassengers.length }} shown</small>
+                                </div>
+
+                                <div class="border rounded p-2" style="max-height: 280px; overflow-y: auto;">
+                                    <div v-if="passengersLoading" class="text-muted">Loading passengers...</div>
+                                    <div v-else-if="!filteredPassengers.length" class="text-muted">
+                                        No passengers available.
+                                    </div>
+                                    <div v-else>
+                                        <div
+                                            v-for="passenger in filteredPassengers"
+                                            :key="passenger.id"
+                                            :class="[
+                                                'form-check mb-2 p-2 rounded booking-passenger-option',
+                                                { 'booking-passenger-option--selected': isPassengerSelected(passenger.id) }
+                                            ]"
+                                        >
+                                            <input
+                                                :id="'passenger-' + passenger.id"
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                :value="passenger.id"
+                                                v-model="form.passenger_ids"
+                                                v-show="false"
+                                            >
+                                            <label class="form-check-label" :for="'passenger-' + passenger.id">
+                                                #{{ passenger.id }} - {{ passenger.first_name }} {{ passenger.last_name }}
+                                                <span
+                                                    v-if="isPassengerSelected(passenger.id)"
+                                                    class="badge badge-success ml-2"
+                                                >
+                                                    Selected
+                                                </span>
+                                                <span class="text-muted">
+                                                    ({{ passenger.email || passenger.phone || 'No contact' }}, {{ passenger.status }})
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div v-else>
-                                <div
-                                    v-for="passenger in filteredPassengers"
-                                    :key="passenger.id"
-                                    class="form-check mb-2"
-                                >
-                                    <input
-                                        :id="'passenger-' + passenger.id"
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        :value="passenger.id"
-                                        v-model="form.passenger_ids"
+
+                            <div class="col-md-5">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <small class="text-muted">
+                                        Checked passengers
+                                    </small>
+                                    <small class="text-muted">
+                                        {{ selectedPassengerCount }} selected
+                                    </small>
+                                </div>
+
+                                <div class="border rounded p-2" style="max-height: 280px; overflow-y: auto;">
+                                    <div v-if="!selectedPassengers.length" class="text-muted">
+                                        No passenger selected.
+                                    </div>
+                                    <div
+                                        v-for="passenger in selectedPassengers"
+                                        :key="'selected-passenger-' + passenger.id"
+                                        class="d-flex justify-content-between align-items-start booking-selected-passenger-item"
                                     >
-                                    <label class="form-check-label" :for="'passenger-' + passenger.id">
-                                        #{{ passenger.id }} - {{ passenger.first_name }} {{ passenger.last_name }}
-                                        <span class="text-muted">
-                                            ({{ passenger.email || passenger.phone || 'No contact' }}, {{ passenger.status }})
-                                        </span>
-                                    </label>
+                                        <div class="pr-2">
+                                            <strong>#{{ passenger.id }} - {{ passenger.first_name }} {{ passenger.last_name }}</strong>
+                                            <div class="text-muted small">
+                                                {{ passenger.email || passenger.phone || 'No contact' }}
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-outline-danger"
+                                            @click="removePassengerFromSelection(passenger.id)"
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -394,6 +449,20 @@ export default {
 
                 return fullName.includes(keyword) || email.includes(keyword) || phone.includes(keyword);
             });
+        },
+        selectedPassengerCount() {
+            return Array.isArray(this.form.passenger_ids) ? this.form.passenger_ids.length : 0;
+        },
+        selectedPassengers() {
+            if (!Array.isArray(this.form.passenger_ids) || !this.form.passenger_ids.length) {
+                return [];
+            }
+
+            const selectedIds = this.form.passenger_ids.map((id) => Number(id));
+
+            return selectedIds
+                .map((id) => this.passengers.find((passenger) => Number(passenger.id) === id))
+                .filter(Boolean);
         },
         statusOptions() {
             return [
@@ -881,6 +950,14 @@ export default {
 
             return startDate + ' to ' + endDate;
         },
+        isPassengerSelected(passengerId) {
+            return this.form.passenger_ids.includes(Number(passengerId));
+        },
+        removePassengerFromSelection(passengerId) {
+            this.form.passenger_ids = this.form.passenger_ids.filter(
+                (selectedId) => Number(selectedId) !== Number(passengerId)
+            );
+        },
     },
     beforeDestroy() {
         if (this.searchDebounceTimer) {
@@ -899,3 +976,27 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.booking-passenger-option {
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.booking-passenger-option--selected {
+    border-color: #28a745;
+    background-color: #eaf7ee;
+}
+
+.booking-selected-passenger-item {
+    padding: 8px;
+    border: 1px solid #dcefe2;
+    border-radius: 4px;
+    background-color: #f8fffa;
+    margin-bottom: 8px;
+}
+
+.booking-selected-passenger-item:last-child {
+    margin-bottom: 0;
+}
+</style>
