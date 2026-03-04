@@ -269,7 +269,7 @@
                         <button type="submit" class="btn btn-success mr-2" :disabled="submitting">
                             {{ submitting ? 'Saving...' : (isEditing ? 'Update booking' : 'Create booking') }}
                         </button>
-                        <button type="button" class="btn btn-outline-secondary" :disabled="submitting" @click="goToIndex">
+                        <button type="button" class="btn btn-outline-secondary" :disabled="submitting" @click="$router.go(-1)">
                             Cancel
                         </button>
                     </div>
@@ -490,6 +490,9 @@ export default {
             immediate: true,
             handler() {
                 this.syncFormFromRoute();
+                this.$nextTick(() => {
+                    this.handleSelect2ByRoute();
+                });
             },
         },
         referenceInput(newValue) {
@@ -527,6 +530,15 @@ export default {
                 this.syncTourDateSelect2Value();
             });
         },
+        loadingForm(isLoading) {
+            if (isLoading || !this.isFormRoute) {
+                return;
+            }
+
+            this.$nextTick(() => {
+                this.handleSelect2ByRoute();
+            });
+        },
     },
     created() {
         this.fetchToursForSelection();
@@ -534,10 +546,7 @@ export default {
     },
     mounted() {
         this.$nextTick(() => {
-            this.initTourSelect2();
-            this.initTourDateSelect2();
-            this.syncTourSelect2Value();
-            this.syncTourDateSelect2Value();
+            this.handleSelect2ByRoute();
         });
     },
     methods: {
@@ -612,12 +621,35 @@ export default {
 
             return fallbackMessage;
         },
+        canUseSelect2() {
+            return !!(window.$ && window.$.fn && window.$.fn.select2);
+        },
+        handleSelect2ByRoute() {
+            if (!this.canUseSelect2()) {
+                return;
+            }
+
+            if (!this.isFormRoute) {
+                this.destroyTourSelect2();
+                this.destroyTourDateSelect2();
+                return;
+            }
+
+            this.initTourSelect2();
+            this.initTourDateSelect2();
+            this.syncTourSelect2Value();
+            this.syncTourDateSelect2Value();
+        },
         initTourSelect2() {
-            if (!this.$refs.tourSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
+            if (!this.$refs.tourSelect || !this.canUseSelect2()) {
                 return;
             }
 
             const $tourSelect = window.$(this.$refs.tourSelect);
+            if ($tourSelect.hasClass('select2-hidden-accessible')) {
+                $tourSelect.off('change.select2-vue');
+                $tourSelect.select2('destroy');
+            }
             $tourSelect.select2({
                 width: '100%',
                 placeholder: 'Select a tour',
@@ -631,11 +663,15 @@ export default {
             });
         },
         initTourDateSelect2() {
-            if (!this.$refs.tourDateSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
+            if (!this.$refs.tourDateSelect || !this.canUseSelect2()) {
                 return;
             }
 
             const $tourDateSelect = window.$(this.$refs.tourDateSelect);
+            if ($tourDateSelect.hasClass('select2-hidden-accessible')) {
+                $tourDateSelect.off('change.select2-vue');
+                $tourDateSelect.select2('destroy');
+            }
             $tourDateSelect.select2({
                 width: '100%',
                 placeholder: 'Select a tour date',
@@ -648,7 +684,7 @@ export default {
             });
         },
         syncTourSelect2Value() {
-            if (!this.$refs.tourSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
+            if (!this.$refs.tourSelect || !this.canUseSelect2()) {
                 return;
             }
 
@@ -656,12 +692,34 @@ export default {
             window.$(this.$refs.tourSelect).val(value).trigger('change.select2');
         },
         syncTourDateSelect2Value() {
-            if (!this.$refs.tourDateSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
+            if (!this.$refs.tourDateSelect || !this.canUseSelect2()) {
                 return;
             }
 
             const value = this.form.tour_date_id ? String(this.form.tour_date_id) : null;
             window.$(this.$refs.tourDateSelect).val(value).trigger('change.select2');
+        },
+        destroyTourSelect2() {
+            if (!this.$refs.tourSelect || !this.canUseSelect2()) {
+                return;
+            }
+
+            const $tourSelect = window.$(this.$refs.tourSelect);
+            if ($tourSelect.hasClass('select2-hidden-accessible')) {
+                $tourSelect.off('change.select2-vue');
+                $tourSelect.select2('destroy');
+            }
+        },
+        destroyTourDateSelect2() {
+            if (!this.$refs.tourDateSelect || !this.canUseSelect2()) {
+                return;
+            }
+
+            const $tourDateSelect = window.$(this.$refs.tourDateSelect);
+            if ($tourDateSelect.hasClass('select2-hidden-accessible')) {
+                $tourDateSelect.off('change.select2-vue');
+                $tourDateSelect.select2('destroy');
+            }
         },
         togglePassengerCreator() {
             this.showPassengerCreator = !this.showPassengerCreator;
@@ -964,15 +1022,8 @@ export default {
             clearTimeout(this.searchDebounceTimer);
         }
 
-        if (this.$refs.tourSelect && window.$ && window.$.fn && window.$.fn.select2) {
-            window.$(this.$refs.tourSelect).off('change.select2-vue');
-            window.$(this.$refs.tourSelect).select2('destroy');
-        }
-
-        if (this.$refs.tourDateSelect && window.$ && window.$.fn && window.$.fn.select2) {
-            window.$(this.$refs.tourDateSelect).off('change.select2-vue');
-            window.$(this.$refs.tourDateSelect).select2('destroy');
-        }
+        this.destroyTourSelect2();
+        this.destroyTourDateSelect2();
     },
 };
 </script>

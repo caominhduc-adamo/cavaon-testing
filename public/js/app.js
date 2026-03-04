@@ -2738,11 +2738,15 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     '$route': {
       immediate: true,
       handler: function handler() {
+        var _this3 = this;
         this.syncFormFromRoute();
+        this.$nextTick(function () {
+          _this3.handleSelect2ByRoute();
+        });
       }
     },
     referenceInput: function referenceInput(newValue) {
-      var _this3 = this;
+      var _this4 = this;
       if (this.isFormRoute) {
         return;
       }
@@ -2754,26 +2758,35 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         clearTimeout(this.searchDebounceTimer);
       }
       this.searchDebounceTimer = setTimeout(function () {
-        _this3.submitSearch();
+        _this4.submitSearch();
       }, 800);
     },
     availableTourDates: function availableTourDates() {
-      var _this4 = this;
+      var _this5 = this;
       this.$nextTick(function () {
-        _this4.initTourDateSelect2();
-        _this4.syncTourDateSelect2Value();
+        _this5.initTourDateSelect2();
+        _this5.syncTourDateSelect2Value();
       });
     },
     'form.tour_id': function formTour_id() {
-      var _this5 = this;
+      var _this6 = this;
       this.$nextTick(function () {
-        _this5.syncTourSelect2Value();
+        _this6.syncTourSelect2Value();
       });
     },
     'form.tour_date_id': function formTour_date_id() {
-      var _this6 = this;
+      var _this7 = this;
       this.$nextTick(function () {
-        _this6.syncTourDateSelect2Value();
+        _this7.syncTourDateSelect2Value();
+      });
+    },
+    loadingForm: function loadingForm(isLoading) {
+      var _this8 = this;
+      if (isLoading || !this.isFormRoute) {
+        return;
+      }
+      this.$nextTick(function () {
+        _this8.handleSelect2ByRoute();
       });
     }
   },
@@ -2782,12 +2795,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     this.fetchPassengersForSelection();
   },
   mounted: function mounted() {
-    var _this7 = this;
+    var _this9 = this;
     this.$nextTick(function () {
-      _this7.initTourSelect2();
-      _this7.initTourDateSelect2();
-      _this7.syncTourSelect2Value();
-      _this7.syncTourDateSelect2Value();
+      _this9.handleSelect2ByRoute();
     });
   },
   methods: {
@@ -2856,12 +2866,33 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }
       return fallbackMessage;
     },
+    canUseSelect2: function canUseSelect2() {
+      return !!(window.$ && window.$.fn && window.$.fn.select2);
+    },
+    handleSelect2ByRoute: function handleSelect2ByRoute() {
+      if (!this.canUseSelect2()) {
+        return;
+      }
+      if (!this.isFormRoute) {
+        this.destroyTourSelect2();
+        this.destroyTourDateSelect2();
+        return;
+      }
+      this.initTourSelect2();
+      this.initTourDateSelect2();
+      this.syncTourSelect2Value();
+      this.syncTourDateSelect2Value();
+    },
     initTourSelect2: function initTourSelect2() {
-      var _this8 = this;
-      if (!this.$refs.tourSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
+      var _this0 = this;
+      if (!this.$refs.tourSelect || !this.canUseSelect2()) {
         return;
       }
       var $tourSelect = window.$(this.$refs.tourSelect);
+      if ($tourSelect.hasClass('select2-hidden-accessible')) {
+        $tourSelect.off('change.select2-vue');
+        $tourSelect.select2('destroy');
+      }
       $tourSelect.select2({
         width: '100%',
         placeholder: 'Select a tour',
@@ -2870,16 +2901,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       $tourSelect.off('change.select2-vue');
       $tourSelect.on('change.select2-vue', function () {
         var value = $tourSelect.val();
-        _this8.form.tour_id = value ? Number(value) : null;
-        _this8.onTourChanged();
+        _this0.form.tour_id = value ? Number(value) : null;
+        _this0.onTourChanged();
       });
     },
     initTourDateSelect2: function initTourDateSelect2() {
-      var _this9 = this;
-      if (!this.$refs.tourDateSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
+      var _this1 = this;
+      if (!this.$refs.tourDateSelect || !this.canUseSelect2()) {
         return;
       }
       var $tourDateSelect = window.$(this.$refs.tourDateSelect);
+      if ($tourDateSelect.hasClass('select2-hidden-accessible')) {
+        $tourDateSelect.off('change.select2-vue');
+        $tourDateSelect.select2('destroy');
+      }
       $tourDateSelect.select2({
         width: '100%',
         placeholder: 'Select a tour date',
@@ -2888,22 +2923,42 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       $tourDateSelect.off('change.select2-vue');
       $tourDateSelect.on('change.select2-vue', function () {
         var value = $tourDateSelect.val();
-        _this9.form.tour_date_id = value ? Number(value) : null;
+        _this1.form.tour_date_id = value ? Number(value) : null;
       });
     },
     syncTourSelect2Value: function syncTourSelect2Value() {
-      if (!this.$refs.tourSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
+      if (!this.$refs.tourSelect || !this.canUseSelect2()) {
         return;
       }
       var value = this.form.tour_id ? String(this.form.tour_id) : null;
       window.$(this.$refs.tourSelect).val(value).trigger('change.select2');
     },
     syncTourDateSelect2Value: function syncTourDateSelect2Value() {
-      if (!this.$refs.tourDateSelect || !window.$ || !window.$.fn || !window.$.fn.select2) {
+      if (!this.$refs.tourDateSelect || !this.canUseSelect2()) {
         return;
       }
       var value = this.form.tour_date_id ? String(this.form.tour_date_id) : null;
       window.$(this.$refs.tourDateSelect).val(value).trigger('change.select2');
+    },
+    destroyTourSelect2: function destroyTourSelect2() {
+      if (!this.$refs.tourSelect || !this.canUseSelect2()) {
+        return;
+      }
+      var $tourSelect = window.$(this.$refs.tourSelect);
+      if ($tourSelect.hasClass('select2-hidden-accessible')) {
+        $tourSelect.off('change.select2-vue');
+        $tourSelect.select2('destroy');
+      }
+    },
+    destroyTourDateSelect2: function destroyTourDateSelect2() {
+      if (!this.$refs.tourDateSelect || !this.canUseSelect2()) {
+        return;
+      }
+      var $tourDateSelect = window.$(this.$refs.tourDateSelect);
+      if ($tourDateSelect.hasClass('select2-hidden-accessible')) {
+        $tourDateSelect.off('change.select2-vue');
+        $tourDateSelect.select2('destroy');
+      }
     },
     togglePassengerCreator: function togglePassengerCreator() {
       this.showPassengerCreator = !this.showPassengerCreator;
@@ -2917,25 +2972,25 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       this.clearNewPassengerValidationErrors();
     },
     submitQuickPassenger: function submitQuickPassenger() {
-      var _this0 = this;
+      var _this10 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
         var payload, newPassenger, hasFieldErrors, errorMessage, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
-              _this0.creatingPassenger = true;
-              _this0.newPassengerError = null;
-              _this0.clearNewPassengerValidationErrors();
+              _this10.creatingPassenger = true;
+              _this10.newPassengerError = null;
+              _this10.clearNewPassengerValidationErrors();
               _context.p = 1;
               payload = {
-                first_name: _this0.newPassengerForm.first_name,
-                last_name: _this0.newPassengerForm.last_name,
-                email: _this0.newPassengerForm.email || null,
-                phone: _this0.newPassengerForm.phone || null,
+                first_name: _this10.newPassengerForm.first_name,
+                last_name: _this10.newPassengerForm.last_name,
+                email: _this10.newPassengerForm.email || null,
+                phone: _this10.newPassengerForm.phone || null,
                 status: 'Enabled'
               };
               _context.n = 2;
-              return _this0.$store.dispatch('passengers/createPassenger', payload);
+              return _this10.$store.dispatch('passengers/createPassenger', payload);
             case 2:
               newPassenger = _context.v;
               if (newPassenger) {
@@ -2944,12 +2999,12 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               }
               throw new Error('Passenger payload missing');
             case 3:
-              _this0.passengers.unshift(newPassenger);
-              _this0.form.passenger_ids = [Number(newPassenger.id)].concat(_this0.form.passenger_ids);
-              _this0.form.passenger_ids = Array.from(new Set(_this0.form.passenger_ids));
-              _this0.passengerSearchInput = '';
-              _this0.resetQuickPassengerForm();
-              _this0.showPassengerCreator = false;
+              _this10.passengers.unshift(newPassenger);
+              _this10.form.passenger_ids = [Number(newPassenger.id)].concat(_this10.form.passenger_ids);
+              _this10.form.passenger_ids = Array.from(new Set(_this10.form.passenger_ids));
+              _this10.passengerSearchInput = '';
+              _this10.resetQuickPassengerForm();
+              _this10.showPassengerCreator = false;
               _context.n = 4;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
                 toast: true,
@@ -2966,10 +3021,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 5:
               _context.p = 5;
               _t = _context.v;
-              hasFieldErrors = _this0.setNewPassengerValidationErrors(_t);
-              errorMessage = _this0.extractApiError(_t, 'Unable to create passenger. Please review your input and try again.');
+              hasFieldErrors = _this10.setNewPassengerValidationErrors(_t);
+              errorMessage = _this10.extractApiError(_t, 'Unable to create passenger. Please review your input and try again.');
               if (!hasFieldErrors) {
-                _this0.newPassengerError = errorMessage;
+                _this10.newPassengerError = errorMessage;
               }
               _context.n = 6;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
@@ -2983,7 +3038,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               });
             case 6:
               _context.p = 6;
-              _this0.creatingPassenger = false;
+              _this10.creatingPassenger = false;
               return _context.f(6);
             case 7:
               return _context.a(2);
@@ -2992,7 +3047,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }))();
     },
     onTourChanged: function onTourChanged() {
-      var _this1 = this;
+      var _this11 = this;
       if (!this.form.tour_date_id) {
         return;
       }
@@ -3002,14 +3057,14 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
         return;
       }
       var exists = this.availableTourDates.some(function (tourDate) {
-        return Number(tourDate.id) === Number(_this1.form.tour_date_id);
+        return Number(tourDate.id) === Number(_this11.form.tour_date_id);
       });
       if (!exists) {
         this.form.tour_date_id = null;
       }
     },
     fetchToursForSelection: function fetchToursForSelection() {
-      var _this10 = this;
+      var _this12 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
         var _t2;
         return _regenerator().w(function (_context2) {
@@ -3017,20 +3072,20 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 0:
               _context2.p = 0;
               _context2.n = 1;
-              return _this10.$store.dispatch('tours/fetchPublicToursForSelection');
+              return _this12.$store.dispatch('tours/fetchPublicToursForSelection');
             case 1:
-              _this10.tours = _context2.v;
-              _this10.onTourChanged();
-              _this10.$nextTick(function () {
-                _this10.initTourSelect2();
-                _this10.syncTourSelect2Value();
+              _this12.tours = _context2.v;
+              _this12.onTourChanged();
+              _this12.$nextTick(function () {
+                _this12.initTourSelect2();
+                _this12.syncTourSelect2Value();
               });
               _context2.n = 3;
               break;
             case 2:
               _context2.p = 2;
               _t2 = _context2.v;
-              _this10.formError = _this10.extractApiError(_t2, 'Unable to load tours for booking.');
+              _this12.formError = _this12.extractApiError(_t2, 'Unable to load tours for booking.');
             case 3:
               return _context2.a(2);
           }
@@ -3038,27 +3093,27 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }))();
     },
     fetchPassengersForSelection: function fetchPassengersForSelection() {
-      var _this11 = this;
+      var _this13 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
         var _t3;
         return _regenerator().w(function (_context3) {
           while (1) switch (_context3.p = _context3.n) {
             case 0:
-              _this11.passengersLoading = true;
+              _this13.passengersLoading = true;
               _context3.p = 1;
               _context3.n = 2;
-              return _this11.$store.dispatch('passengers/fetchPassengersForSelection');
+              return _this13.$store.dispatch('passengers/fetchPassengersForSelection');
             case 2:
-              _this11.passengers = _context3.v;
+              _this13.passengers = _context3.v;
               _context3.n = 4;
               break;
             case 3:
               _context3.p = 3;
               _t3 = _context3.v;
-              _this11.formError = _this11.extractApiError(_t3, 'Unable to load passengers for booking.');
+              _this13.formError = _this13.extractApiError(_t3, 'Unable to load passengers for booking.');
             case 4:
               _context3.p = 4;
-              _this11.passengersLoading = false;
+              _this13.passengersLoading = false;
               return _context3.f(4);
             case 5:
               return _context3.a(2);
@@ -3068,21 +3123,21 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     },
     fetchBookings: function fetchBookings() {
       var _arguments = arguments,
-        _this12 = this;
+        _this14 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
         var _ref, _ref$reference, reference, _ref$status, status, _ref$page, page;
         return _regenerator().w(function (_context4) {
           while (1) switch (_context4.n) {
             case 0:
               _ref = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {}, _ref$reference = _ref.reference, reference = _ref$reference === void 0 ? '' : _ref$reference, _ref$status = _ref.status, status = _ref$status === void 0 ? '' : _ref$status, _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page;
-              if (!_this12.isFormRoute) {
+              if (!_this14.isFormRoute) {
                 _context4.n = 1;
                 break;
               }
               return _context4.a(2);
             case 1:
               _context4.n = 2;
-              return _this12.$store.dispatch('bookings/fetchBookings', {
+              return _this14.$store.dispatch('bookings/fetchBookings', {
                 reference: reference,
                 status: status,
                 page: page
@@ -3094,28 +3149,28 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }))();
     },
     fetchBookingForEdit: function fetchBookingForEdit(id) {
-      var _this13 = this;
+      var _this15 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
         var item, _t4;
         return _regenerator().w(function (_context5) {
           while (1) switch (_context5.p = _context5.n) {
             case 0:
-              _this13.loadingForm = true;
-              _this13.formError = null;
-              _this13.form = _this13.getDefaultForm();
+              _this15.loadingForm = true;
+              _this15.formError = null;
+              _this15.form = _this15.getDefaultForm();
               _context5.p = 1;
               _context5.n = 2;
-              return _this13.$store.dispatch('bookings/fetchBookingById', id);
+              return _this15.$store.dispatch('bookings/fetchBookingById', id);
             case 2:
               item = _context5.v;
               if (item) {
                 _context5.n = 3;
                 break;
               }
-              _this13.formError = 'Booking not found.';
+              _this15.formError = 'Booking not found.';
               return _context5.a(2);
             case 3:
-              _this13.form = {
+              _this15.form = {
                 id: item.id,
                 reference: item.reference || '',
                 tour_id: item.tour_id || null,
@@ -3126,16 +3181,16 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                   return Number(p.id);
                 }) : []
               };
-              _this13.onTourChanged();
+              _this15.onTourChanged();
               _context5.n = 5;
               break;
             case 4:
               _context5.p = 4;
               _t4 = _context5.v;
-              _this13.formError = _this13.extractApiError(_t4, 'Unable to load this booking.');
+              _this15.formError = _this15.extractApiError(_t4, 'Unable to load this booking.');
             case 5:
               _context5.p = 5;
-              _this13.loadingForm = false;
+              _this15.loadingForm = false;
               return _context5.f(5);
             case 6:
               return _context5.a(2);
@@ -3144,31 +3199,31 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }))();
     },
     submitBookingForm: function submitBookingForm() {
-      var _this14 = this;
+      var _this16 = this;
       return _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
         var wasEditing, payload, hasFieldErrors, errorMessage, _t5;
         return _regenerator().w(function (_context6) {
           while (1) switch (_context6.p = _context6.n) {
             case 0:
-              _this14.submitting = true;
-              _this14.formError = null;
-              _this14.clearValidationErrors();
+              _this16.submitting = true;
+              _this16.formError = null;
+              _this16.clearValidationErrors();
               _context6.p = 1;
-              wasEditing = _this14.isEditing;
+              wasEditing = _this16.isEditing;
               payload = {
-                tour_id: _this14.form.tour_id,
-                tour_date_id: _this14.form.tour_date_id,
-                passenger_ids: _this14.form.passenger_ids
+                tour_id: _this16.form.tour_id,
+                tour_date_id: _this16.form.tour_date_id,
+                passenger_ids: _this16.form.passenger_ids
               };
               if (!wasEditing) {
                 _context6.n = 3;
                 break;
               }
-              payload.status = _this14.form.status;
-              payload.updated_at = _this14.form.updated_at;
+              payload.status = _this16.form.status;
+              payload.updated_at = _this16.form.updated_at;
               _context6.n = 2;
-              return _this14.$store.dispatch('bookings/updateBooking', {
-                id: _this14.form.id,
+              return _this16.$store.dispatch('bookings/updateBooking', {
+                id: _this16.form.id,
                 payload: payload
               });
             case 2:
@@ -3176,9 +3231,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               break;
             case 3:
               _context6.n = 4;
-              return _this14.$store.dispatch('bookings/createBooking', payload);
+              return _this16.$store.dispatch('bookings/createBooking', payload);
             case 4:
-              _this14.goToIndex();
+              _this16.goToIndex();
               _context6.n = 5;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
                 toast: true,
@@ -3195,10 +3250,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 6:
               _context6.p = 6;
               _t5 = _context6.v;
-              hasFieldErrors = _this14.setValidationErrors(_t5);
-              errorMessage = _this14.extractApiError(_t5, 'Unable to save booking. Please review your selections.');
+              hasFieldErrors = _this16.setValidationErrors(_t5);
+              errorMessage = _this16.extractApiError(_t5, 'Unable to save booking. Please review your selections.');
               if (!hasFieldErrors) {
-                _this14.formError = errorMessage;
+                _this16.formError = errorMessage;
               }
               _context6.n = 7;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
@@ -3212,7 +3267,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               });
             case 7:
               _context6.p = 7;
-              _this14.submitting = false;
+              _this16.submitting = false;
               return _context6.f(7);
             case 8:
               return _context6.a(2);
@@ -3325,14 +3380,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     if (this.searchDebounceTimer) {
       clearTimeout(this.searchDebounceTimer);
     }
-    if (this.$refs.tourSelect && window.$ && window.$.fn && window.$.fn.select2) {
-      window.$(this.$refs.tourSelect).off('change.select2-vue');
-      window.$(this.$refs.tourSelect).select2('destroy');
-    }
-    if (this.$refs.tourDateSelect && window.$ && window.$.fn && window.$.fn.select2) {
-      window.$(this.$refs.tourDateSelect).off('change.select2-vue');
-      window.$(this.$refs.tourDateSelect).select2('destroy');
-    }
+    this.destroyTourSelect2();
+    this.destroyTourDateSelect2();
   }
 });
 
@@ -4945,7 +4994,10 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
             return messages;
           }, []);
           if (allMessages.length) {
-            return allMessages.join(' ');
+            var uniqueMessages = allMessages.filter(function (message, index, list) {
+              return list.indexOf(message) === index;
+            });
+            return uniqueMessages.join(' ');
           }
         }
         if (payload.message && payload.message !== 'The given data was invalid.') {
@@ -54008,7 +54060,11 @@ var render = function () {
                           {
                             staticClass: "btn btn-outline-secondary",
                             attrs: { type: "button", disabled: _vm.submitting },
-                            on: { click: _vm.goToIndex },
+                            on: {
+                              click: function ($event) {
+                                return _vm.$router.go(-1)
+                              },
+                            },
                           },
                           [
                             _vm._v(
@@ -54506,7 +54562,11 @@ var render = function () {
                           {
                             staticClass: "btn btn-outline-secondary",
                             attrs: { type: "button", disabled: _vm.submitting },
-                            on: { click: _vm.goToIndex },
+                            on: {
+                              click: function ($event) {
+                                return _vm.$router.go(-1)
+                              },
+                            },
                           },
                           [
                             _vm._v(
@@ -55114,7 +55174,11 @@ var render = function () {
                           {
                             staticClass: "btn btn-outline-secondary",
                             attrs: { type: "button", disabled: _vm.submitting },
-                            on: { click: _vm.goToIndex },
+                            on: {
+                              click: function ($event) {
+                                return _vm.$router.go(-1)
+                              },
+                            },
                           },
                           [
                             _vm._v(
@@ -55889,7 +55953,11 @@ var render = function () {
                                   type: "button",
                                   disabled: _vm.submitting,
                                 },
-                                on: { click: _vm.goToIndex },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.$router.go(-1)
+                                  },
+                                },
                               },
                               [
                                 _vm._v(
@@ -55905,7 +55973,11 @@ var render = function () {
                                   type: "button",
                                   disabled: _vm.submitting,
                                 },
-                                on: { click: _vm.goToIndex },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.$router.go(-1)
+                                  },
+                                },
                               },
                               [
                                 _vm._v(

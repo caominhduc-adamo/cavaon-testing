@@ -37,6 +37,7 @@ class UpsertTourRequest extends FormRequest
         $validator->after(function ($validator) {
             $tourDates = $this->input('tour_dates', []);
             $today = Carbon::today();
+            $seenDateRanges = [];
 
             foreach ($tourDates as $index => $tourDate) {
                 if (empty($tourDate['start_date'])) {
@@ -79,6 +80,33 @@ class UpsertTourRequest extends FormRequest
                         'End date must be greater than or equal to start date.'
                     );
                 }
+
+                $dateRangeKey = $startDate->format('Y-m-d') . '|' . $endDate->format('Y-m-d');
+                if (isset($seenDateRanges[$dateRangeKey])) {
+                    $firstIndex = $seenDateRanges[$dateRangeKey];
+                    $errorMessage = 'Duplicate tour date range is not allowed.';
+
+                    $validator->errors()->add(
+                        'tour_dates.' . $index . '.start_date',
+                        $errorMessage
+                    );
+                    $validator->errors()->add(
+                        'tour_dates.' . $index . '.end_date',
+                        $errorMessage
+                    );
+                    $validator->errors()->add(
+                        'tour_dates.' . $firstIndex . '.start_date',
+                        $errorMessage
+                    );
+                    $validator->errors()->add(
+                        'tour_dates.' . $firstIndex . '.end_date',
+                        $errorMessage
+                    );
+
+                    continue;
+                }
+
+                $seenDateRanges[$dateRangeKey] = $index;
             }
         });
     }

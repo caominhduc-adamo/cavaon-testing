@@ -116,11 +116,12 @@ DB_USERNAME=laravel
 DB_PASSWORD=secret
 ```
 
-5. Generate app key and run migrations:
+5. Generate app key, run migrations, and seed data:
 
 ```bash
 docker compose exec app php artisan key:generate
 docker compose exec app php artisan migrate
+docker compose exec app php artisan db:seed
 ```
 
 ### Stop project

@@ -162,7 +162,7 @@
                             type="button"
                             class="btn btn-outline-secondary"
                             :disabled="submitting"
-                            @click="goToIndex"
+                            @click="$router.go(-1)"
                         >
                             Cancel edit
                         </button>
@@ -171,7 +171,7 @@
                             type="button"
                             class="btn btn-outline-secondary"
                             :disabled="submitting"
-                            @click="goToIndex"
+                            @click="$router.go(-1)"
                         >
                             Cancel
                         </button>
@@ -471,7 +471,11 @@ export default {
                     }, []);
 
                     if (allMessages.length) {
-                        return allMessages.join(' ');
+                        const uniqueMessages = allMessages.filter((message, index, list) => {
+                            return list.indexOf(message) === index;
+                        });
+
+                        return uniqueMessages.join(' ');
                     }
                 }
 

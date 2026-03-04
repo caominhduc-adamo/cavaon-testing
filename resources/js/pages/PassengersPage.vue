@@ -90,7 +90,7 @@
                         <button type="submit" class="btn btn-success mr-2" :disabled="submitting">
                             {{ submitting ? 'Saving...' : (isEditing ? 'Update passenger' : 'Create passenger') }}
                         </button>
-                        <button type="button" class="btn btn-outline-secondary" :disabled="submitting" @click="goToIndex">
+                        <button type="button" class="btn btn-outline-secondary" :disabled="submitting" @click="$router.go(-1)">
                             Cancel
                         </button>
                     </div>
