@@ -161,3 +161,67 @@ Run all tests:
 ```bash
 ./vendor/bin/phpunit
 ```
+
+## Booking Module Architecture Notes
+
+### 1) Folder structure and why
+
+I use a layered structure that keeps HTTP concerns, business rules, and data access clearly separated:
+
+- `app/Http/Controllers/Api/*Controller.php`: thin request/response layer.
+- `app/Services/*Service.php`: business workflows (booking creation, tour lifecycle, invoice creation).
+- `app/*` models (`Booking`, `Tour`, `TourDate`, `Invoice`): Eloquent entities and relationships.
+- `resources/js/pages/*.vue`: Vue pages for admin/user flows.
+- `tests/Unit/Services/*Test.php`: service-level business logic tests.
+
+Why this shape:
+- Controllers stay small and easy to reason about.
+- Services centralize business invariants.
+- Models remain focused on persistence and relations.
+- Frontend is decoupled from backend internals through API contracts.
+
+### 2) Preventing N+1 queries
+
+N+1 is prevented by eager loading related entities in service-layer read/write responses:
+
+- `app/Services/BookingService.php` uses:
+  - `listBookings()`: `->with(['tour', 'tourDate', 'passengers', 'invoice'])`
+  - `getBooking()`, `createBooking()`, `updateBooking()`: `->load(['tour', 'tourDate', 'passengers', 'invoice'])`
+- `app/Services/TourService.php` uses:
+  - `listTours()`, `getTour()`, `createTour()`, `updateTour()`, `publishTour()`: eager loads `tourDates` (with filtering/ordering).
+
+This ensures related data is fetched in bounded query counts instead of per-row follow-up queries.
+
+### 3) Atomic booking creation (transaction boundaries)
+
+Booking creation is atomic in `app/Services/BookingService.php`:
+
+- `createBooking()` wraps the full workflow in `DB::transaction(...)`.
+- Inside one transaction boundary it does:
+  1. Load/validate `Tour` and `TourDate`
+  2. Create `Booking`
+  3. Sync passengers (`booking_passenger` pivot)
+  4. Create `Invoice`
+  5. Return hydrated booking object
+
+If any step fails, Laravel rolls back the entire unit of work, preventing partial state (for example, booking exists but invoice missing).
+
+### 4) Scaling to 10,000 bookings/day
+
+At this traffic level, the current design is a solid base; I would scale by hardening hot paths:
+
+- Move non-critical side effects (email, notifications, analytics) to queues/workers.
+- Introduce read caching for high-frequency tour/date listing endpoints.
+- Add DB read replicas for read-heavy screens while keeping writes on primary.
+- Use idempotency keys for booking-create API to handle retries safely.
+- Add observability: query-time metrics, slow-query alerts, error rate/SLO dashboards.
+
+### 5) Production readiness improvements
+
+- Standardize structured logging/correlation IDs for request tracing.
+- Add API rate limiting and abuse protection at gateway level.
+
+### 6) Key trade-offs and assumptions
+- Service-layer orchestration over fat controllers improves maintainability but adds abstraction.
+- Eager loading improves latency consistency but may return more data than some consumers need.
+- Transactional safety improves correctness but increases lock time on write paths.
