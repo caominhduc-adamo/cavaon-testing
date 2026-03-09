@@ -28,6 +28,6 @@ class HomeController extends Controller
 
     public function spa($any)
     {
-        return view('layouts.app');
+        return view('welcome');
     }
 }
